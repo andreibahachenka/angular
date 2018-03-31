@@ -1,0 +1,23 @@
+.divider {
+    margin: 15px 0;
+}
+
+.nav-list {
+    padding: 0;
+}
+
+.nav-item {
+    &:hover {
+        background-color: #000;
+    }
+    &__link {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        color: #9d9d9d;
+        &:hover {
+            color: #fff;
+        }
+    }
+}

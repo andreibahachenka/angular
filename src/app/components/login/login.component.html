@@ -1,0 +1,25 @@
+<div class="login">
+    <form class="login__wrapper" id="login-form" (ngSubmit)="login(applogin, apppassword)">
+        <div class="login__input-wrapper">
+            <input #applogin
+                   class="login__text"
+                   type="text"
+                   name="user-name"
+                   form="login-form"
+                   id="users_name"
+                   placeholder="Email">
+        </div>
+        <div class="login-input-wrapper">
+            <input #apppassword
+                   class="login__text"
+                   type="password"
+                   name="password"
+                   form="login-form"
+                   id="pass"
+                   placeholder="Password">
+        </div>
+        <div class="login__input-wrapper">
+            <button class="login__input-button" type="submit">{{enter}}</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,15 @@
+.header {
+	background-color: #32353b;
+	color: #fff;
+	border-bottom: 1px #000 solid;
+	&__left-container {
+		display: flex;
+		align-items: center;
+		& > *:not(:first-child) {
+			margin-left: 20px;
+		}
+	}
+	//&__app-logo {
+	//	width: 200px;
+	//}
+}

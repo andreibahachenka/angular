@@ -1,0 +1,16 @@
+:host {
+	flex-basis: 100%;
+}
+
+//have to write in styles.css
+.wrapper-login-page {
+	height: 100%;
+	background-image: url("https://image.freepik.com/free-photo/3d-render-of-spotlights-on-a-grunge-brick-wall_1048-6284.jpg");
+	background-position: 50%;
+	background-size: cover;
+	display: flex;
+	align-items: center;
+	.login-content {
+		width: 100%;
+	}
+}

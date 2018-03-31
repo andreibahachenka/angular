@@ -1,0 +1,22 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+/* This file is for setting global styles  */
+
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+head, body {
+	margin: 0;
+	padding: 0;
+}
+
+//table global styles
+.datatable-header {
+	&-inner {
+		background-color: #4e5155;
+	}
+	&-cell-label {
+		color: #fff;
+	}
+}
