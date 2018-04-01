@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/';
 
-import { PathConfig } from 'app-config';
 import {LocalStorageConfig} from "../../app-config/locastorage.config";
 
 @Injectable()
