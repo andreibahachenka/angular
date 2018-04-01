@@ -2,17 +2,5 @@
 	{
 		"title": "Users",
 		"url": "/users"
-	},
-	{
-		"title": "Clubs",
-		"url": "/clubs"
-	},
-	{
-		"title": "Events",
-		"url": "/events"
-	},
-	{
-		"title": "Club map",
-		"url": "/clubmap"
 	}
 ]
