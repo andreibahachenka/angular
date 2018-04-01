@@ -20,22 +20,21 @@ export class AdminPageComponent implements OnInit{
     public tableData: any[] = [];
 
     public columns: any = [
+        { name : 'Id'},
+        { name : 'Name'},
         { name : 'Username'},
         { name : 'Surname'},
-        { name : 'status'},
-        { name : 'shop_id'},
-        { name : 'points'},
-        { name : 'photo'},
-        { name : 'phone'},
-        { name : 'name'},
-        { name : 'id'},
-        { name : 'email'},
-        { name : 'city_id'}
+        { name : 'Photo'},
+        { name : 'Phone'},
+        { name : 'Email'},
+        { name : 'Status'},
+        { name : 'Points'},
+        { name : 'Shop_id'},
+        { name : 'City_id'}
     ];
 
     constructor(
         private navMenuService: NavMenuService,
-        private restApiService: RestApiService,
         private adminPageService: AdminPageService
     ) {
     }
