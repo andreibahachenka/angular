@@ -6,7 +6,7 @@ import { MaterialSharedModule } from 'app/core';
 
 import { AdminPageComponent } from './page';
 import { AdminPageRoutes } from './admin-page.routes';
-// import { Services } from './page/services';
+import { AdminPageService } from "./page/services/admin-page.service";
 
 @NgModule({
     imports: [
@@ -24,8 +24,7 @@ import { AdminPageRoutes } from './admin-page.routes';
     ],
 
     providers: [
-        // FileUploadService,
-        // FileImportService
+        AdminPageService
     ]
 })
 

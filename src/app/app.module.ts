@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
-import { LoginPageModule } from './pages/login/login-page.module';
 import { MaterialSharedModule } from "./core/material-shared.module";
 
 /*
@@ -17,23 +16,33 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { LoginComponent } from './components/login/login.component';
 import { LoginPageComponent } from './pages/login/page';
 import { AdminPageComponent } from './pages/admin/page';
-import { TableComponent } from "./components/table/table.component";
-import { HeaderComponent } from "./components/header/header.component";
-import { NavMenuComponent } from "./components/nav-menu/nav-menu.component";
+
+//PAGES
+import {
+    LoginPageModule,
+    AdminPageModule
+} from './pages'
+
+//COMPONENTS
+import {
+    LoginComponent,
+    TableComponent,
+    HeaderComponent,
+    NavMenuComponent
+} from './components';
 
 //SERVICES
-import { RestApiService } from './services/rest-api.service';
-import { NavMenuService } from "./services/nav-menu.service";
+import {
+    RestApiService,
+    NavMenuService
+} from './services';
+
 import { AdminPageService } from './pages/admin/page/services/admin-page.service'
 
 //styles
 import '../styles/styles.scss';
-
-
-
 
 // Application wide providers
 const APP_PROVIDERS = [
