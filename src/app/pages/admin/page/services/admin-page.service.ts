@@ -21,7 +21,7 @@ export class AdminPageService {
             ).first()
                 .subscribe((res) => {
                     observer.next(res);
-                    });
+                });
         })
     }
 
