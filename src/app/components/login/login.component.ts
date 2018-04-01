@@ -26,7 +26,7 @@ export class LoginComponent {
 
     public login(login, password) {
         this.restApiService.postItem(
-            'http://46.30.42.15:8066/v1/admin/auth',
+            `${PathConfig.mainPath}/auth`,
             JSON.stringify({
                 username: login.value,
                 password: password.value,
