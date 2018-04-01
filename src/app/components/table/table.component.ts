@@ -1,10 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-
-import { RestApiService } from './../../services/rest-api.service';
-import { LocalStorageConfig } from '../../../app-config/locastorage.config';
-import { PathConfig } from '../../../app-config/path.config';
-import { Router } from "@angular/router";
-
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'table-component',

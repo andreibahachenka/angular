@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { RestApiService } from './../../services/rest-api.service';
+import { RestApiService } from './../../services';
 import { LocalStorageConfig } from '../../../app-config/locastorage.config';
 import { PathConfig } from '../../../app-config/path.config';
 import { RoutesConfig } from '../../../app-config/routes.config';
-import { Router } from '@angular/router';
 
 
 @Component({

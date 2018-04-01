@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/';
 
-import {LocalStorageConfig} from "../../app-config/locastorage.config";
+import { LocalStorageConfig } from '../../app-config/locastorage.config';
 
 @Injectable()
 export class RestApiService {

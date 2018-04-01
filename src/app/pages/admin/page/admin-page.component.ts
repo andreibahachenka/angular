@@ -4,11 +4,9 @@ import {
 } from '@angular/core';
 
 import { NavMenuService } from '../../../services/nav-menu.service';
-import { NavItemModel } from './../../../components/nav-menu/models/nav-menu.model'
-import { RestApiService } from '../../../services/rest-api.service';
-import { AdminPageService } from './services/admin-page.service'
+import { AdminPageService } from './services/admin-page.service';
+import { NavItemModel } from './../../../components/nav-menu/models';
 
-import { PathConfig } from './../../../../app-config/path.config'
 
 @Component({
     selector: 'app-admin',

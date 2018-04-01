@@ -1,9 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
-
-import { AssociationOfItemDisplayModel } from './models';
-import { NavItemModel } from './models';
-import { RoutesConfig } from '../../../app-config/routes.config';
 import { Router } from '@angular/router';
+
+import { AssociationOfItemDisplayModel, NavItemModel } from './models';
+import { RoutesConfig } from '../../../app-config';
 
 @Component({
     selector: 'app-nav-menu',
