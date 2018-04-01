@@ -2,7 +2,8 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 import { AssociationOfItemDisplayModel } from './models';
 import { NavItemModel } from './models';
-// import { PathConfig } from 'app-config';
+import { RoutesConfig } from '../../../app-config/routes.config';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-nav-menu',
@@ -20,6 +21,7 @@ export class NavMenuComponent implements OnChanges {
     public baseUrl: string = '/admin';
 
     constructor(
+        private router: Router
     ) {
     }
 
@@ -38,5 +40,9 @@ export class NavMenuComponent implements OnChanges {
                 })
                 : this.navMenuList;
         }
+    }
+
+    public routeTo() {
+        this.router.navigate([RoutesConfig.startAdminRoute])
     }
 }

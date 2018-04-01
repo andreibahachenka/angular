@@ -2,7 +2,7 @@
     <ng-container *ngFor="let navItem of navItems; let i = index">
         <ng-container>
             <mat-list-item class="nav-item">
-                <a class="nav-item__link" href="{{baseUrl + navItem.url}}">{{navItem.title}}</a>
+                <a class="nav-item__link" (click)="routeTo()">{{navItem.title}}</a>
             </mat-list-item>
         </ng-container>
     </ng-container>
