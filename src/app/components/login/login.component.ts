@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { RestApiService } from './../../services/rest-api.service';
 import { LocalStorageConfig } from '../../../app-config/locastorage.config';
@@ -14,6 +14,10 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     public enter: string = 'Sign In';
 
+    @ViewChild('applogin') applogin: ElementRef;
+    @ViewChild('apppassword') apppassword: ElementRef;
+
+
     constructor(
         private restApiService: RestApiService,
         private router: Router,
@@ -28,16 +32,12 @@ export class LoginComponent {
                 password: password.value,
             }),
             (err) => {
-                console.log(JSON.stringify({
-                    username: login.value,
-                    password: password.value,
-                }));
-                console.log('header', err.headers);
+                this.applogin.nativeElement.className = "wrongData";
+                this.apppassword.nativeElement.className = "wrongData";
                 console.error(err);
             }
         ).first()
             .subscribe((res) => {
-            console.log(res);
                 localStorage.setItem(LocalStorageConfig.token, res.token);
                 this.router.navigate([PathConfig.adminUrl]);
             });

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/';
 import { PathConfig } from 'app-config';
 import { omitBy, isEmpty } from 'lodash';
 import {HttpParams} from "@angular/common/http";
+import {LocalStorageConfig} from "../../app-config/locastorage.config";
 
 @Injectable()
 export class RestApiService {
@@ -20,7 +21,13 @@ export class RestApiService {
         const queryUrl = isParamString ? `${url}?${params}` : url;
 
         return new Observable((observer) => {
-            this.http.get(queryUrl, !isParamString ? { params: this.createParams(params)} : {})
+            this.http.get(queryUrl,
+                { headers:
+                    {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                    }
+                })
                 .subscribe(
                 (response) => {
                     observer.next(response);
@@ -37,11 +44,6 @@ export class RestApiService {
     }
 
     public postItem(url: string, body?: any, errorCallback?): Observable<any> {
-        // let headers = new HttpHeaders();
-        // headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-
-        // const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
-
         return new Observable((observer) => {
             this.http.post(url, body, { headers: {'Content-Type': 'application/json'} })
                 .subscribe(
@@ -76,14 +78,5 @@ export class RestApiService {
                         observer.error(err);
                     });
         }).first();
-    }
-
-    private createParams(paramsObject: any): any {
-        return !paramsObject ? null : omitBy(paramsObject, (propValue) => {
-            return propValue === ''
-                || propValue === undefined
-                || propValue === null
-                || (typeof propValue === 'object' && isEmpty(propValue));
-        });
     }
 }
