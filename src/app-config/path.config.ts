@@ -6,7 +6,4 @@ export const PathConfig = {
     createUserEndpoint: 'http://46.30.42.15:8066/v1/admin/users/create',
     updateUserEndpoint: 'http://46.30.42.15:8066/v1/admin/users/update',
     removeUserEndpoint: 'http://46.30.42.15:8066/v1/admin/users/remove',
-
-    adminUrl: '/admin',
-    login: '/login'
 };
