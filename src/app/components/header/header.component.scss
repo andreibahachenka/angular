@@ -1,4 +1,6 @@
 .header {
+	display: flex;
+	justify-content: space-between;
 	background-color: #32353b;
 	color: #fff;
 	border-bottom: 1px #000 solid;
@@ -9,7 +11,29 @@
 			margin-left: 20px;
 		}
 	}
+	&__right-container {
+		padding: 25px;
+		&:hover {
+			background-color: #000;
+		}
+		a {
+			color: #fff;
+			font-size: 16px;
+		}
+	}
 	//&__app-logo {
 	//	width: 200px;
 	//}
+}
+
+.caret {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 2px;
+	vertical-align: middle;
+	border-top: 4px dashed;
+	border-top: 4px solid\9;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent
 }

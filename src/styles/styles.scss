@@ -11,6 +11,10 @@ head, body {
 	padding: 0;
 }
 
+a {
+	text-decoration: none;
+}
+
 //table global styles
 .datatable-header {
 	&-inner {
