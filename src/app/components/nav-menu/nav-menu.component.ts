@@ -18,7 +18,6 @@ export class NavMenuComponent implements OnChanges {
     public itemDisplayList: AssociationOfItemDisplayModel[];
     public hotLinksGroup: NavItemModel;
     public navItems: NavItemModel[];
-    public baseUrl: string = '/admin';
 
     constructor(
         private router: Router
