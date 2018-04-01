@@ -19,6 +19,8 @@ import { AppState, InternalStateType } from './app.service';
 import { LoginPageComponent } from './pages/login/page';
 import { AdminPageComponent } from './pages/admin/page';
 
+import { AuthGuard } from './auth/auth.guard';
+
 //PAGES
 import {
     LoginPageModule,
@@ -99,6 +101,7 @@ interface StoreType {
       RestApiService,
       NavMenuService,
       AdminPageService,
+      AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
   ]
