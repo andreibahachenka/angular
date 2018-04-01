@@ -6,6 +6,7 @@ import {
 import { NavMenuService } from '../../../services/nav-menu.service';
 import { NavItemModel } from './../../../components/nav-menu/models/nav-menu.model'
 import { RestApiService } from '../../../services/rest-api.service';
+import { AdminPageService } from './services/admin-page.service'
 
 import { PathConfig } from './../../../../app-config/path.config'
 
@@ -34,38 +35,35 @@ export class AdminPageComponent implements OnInit{
 
     constructor(
         private navMenuService: NavMenuService,
-        private restApiService: RestApiService
+        private restApiService: RestApiService,
+        private adminPageService: AdminPageService
     ) {
     }
 
     public ngOnInit() {
         this.navMenuService.getMainNavMenu()
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
+
         this.getUsers();
     }
 
     public getUsers() {
-        this.restApiService.getItems(
-            `${PathConfig.mainPath}/users?limit=&offset=&id=&email=&phone=&username=`,
-            (err) => {
-                console.error(err);
-            }
-        ).first()
+        this.adminPageService.getUser()
             .subscribe((res) => {
-                this.tableData = res.users;
+            this.tableData = res.users;
 
-                //converters
-                this.tableData = this.tableData.map(function (obj) {
-                    obj['shopId'] = obj['shop_id'];
-                    delete obj['shop_id'];
-                    return obj;
-                });
-
-                this.tableData = this.tableData.map(function (obj) {
-                    obj['cityId'] = obj['city_id'];
-                    delete obj['city_id'];
-                    return obj;
-                });
+            //converters
+            this.tableData = this.tableData.map((obj) => {
+                obj['shopId'] = obj['shop_id'];
+                delete obj['shop_id'];
+                return obj;
             });
+
+            this.tableData = this.tableData.map((obj) => {
+                obj['cityId'] = obj['city_id'];
+                delete obj['city_id'];
+                return obj;
+            });
+        });
     }
 }

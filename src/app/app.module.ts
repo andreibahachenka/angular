@@ -27,6 +27,7 @@ import { NavMenuComponent } from "./components/nav-menu/nav-menu.component";
 //SERVICES
 import { RestApiService } from './services/rest-api.service';
 import { NavMenuService } from "./services/nav-menu.service";
+import { AdminPageService } from './pages/admin/page/services/admin-page.service'
 
 //styles
 import '../styles/styles.scss';
@@ -88,6 +89,7 @@ interface StoreType {
   providers: [
       RestApiService,
       NavMenuService,
+      AdminPageService,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
   ]

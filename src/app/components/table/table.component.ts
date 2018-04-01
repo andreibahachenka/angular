@@ -16,8 +16,6 @@ export class TableComponent {
     @Input() public columns: any[] = [];
 
     constructor(
-        // private restApiService: RestApiService,
-        // private router: Router,
     ){
     }
 }
