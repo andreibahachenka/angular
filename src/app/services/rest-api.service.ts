@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/';
 
 import { PathConfig } from 'app-config';
-import { omitBy, isEmpty } from 'lodash';
-import {HttpParams} from "@angular/common/http";
 import {LocalStorageConfig} from "../../app-config/locastorage.config";
 
 @Injectable()
@@ -14,7 +12,6 @@ export class RestApiService {
         private http: HttpClient,
     ) {
     }
-    private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
     public getItems(url: string,  params?: any, errorCallback?): Observable<any> {
         const isParamString = typeof params === 'string';
@@ -48,7 +45,6 @@ export class RestApiService {
             this.http.post(url, body, { headers: {'Content-Type': 'application/json'} })
                 .subscribe(
                 (response) => {
-                    console.log('response', response);
                     observer.next(response);
                 },
                 (err) => {
