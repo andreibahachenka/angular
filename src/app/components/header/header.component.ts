@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
     @Output() public onSideNavToogle: EventEmitter<null> = new EventEmitter<null>();
 
+    public admin: string = 'Admin';
+    public logoutName: string = 'Logout';
+
     // public appToolBarLogo: string = PathConfig.mainLogoPath;
 
     constructor(
