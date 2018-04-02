@@ -16,6 +16,10 @@ a {
 }
 
 //table global styles
+.main-table {
+	word-break: break-all;
+}
+
 .datatable-header {
 	&-inner {
 		background-color: #4e5155;
@@ -25,6 +29,14 @@ a {
 	}
 }
 
-.main-table {
-	word-break: break-all;
+datatable-row-wrapper.datatable-row-wrapper.ng-star-inserted:nth-child(even) {
+	&:nth-child(even) {
+		background-color: #ededed;
+	}
+}
+
+.datatable-body-row:hover,
+.datatable-row-wrapper:hover,
+.datatable-body-cell {
+	pointer-events:none;
 }
