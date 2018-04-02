@@ -9,10 +9,6 @@ export class TableComponent implements OnInit, OnChanges {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
 
-
-    @ViewChild('editTmpl') editTmpl: TemplateRef<any>;
-    @ViewChild('hdrTpl') hdrTpl: TemplateRef<any>;
-
     constructor(
     ){
     }
