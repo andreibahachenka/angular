@@ -1,15 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, TemplateRef, OnInit, OnChanges } from '@angular/core';
 
 @Component({
     selector: 'table-component',
     styleUrls: ['./table.component.scss'],
     templateUrl: './table.component.html'
 })
-export class TableComponent {
+export class TableComponent implements OnInit, OnChanges {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
 
+
+    @ViewChild('editTmpl') editTmpl: TemplateRef<any>;
+    @ViewChild('hdrTpl') hdrTpl: TemplateRef<any>;
+
     constructor(
     ){
+    }
+
+    public photos = [];
+
+    ngOnInit() {
+        this.columns = [
+            { name : 'Id'},
+            { name : 'Name'},
+            { name : 'Username'},
+            { name : 'Surname'},
+            { name : 'Phone'},
+            { name : 'Email'},
+            { name : 'Status'},
+            { name : 'Points'},
+            { name : 'Shop_id'},
+            { name : 'City_id'},];
+    }
+
+    ngOnChanges() {
     }
 }

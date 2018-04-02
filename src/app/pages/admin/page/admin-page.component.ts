@@ -28,7 +28,7 @@ export class AdminPageComponent implements OnInit{
         { name : 'Status'},
         { name : 'Points'},
         { name : 'Shop_id'},
-        { name : 'City_id'}
+        { name : 'City_id'},
     ];
 
     constructor(
