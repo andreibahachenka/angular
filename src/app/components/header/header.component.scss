@@ -20,7 +20,7 @@
 		a {
 			color: #fff;
 			font-size: 16px;
-			.header__right-account {
+			.account-icon {
 				position: relative;
 				left: -2px;
 				bottom: -5px;
@@ -30,6 +30,11 @@
 	//&__app-logo {
 	//	width: 200px;
 	//}
+}
+
+mat-icon.logout-icon {
+	margin-right: 2px;
+	font-size: 22px;
 }
 
 .caret {
