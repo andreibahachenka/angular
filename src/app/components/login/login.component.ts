@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import { RestApiService } from './../../services';
 import { LocalStorageConfig } from '../../../app-config/locastorage.config';
-import { PathConfig } from '../../../app-config/path.config';
 import { RoutesConfig } from '../../../app-config/routes.config';
+import { LoginService } from './services/login.service';
 
 
 @Component({
@@ -22,25 +22,20 @@ export class LoginComponent {
     constructor(
         private restApiService: RestApiService,
         private router: Router,
+        private loginService: LoginService,
     ){
     }
 
     public login(login, password) {
-        this.restApiService.postItem(
-            `${PathConfig.authEndpoint}`,
-            JSON.stringify({
-                username: login.value,
-                password: password.value,
-            }),
-            (err) => {
-                this.applogin.nativeElement.className = "wrongData";
-                this.apppassword.nativeElement.className = "wrongData";
-                console.error(err);
-            }
-        ).first()
+        this.loginService.loginTo(login, password)
             .subscribe((res) => {
-                localStorage.setItem(LocalStorageConfig.token, res.token);
-                this.router.navigate([RoutesConfig.startAdminRoute]);
-            });
+                    localStorage.setItem(LocalStorageConfig.token, res.token);
+                    this.router.navigate([RoutesConfig.startAdminRoute]);
+                },
+                (err) => {
+                    this.applogin.nativeElement.className = "wrongData";
+                    this.apppassword.nativeElement.className = "wrongData";
+                    console.error(err);
+                })
     }
 }

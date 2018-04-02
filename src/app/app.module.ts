@@ -41,7 +41,8 @@ import {
     NavMenuService
 } from './services';
 
-import { AdminPageService } from './pages/admin/page/services/admin-page.service'
+import { AdminPageService } from './pages/admin/page/services/admin-page.service';
+import { LoginService } from './components/login/services/login.service';
 
 //styles
 import '../styles/styles.scss';
@@ -101,6 +102,7 @@ interface StoreType {
       RestApiService,
       NavMenuService,
       AdminPageService,
+      LoginService,
       AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
