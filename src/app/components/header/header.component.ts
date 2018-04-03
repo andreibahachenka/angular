@@ -23,7 +23,7 @@ export class HeaderComponent {
     ){
     }
 
-    public logout() {
+    public logout(): void {
         localStorage.removeItem(LocalStorageConfig.token);
         this.router.navigate([RoutesConfig.login]);
     }

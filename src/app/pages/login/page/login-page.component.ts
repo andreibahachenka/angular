@@ -1,9 +1,6 @@
 import {
-    Component,
-    OnInit
+    Component
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LoginComponent } from './../../../components/login/login.component'
 
 @Component({
     selector: 'app-login',

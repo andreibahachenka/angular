@@ -17,16 +17,17 @@
 		height: 50px;
 	}
 	&__text {
+		background-color: transparent;
 		width: 250px;
 		border: none;
-		border-bottom: 1px solid #000;
+		border-bottom: 1px solid #fff;
 		padding: 10px 20px;
 		outline: none;
 		text-align: center;
 		font-size: 16px;
 	}
 	&__input-button {
-		background-color: #000;
+		//background-color: #000;
 		height: 2.725rem !important;
 		color: #fff;
 		font-size: 18px;
@@ -37,8 +38,12 @@
 		border: 1px solid #fff;
 		outline: none;
 		&:hover {
-			background-color: #808080;
+			opacity: 0.6;
 		}
+	}
+	.transparent {
+		color: #fff;
+		background-color: transparent;
 	}
 }
 
@@ -46,6 +51,7 @@
 	@extend .login__text;
 	border-bottom: 1px solid #c60000;
 	color: #c60000;
+	-webkit-text-fill-color: #c60000 !important;
 }
 
 //cancel autofill
@@ -59,17 +65,32 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	color: #c60000 !important;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-text-fill-color: #fff;
+}
+
+textarea:focus, input:focus {
+	color: #ff0000;
+}
+
 
 //placeholder
 ::-webkit-input-placeholder {
+	color: #fff;
 	text-align: center;
 }
 :-moz-placeholder {
+	color: #fff;
 	text-align: center;
 }
 ::-moz-placeholder {
+	color: #fff;
 	text-align: center;
 }
 :-ms-input-placeholder {
+	color: #fff;
 	text-align: center;
 }

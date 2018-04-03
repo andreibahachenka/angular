@@ -9,6 +9,8 @@
 head, body {
 	margin: 0;
 	padding: 0;
+	background: url(http://data.1freewallpapers.com/detail/apple-carved-in-the-wood.jpg) no-repeat center center fixed;
+	background-size: cover;
 }
 
 a {
@@ -37,6 +39,8 @@ datatable-row-wrapper.datatable-row-wrapper.ng-star-inserted:nth-child(even) {
 
 .datatable-body-row:hover,
 .datatable-row-wrapper:hover,
-.datatable-body-cell:hover {
+.datatable-body-cell:hover,
+.datatable-body-cell-label:hover,
+span:hover {
 	pointer-events:none;
 }

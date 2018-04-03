@@ -14,10 +14,10 @@ import { LoginService } from './services/login.service';
 })
 export class LoginComponent {
     public enter: string = 'Sign In';
+    public checkInput: boolean = false;
 
     @ViewChild('applogin') applogin: ElementRef;
     @ViewChild('apppassword') apppassword: ElementRef;
-
 
     constructor(
         private restApiService: RestApiService,
@@ -26,16 +26,19 @@ export class LoginComponent {
     ){
     }
 
-    public login(login, password) {
+    public login(login, password): void {
         this.loginService.loginTo(login, password)
             .subscribe((res) => {
                     localStorage.setItem(LocalStorageConfig.token, res.token);
                     this.router.navigate([RoutesConfig.startAdminRoute]);
                 },
                 (err) => {
-                    this.applogin.nativeElement.className = "wrongData";
-                    this.apppassword.nativeElement.className = "wrongData";
+                    this.checkInput = true;
                     console.error(err);
                 })
+    }
+
+    public checkKeyUp(): void {
+       this.checkInput = false;
     }
 }

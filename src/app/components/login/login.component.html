@@ -2,7 +2,9 @@
     <form class="login__wrapper" id="login-form" (ngSubmit)="login(applogin, apppassword)">
         <div class="login__input-wrapper">
             <input #applogin
-                   class="login__text"
+                   [ngClass]="{'wrongData': checkInput}"
+                   (keyup)="checkInput ? checkKeyUp() : return;"
+                   class="login__text transparent"
                    type="text"
                    name="user-name"
                    form="login-form"
@@ -11,7 +13,9 @@
         </div>
         <div class="login-input-wrapper">
             <input #apppassword
-                   class="login__text"
+                   [ngClass]="{'wrongData': checkInput}"
+                   (keyup)="checkInput ? checkKeyUp() : return;"
+                   class="login__text transparent"
                    type="password"
                    name="password"
                    form="login-form"
@@ -19,7 +23,7 @@
                    placeholder="Password">
         </div>
         <div class="login__input-wrapper">
-            <button class="login__input-button" type="submit">{{enter}}</button>
+            <button class="login__input-button transparent" type="submit">{{enter}}</button>
         </div>
     </form>
 </div>

@@ -44,7 +44,7 @@ export class AdminPageComponent implements OnInit{
         this.getUsers();
     }
 
-    public getUsers() {
+    public getUsers(): void {
         this.adminPageService.getUser()
             .subscribe((res) => {
             this.tableData = res.users;

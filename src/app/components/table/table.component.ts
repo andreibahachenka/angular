@@ -1,19 +1,17 @@
-import { Component, Input, ViewChild, TemplateRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'table-component',
     styleUrls: ['./table.component.scss'],
     templateUrl: './table.component.html'
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
 
     constructor(
     ){
     }
-
-    public photos = [];
 
     ngOnInit() {
         this.columns = [
@@ -27,8 +25,5 @@ export class TableComponent implements OnInit, OnChanges {
             { name : 'Points'},
             { name : 'Shop_id'},
             { name : 'City_id'},];
-    }
-
-    ngOnChanges() {
     }
 }
