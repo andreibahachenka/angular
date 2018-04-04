@@ -15,15 +15,12 @@ export class TableComponent implements OnInit {
 
     ngOnInit() {
         this.columns = [
-            { name : 'Id'},
             { name : 'Name'},
             { name : 'Username'},
             { name : 'Surname'},
             { name : 'Phone'},
             { name : 'Email'},
             { name : 'Status'},
-            { name : 'Points'},
-            { name : 'Shop_id'},
-            { name : 'City_id'},];
+        ];
     }
 }

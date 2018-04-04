@@ -61,6 +61,13 @@ export class AdminPageComponent implements OnInit{
                 delete obj['city_id'];
                 return obj;
             });
+            this.tableData.map((obj) => {
+                if (obj.status === 1) {
+                    obj.status = 'Active';
+                } else if (obj.status === 2) {
+                    obj.status = 'Waiting moderation';
+                }
+            });
         });
     }
 }
