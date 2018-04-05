@@ -24,6 +24,7 @@ export class AdminPageComponent implements OnInit {
 
     public edit: string = 'Edit User';
     public deleteMessage: string = 'Are you sure you want to delete this user?';
+    public statuses = ['Active', 'Not Active', 'Waiting moderation'];
 
     public name: string = '';
     public userName: string = '';
@@ -130,14 +131,24 @@ export class AdminPageComponent implements OnInit {
             .subscribe((res) => {
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
-            },
+                },
                 (err) => {
                     console.error(err);
                 })
     }
 
     public applyDelete(id): void {
-        console.log(id);
+        let dataToDelete = {
+            id: id
+        };
+        this.adminPageService.deleteUser(dataToDelete)
+            .subscribe((res) => {
+                    this.getUsers();
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
     }
 
     public cancel(): void {

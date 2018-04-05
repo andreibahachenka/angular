@@ -60,8 +60,12 @@
                     <input matInput placeholder="Phone" [(ngModel)]="phone" formControlName="phone"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Status" [(ngModel)]="status" formControlName="status"/>
-                </mat-form-field><br>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of statuses" [value]="status">
+                            {{ status }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </form>
         </div>
         <div class="buttons">
