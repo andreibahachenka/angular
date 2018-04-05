@@ -12,7 +12,6 @@ import { AdminPageService } from './services/admin-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
 
-
 @Component({
     selector: 'app-admin',
     styleUrls: ['admin-page.component.scss'],
@@ -33,10 +32,7 @@ export class AdminPageComponent implements OnInit {
     public email: string = '';
     public status: any = '';
     // public points: string = '';
-    public cityId: string = '';
-    public shopId: string = '';
     public id: string = '';
-    public photo: string = '';
 
     @ViewChild('editModal') public editModal: ElementRef;
     @ViewChild('deleteModal') public deleteModal: ElementRef;
@@ -120,7 +116,7 @@ export class AdminPageComponent implements OnInit {
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
 
-    public openDelete(item: any): void {
+    public openDelete(): void {
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
     }
 
@@ -154,8 +150,4 @@ export class AdminPageComponent implements OnInit {
     public cancel(): void {
         this.modalWindowService.closeModalWindow();
     }
-
-    // public onSubmit(data): void {
-    //     console.log('data', data);
-    // }
 }

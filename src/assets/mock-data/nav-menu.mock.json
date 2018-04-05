@@ -1,6 +1,7 @@
 [
 	{
 		"title": "Users",
-		"url": "/users"
+		"url": "/users",
+		"image": "group"
 	}
 ]
