@@ -1,0 +1,8 @@
+﻿<div class="modal-container"
+    #modalWindowContainer>
+    <div class="modal-background" (click)="outsideCLick($event.target)">
+        <div class="modal">
+            <ng-content select=".content"></ng-content>
+        </div>
+    </div>
+</div>

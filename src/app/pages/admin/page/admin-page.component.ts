@@ -1,11 +1,14 @@
 import {
     Component,
-    OnInit
+    OnInit,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 
 import { NavMenuService } from '../../../services/nav-menu.service';
 import { AdminPageService } from './services/admin-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
+import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
 
 
 @Component({
@@ -16,6 +19,9 @@ import { NavItemModel } from './../../../components/nav-menu/models';
 export class AdminPageComponent implements OnInit{
     public navItems: NavItemModel[];
     public tableData: any[] = [];
+
+    public itemId: string = '';
+    @ViewChild('report') public report: ElementRef;
 
     public columns: any = [
         { name : 'Id'},
@@ -33,7 +39,8 @@ export class AdminPageComponent implements OnInit{
 
     constructor(
         private navMenuService: NavMenuService,
-        private adminPageService: AdminPageService
+        private adminPageService: AdminPageService,
+        private modalWindowService: ModalWindowService
     ) {
     }
 
@@ -69,5 +76,10 @@ export class AdminPageComponent implements OnInit{
                 }
             });
         });
+    }
+
+    public openReport(item: any): void {
+        this.itemId = item.id;
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.report });
     }
 }

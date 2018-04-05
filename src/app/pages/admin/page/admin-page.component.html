@@ -16,9 +16,18 @@
                 <table-component
                         [rows]="tableData"
                         [columns]="columns"
+                        (onOpenReport)="openReport($event)"
                 ></table-component>
                 <router-outlet></router-outlet>
             </div>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>
+
+<app-modal-window class="modal-window">
+    <div class="content" #report>
+        <div class="report-block">
+            <span class="report-block__error-title">{{itemId}}</span>
+        </div>
+    </div>
+</app-modal-window>

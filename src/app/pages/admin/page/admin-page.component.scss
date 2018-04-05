@@ -18,3 +18,12 @@
 		background-color: #32353b;
 	}
 }
+
+.modal-window {
+	.report-block {
+		&__error-title {
+			white-space: pre-line;
+			color: #f44336;
+		}
+	}
+}

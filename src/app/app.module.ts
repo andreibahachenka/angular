@@ -32,7 +32,8 @@ import {
     LoginComponent,
     TableComponent,
     HeaderComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    ModalWindowComponent
 } from './components';
 
 //SERVICES
@@ -43,6 +44,7 @@ import {
 
 import { AdminPageService } from './pages/admin/page/services/admin-page.service';
 import { LoginService } from './components/login/services/login.service';
+import { ModalWindowService } from './components/modal-window/services/modal-window.service';
 
 //styles
 import '../styles/styles.scss';
@@ -71,7 +73,8 @@ interface StoreType {
       AdminPageComponent,
       TableComponent,
       HeaderComponent,
-      NavMenuComponent
+      NavMenuComponent,
+      ModalWindowComponent
   ],
   /**
    * Import Angular's modules.
@@ -103,6 +106,7 @@ interface StoreType {
       NavMenuService,
       AdminPageService,
       LoginService,
+      ModalWindowService,
       AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
