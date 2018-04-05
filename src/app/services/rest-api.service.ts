@@ -41,7 +41,13 @@ export class RestApiService {
 
     public postItem(url: string, body?: any, errorCallback?): Observable<any> {
         return new Observable((observer) => {
-            this.http.post(url, body, { headers: {'Content-Type': 'application/json'} })
+            this.http.post(url, body,
+                { headers:
+                    {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                    }
+                })
                 .subscribe(
                 (response) => {
                     observer.next(response);
@@ -60,6 +66,24 @@ export class RestApiService {
     public deleteItem(url: string, errorCallback?: any): Observable<any> {
         return new Observable((observer) => {
             this.http.delete(url)
+                .subscribe(
+                    (response) => {
+                        observer.next(response);
+                    },
+                    (err) => {
+                        if (errorCallback) {
+                            errorCallback(err);
+                        } else {
+                            console.error(err);
+                        }
+                        observer.error(err);
+                    });
+        }).first();
+    }
+
+    public updateItem(url: string, body: string, errorCallback?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.http.put(url, body)
                 .subscribe(
                     (response) => {
                         observer.next(response);

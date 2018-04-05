@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialSharedModule } from 'app/core';
 
@@ -12,6 +12,7 @@ import { AdminPageService } from "./page/services/admin-page.service";
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         AdminPageRoutes,
     ],
 

@@ -25,4 +25,19 @@ export class AdminPageService {
         })
     }
 
+    public updateUser(data): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.updateUserEndpoint}`,
+                JSON.stringify(data),
+                (err) => {
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
 }
