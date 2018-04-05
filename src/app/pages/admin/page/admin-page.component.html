@@ -29,7 +29,7 @@
     <div class="content" #deleteModal>
         <div class="delete-message">{{deleteMessage}}</div>
         <div class="buttons">
-            <button color="primary" mat-raised-button>Yes</button>
+            <button color="primary" mat-raised-button (click)="applyDelete(id)">Yes</button>
             <button mat-raised-button (click)="cancel()">No</button>
         </div>
     </div>
@@ -42,19 +42,16 @@
         <div class="report-block">
             <form [formGroup]="inputForm" novalidate>
                 <mat-form-field>
-                    <input matInput placeholder="Photo" [(ngModel)]="photo" formControlName="photo"/>
+                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id"/>
+                    <input matInput placeholder="Username" [(ngModel)]="userName" formControlName="username"/>
                 </mat-form-field><br>
                 <mat-form-field>
                     <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Username" [(ngModel)]="userName" formControlName="userName"/>
-                </mat-form-field><br>
-                <mat-form-field>
-                    <input matInput placeholder="Surname" [(ngModel)]="surName" formControlName="surName"/>
+                    <input matInput placeholder="Surname" [(ngModel)]="surName" formControlName="surname"/>
                 </mat-form-field><br>
                 <mat-form-field>
                     <input matInput placeholder="Email" [(ngModel)]="email" formControlName="email"/>
@@ -65,19 +62,10 @@
                 <mat-form-field>
                     <input matInput placeholder="Status" [(ngModel)]="status" formControlName="status"/>
                 </mat-form-field><br>
-                <mat-form-field>
-                    <input matInput placeholder="Points" [(ngModel)]="points" formControlName="points"/>
-                </mat-form-field><br>
-                <mat-form-field>
-                    <input matInput placeholder="Shop ID" [(ngModel)]="shopId" formControlName="shopId"/>
-                </mat-form-field><br>
-                <mat-form-field>
-                    <input matInput placeholder="City ID" [(ngModel)]="cityId" formControlName="cityId"/>
-                </mat-form-field><br>
             </form>
         </div>
         <div class="buttons">
-            <button color="primary" mat-raised-button (click)="save(inputForm.value)">Save</button>
+            <button color="primary" mat-raised-button (click)="saveChanges(inputForm.value)">Save</button>
             <button mat-raised-button (click)="cancel()">Cancel</button>
         </div>
     </div>

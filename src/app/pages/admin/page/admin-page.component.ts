@@ -31,7 +31,7 @@ export class AdminPageComponent implements OnInit {
     public phone: string = '';
     public email: string = '';
     public status: any = '';
-    public points: string = '';
+    // public points: string = '';
     public cityId: string = '';
     public shopId: string = '';
     public id: string = '';
@@ -56,15 +56,11 @@ export class AdminPageComponent implements OnInit {
 
     public inputForm: FormGroup = new FormGroup({
         name: new FormControl(this.name),
-        userName: new FormControl(this.userName),
-        surName: new FormControl(this.surName),
+        username: new FormControl(this.userName),
+        surname: new FormControl(this.surName),
         email: new FormControl(this.email),
         phone: new FormControl(this.phone),
         status: new FormControl(this.status),
-        points: new FormControl(this.points),
-        shopId: new FormControl(this.shopId),
-        cityId: new FormControl(this.cityId),
-        photo: new FormControl(this.photo),
         id: new FormControl(this.id)
     });
 
@@ -88,22 +84,24 @@ export class AdminPageComponent implements OnInit {
             this.tableData = res.users;
 
             //converters
-            this.tableData = this.tableData.map((obj) => {
-                obj['shopId'] = obj['shop_id'];
-                delete obj['shop_id'];
-                return obj;
-            });
-
-            this.tableData = this.tableData.map((obj) => {
-                obj['cityId'] = obj['city_id'];
-                delete obj['city_id'];
-                return obj;
-            });
+            // this.tableData = this.tableData.map((obj) => {
+            //     obj['shopId'] = obj['shop_id'];
+            //     delete obj['shop_id'];
+            //     return obj;
+            // });
+            //
+            // this.tableData = this.tableData.map((obj) => {
+            //     obj['cityId'] = obj['city_id'];
+            //     delete obj['city_id'];
+            //     return obj;
+            // });
             this.tableData.map((obj) => {
                 if (obj.status === 1) {
                     obj.status = 'Active';
                 } else if (obj.status === 2) {
                     obj.status = 'Waiting moderation';
+                } else if (obj.status === 0) {
+                    obj.status = 'Not Active';
                 }
             });
         });
@@ -115,12 +113,8 @@ export class AdminPageComponent implements OnInit {
         this.surName = item.surname;
         this.phone = item.phone;
         this.email = item.email;
-        this.cityId = item.cityId;
-        this.shopId = item.shopId;
         this.status = item.status;
-        this.points = item.points;
         this.id = item.id;
-        this.photo = item.photo;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
@@ -129,16 +123,21 @@ export class AdminPageComponent implements OnInit {
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
     }
 
-    public save(data: NgForm): void {
-        console.log(data.status);
+    public saveChanges(data: NgForm): void {
+        console.log(data);
+
         this.adminPageService.updateUser(data)
             .subscribe((res) => {
-            //need to refresh data on table
+                    this.getUsers();
                     this.modalWindowService.closeModalWindow();
             },
                 (err) => {
                     console.error(err);
                 })
+    }
+
+    public applyDelete(id): void {
+        console.log(id);
     }
 
     public cancel(): void {

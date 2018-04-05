@@ -20,9 +20,10 @@ export class TableComponent implements OnInit {
             { name : 'Name'},
             { name : 'Username'},
             { name : 'Surname'},
-            { name : 'Phone'},
             { name : 'Email'},
+            { name : 'Phone'},
             { name : 'Status'},
+            { name : 'Points'}
         ];
     }
 
