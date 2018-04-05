@@ -16,7 +16,8 @@
                 <table-component
                         [rows]="tableData"
                         [columns]="columns"
-                        (onOpenReport)="openReport($event)"
+                        (onOpenEdit)="openEdit($event)"
+                        (onOpenDelete)="openDelete($event)"
                 ></table-component>
                 <router-outlet></router-outlet>
             </div>
@@ -25,9 +26,48 @@
 </div>
 
 <app-modal-window class="modal-window">
+    <div class="content" #delete>
+        <span>Do you wanna delete?</span>
+    </div>
+
+
     <div class="content" #report>
+        <div class="modal-header">
+            <span>{{edit}}</span>
+            <hr>
+        </div>
         <div class="report-block">
-            <span class="report-block__error-title">{{itemId}}</span>
+            <mat-form-field>
+                <input matInput placeholder="Name" value="{{name}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Username" value="{{userName}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Surname" value="{{surName}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Email" value="{{email}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Phone" value="{{phone}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Status" value="{{status}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Points" value="{{points}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Shop ID" value="{{shopId}}"/>
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="City ID" value="{{cityId}}"/>
+            </mat-form-field><br>
+        </div>
+        <div class="buttons">
+            <button mat-raised-button>Save</button>
+            <button mat-raised-button>Cancel</button>
         </div>
     </div>
 </app-modal-window>

@@ -20,8 +20,20 @@ export class AdminPageComponent implements OnInit{
     public navItems: NavItemModel[];
     public tableData: any[] = [];
 
-    public itemId: string = '';
+    public edit: string = 'Edit User';
+
+    public name: string = '';
+    public userName: string = '';
+    public surName: string = '';
+    public phone: string = '';
+    public email: string = '';
+    public status: string = '';
+    public points: string = '';
+    public cityId: string = '';
+    public shopId: string = '';
+
     @ViewChild('report') public report: ElementRef;
+    @ViewChild('delete') public delete: ElementRef;
 
     public columns: any = [
         { name : 'Id'},
@@ -78,8 +90,21 @@ export class AdminPageComponent implements OnInit{
         });
     }
 
-    public openReport(item: any): void {
-        this.itemId = item.id;
+    public openEdit(item: any): void {
+        this.name = item.name;
+        this.userName = item.username;
+        this.surName = item.surname;
+        this.phone = item.phone;
+        this.email = item.email;
+        this.cityId = item.cityId;
+        this.shopId = item.shopId;
+        this.status = item.status;
+        this.points = item.points;
+
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.report });
+    }
+
+    public openDelete(item: any): void {
+        this.modalWindowService.showModalWindow({outsideClose: true, content: this.delete });
     }
 }

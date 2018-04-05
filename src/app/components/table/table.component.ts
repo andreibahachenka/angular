@@ -8,7 +8,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class TableComponent implements OnInit {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
-    @Output() public onOpenReport: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onOpenEdit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onOpenDelete: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
     ){
@@ -25,7 +26,11 @@ export class TableComponent implements OnInit {
         ];
     }
 
-    public openReport(item: any): void {
-        this.onOpenReport.emit(item);
+    public openDelete(item: any): void {
+        this.onOpenDelete.emit(item);
+    }
+
+    public openEdit(item: any): void {
+        this.onOpenEdit.emit(item);
     }
 }

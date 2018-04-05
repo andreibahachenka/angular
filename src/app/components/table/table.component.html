@@ -21,9 +21,10 @@
     </ngx-datatable-column>
 </ng-container>
 
-    <ngx-datatable-column name="Action" [cellClass]="'action-btn-cell'" [width]="150">
+    <ngx-datatable-column name="Action" [cellClass]="'action-btn-cell'" [width]="200">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            <button mat-raised-button (click)="openReport(row)">Edit</button>
+            <button class="button-edit" mat-raised-button (click)="openEdit(row)">Edit</button>
+            <button color="warn" class="" mat-raised-button mat-warn (click)="openDelete(row)">Delete</button>
         </ng-template>
     </ngx-datatable-column>
 
