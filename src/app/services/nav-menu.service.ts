@@ -16,7 +16,8 @@ export class NavMenuService {
             .map((dataItems: any[]) => {
                 const navMenu: NavItemModel[] = dataItems.map((dataItem) => new NavItemModel(
                     dataItem.title,
-                    dataItem.url
+                    dataItem.url,
+                    dataItem.image
                 ));
                 return navMenu;
             });
