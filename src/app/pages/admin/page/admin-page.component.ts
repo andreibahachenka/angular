@@ -20,17 +20,24 @@ import { ModalWindowService } from './../../../components/modal-window/services/
 export class AdminPageComponent implements OnInit {
     public navItems: NavItemModel[];
     public tableData: any[] = [];
-
+    public modifiedTableData: any[] = [];
     public edit: string = 'Edit User';
     public deleteMessage: string = 'Are you sure you want to delete this user?';
-    public statuses = ['Active', 'Not Active', 'Waiting moderation'];
+
+    public objectKeys = Object.keys;
+
+    public statuses = {
+        1: 'Active',
+        0: 'Not Active',
+        2: 'Waiting moderation'
+    };
 
     public name: string = '';
     public userName: string = '';
     public surName: string = '';
     public phone: string = '';
     public email: string = '';
-    public status: any = '';
+    public status: any;
     // public points: string = '';
     public id: string = '';
 
@@ -92,16 +99,18 @@ export class AdminPageComponent implements OnInit {
             //     delete obj['city_id'];
             //     return obj;
             // });
-            this.tableData.map((obj) => {
-                if (obj.status === 1) {
-                    obj.status = 'Active';
-                } else if (obj.status === 2) {
-                    obj.status = 'Waiting moderation';
-                } else if (obj.status === 0) {
-                    obj.status = 'Not Active';
-                }
+
+                this.modifiedTableData = this.tableData;
+                this.modifiedTableData.map((obj) => {
+                    if (obj.status === 1) {
+                        obj.status = 'Active';
+                    } else if (obj.status === 2) {
+                        obj.status = 'Waiting moderation';
+                    } else if (obj.status === 0) {
+                        obj.status = 'Not Active';
+                    }
+                });
             });
-        });
     }
 
     public openEdit(item: any): void {
@@ -116,7 +125,8 @@ export class AdminPageComponent implements OnInit {
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
 
-    public openDelete(): void {
+    public openDelete(item: any): void {
+        this.id = item.id;
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
     }
 
@@ -134,10 +144,7 @@ export class AdminPageComponent implements OnInit {
     }
 
     public applyDelete(id): void {
-        let dataToDelete = {
-            id: id
-        };
-        this.adminPageService.deleteUser(dataToDelete)
+        this.adminPageService.deleteUser(id)
             .subscribe((res) => {
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();

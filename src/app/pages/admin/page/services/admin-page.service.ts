@@ -41,10 +41,13 @@ export class AdminPageService {
     }
 
     public deleteUser(data): Observable<any> {
+        let dataToDelete = {
+            id: data
+        };
         return new Observable((observer) => {
             this.restApiService.deleteItem(
                 `${PathConfig.removeUserEndpoint}`,
-                JSON.stringify(data),
+                JSON.stringify(dataToDelete),
                 (err) => {
                     console.log(err);
                 }
