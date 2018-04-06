@@ -131,8 +131,6 @@ export class AdminPageComponent implements OnInit {
     }
 
     public saveChanges(data: NgForm): void {
-        console.log(data);
-
         this.adminPageService.updateUser(data)
             .subscribe((res) => {
                     this.getUsers();
