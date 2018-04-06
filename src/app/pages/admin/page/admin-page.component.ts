@@ -12,6 +12,13 @@ import { AdminPageService } from './services/admin-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
 
+
+// enum StatusMode {
+//     0 = 'Not Active',
+//     1 = 'Active',
+//     2 = 'Waiting moderation'
+// }
+
 @Component({
     selector: 'app-admin',
     styleUrls: ['admin-page.component.scss'],
@@ -38,7 +45,6 @@ export class AdminPageComponent implements OnInit {
     public phone: string = '';
     public email: string = '';
     public status: any;
-    // public points: string = '';
     public id: string = '';
 
     @ViewChild('editModal') public editModal: ElementRef;
@@ -65,7 +71,7 @@ export class AdminPageComponent implements OnInit {
         email: new FormControl(this.email),
         phone: new FormControl(this.phone),
         status: new FormControl(this.status),
-        id: new FormControl(this.id)
+        id: new FormControl(this.id),
     });
 
     constructor(
@@ -123,6 +129,7 @@ export class AdminPageComponent implements OnInit {
         this.id = item.id;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
+        console.log('status', this.status);
     }
 
     public openDelete(item: any): void {
