@@ -25,6 +25,21 @@ export class AdminPageService {
         })
     }
 
+    public setUser(data): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.createUserEndpoint}`,
+                JSON.stringify(data),
+                (err) => {
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public updateUser(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(

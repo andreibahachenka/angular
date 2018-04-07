@@ -49,6 +49,7 @@ export class AdminPageComponent implements OnInit {
 
     @ViewChild('editModal') public editModal: ElementRef;
     @ViewChild('deleteModal') public deleteModal: ElementRef;
+    @ViewChild('createModal') public createModal: ElementRef;
 
     public columns: any = [
         { name : 'Id'},
@@ -72,6 +73,16 @@ export class AdminPageComponent implements OnInit {
         phone: new FormControl(this.phone),
         status: new FormControl(this.status),
         id: new FormControl(this.id),
+    });
+
+    public inputCreateForm: FormGroup = new FormGroup({
+        name: new FormControl(),
+        username: new FormControl(),
+        surname: new FormControl(),
+        email: new FormControl(),
+        phone: new FormControl(),
+        status: new FormControl(),
+        // idCreate: new FormControl(),
     });
 
     constructor(
@@ -129,7 +140,6 @@ export class AdminPageComponent implements OnInit {
         this.id = item.id;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
-        console.log('status', this.status);
     }
 
     public openDelete(item: any): void {
@@ -137,7 +147,12 @@ export class AdminPageComponent implements OnInit {
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
     }
 
+    public createUser(): void {
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
+    }
+
     public saveChanges(data: NgForm): void {
+        console.log(data);
         this.adminPageService.updateUser(data)
             .subscribe((res) => {
                     this.getUsers();
@@ -159,7 +174,19 @@ export class AdminPageComponent implements OnInit {
                 })
     }
 
+    public sendCreateForm(data): void {
+        this.adminPageService.setUser(data)
+            .subscribe((res) => {
+                    this.getUsers();
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
+    }
+
     public cancel(): void {
+        this.inputCreateForm.reset();
         this.modalWindowService.closeModalWindow();
     }
 }

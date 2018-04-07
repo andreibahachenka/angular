@@ -24,7 +24,6 @@ export class NavMenuComponent implements OnChanges {
     }
 
     public ngOnChanges(): void {
-        console.log('navmenu', this.navMenuList);
         if (this.navMenuList && this.navMenuList.length) {
             this.itemDisplayList = Array(this.navMenuList.length).fill(0).map((): AssociationOfItemDisplayModel => {
                  return { display: false };
