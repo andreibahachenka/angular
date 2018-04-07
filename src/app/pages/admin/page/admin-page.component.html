@@ -37,7 +37,7 @@
 
     <div class="content" #editModal>
         <div class="modal-header">
-            <span>{{edit}}</span>
+            <span>{{editUserMessage}}</span>
             <hr>
         </div>
         <div class="report-block">
@@ -76,6 +76,10 @@
     </div>
 
     <div class="content" #createModal>
+        <div class="modal-header">
+            <span>{{createUserMessage}}</span>
+            <hr>
+        </div>
         <div class="report-block">
             <form [formGroup]="inputCreateForm" novalidate>
                 <mat-form-field>

@@ -28,7 +28,8 @@ export class AdminPageComponent implements OnInit {
     public navItems: NavItemModel[];
     public tableData: any[] = [];
     public modifiedTableData: any[] = [];
-    public edit: string = 'Edit User';
+    public editUserMessage: string = 'Edit User';
+    public createUserMessage: string = 'Create User';
     public deleteMessage: string = 'Are you sure you want to delete this user?';
 
     public objectKeys = Object.keys;
@@ -82,7 +83,6 @@ export class AdminPageComponent implements OnInit {
         email: new FormControl(),
         phone: new FormControl(),
         status: new FormControl(),
-        // idCreate: new FormControl(),
     });
 
     constructor(
@@ -152,7 +152,6 @@ export class AdminPageComponent implements OnInit {
     }
 
     public saveChanges(data: NgForm): void {
-        console.log(data);
         this.adminPageService.updateUser(data)
             .subscribe((res) => {
                     this.getUsers();
