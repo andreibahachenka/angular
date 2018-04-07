@@ -19,7 +19,7 @@ import { AppState, InternalStateType } from './app.service';
 import { LoginPageComponent } from './pages/login/page';
 import { AdminPageComponent } from './pages/admin/page';
 
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 //PAGES
 import {

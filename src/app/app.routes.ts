@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login/page'
 import { AdminPageComponent } from './pages/admin/page'
 
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 import { RoutesConfig } from './../app-config/routes.config'
 
