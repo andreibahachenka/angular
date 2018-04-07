@@ -12,13 +12,6 @@ import { AdminPageService } from './services/admin-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
 
-
-// enum StatusMode {
-//     0 = 'Not Active',
-//     1 = 'Active',
-//     2 = 'Waiting moderation'
-// }
-
 @Component({
     selector: 'app-admin',
     styleUrls: ['admin-page.component.scss'],
