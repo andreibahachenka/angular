@@ -41,7 +41,7 @@
             <hr>
         </div>
         <div class="report-block">
-            <form [formGroup]="inputForm" novalidate>
+            <form [formGroup]="inputForm">
                 <mat-form-field>
                     <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
                 </mat-form-field><br>
@@ -70,7 +70,12 @@
             </form>
         </div>
         <div class="buttons">
-            <button color="primary" mat-raised-button (click)="saveChanges(inputForm.value)">Save</button>
+            <button color="primary"
+                    mat-raised-button
+                    (click)="saveChanges(inputForm.value)"
+                    [disabled]="inputForm.invalid">
+                Save
+            </button>
             <button mat-raised-button (click)="cancel()">Cancel</button>
         </div>
     </div>
@@ -81,7 +86,7 @@
             <hr>
         </div>
         <div class="report-block">
-            <form [formGroup]="inputCreateForm" novalidate>
+            <form [formGroup]="inputCreateForm">
                 <mat-form-field>
                     <input matInput placeholder="Username" formControlName="username"/>
                 </mat-form-field><br>
@@ -107,7 +112,12 @@
             </form>
         </div>
         <div class="buttons">
-            <button color="primary" mat-raised-button (click)="sendCreateForm(inputCreateForm.value)">Save</button>
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
             <button mat-raised-button (click)="cancel()">Cancel</button>
         </div>
     </div>

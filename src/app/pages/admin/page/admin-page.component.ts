@@ -5,7 +5,7 @@ import {
     ElementRef
 } from '@angular/core';
 
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
 
 import { NavMenuService } from '../../../services/nav-menu.service';
 import { AdminPageService } from './services/admin-page.service';
@@ -61,22 +61,51 @@ export class AdminPageComponent implements OnInit {
     ];
 
     public inputForm: FormGroup = new FormGroup({
-        name: new FormControl(this.name),
-        username: new FormControl(this.userName),
-        surname: new FormControl(this.surName),
-        email: new FormControl(this.email),
-        phone: new FormControl(this.phone),
-        status: new FormControl(this.status),
+        name: new FormControl(this.name, [
+            Validators.required,
+            Validators.maxLength(20)
+        ]),
+        username: new FormControl(this.userName, [
+            Validators.required,
+            Validators.maxLength(20)
+        ]),
+        surname: new FormControl(this.surName, [
+            Validators.required,
+            Validators.maxLength(20)
+            ]),
+        email: new FormControl(this.email, [
+            Validators.required,
+            Validators.email]),
+        phone: new FormControl(this.phone, [
+            Validators.required,
+            Validators.pattern("^[0-9\-\+\s\(\)]*$")
+        ]),
+        status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
     });
 
     public inputCreateForm: FormGroup = new FormGroup({
-        name: new FormControl(),
-        username: new FormControl(),
-        surname: new FormControl(),
-        email: new FormControl(),
-        phone: new FormControl(),
-        status: new FormControl(),
+        name: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(20)
+        ]),
+        username: new FormControl('',[
+            Validators.required,
+            Validators.maxLength(20)
+        ]),
+        surname: new FormControl('',[
+            Validators.required,
+            Validators.maxLength(20)
+        ]),
+        email: new FormControl('', [
+            Validators.required,
+            Validators.email
+        ]),
+        phone: new FormControl('', [
+            Validators.required,
+            Validators.pattern("^[0-9\-\+\s\(\)]*$")
+        ]),
+        status: new FormControl('', Validators.required),
     });
 
     constructor(
