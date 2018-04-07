@@ -53,17 +53,11 @@ export class AdminPageComponent implements OnInit {
     @ViewChild('createModal') public createModal: ElementRef;
 
     public columns: any = [
-        { name : 'Id'},
         { name : 'Name'},
         { name : 'Username'},
         { name : 'Surname'},
-        { name : 'Photo'},
-        { name : 'Phone'},
-        { name : 'Email'},
         { name : 'Status'},
-        { name : 'Points'},
-        { name : 'Shop_id'},
-        { name : 'City_id'},
+        { name : 'Points'}
     ];
 
     public inputForm: FormGroup = new FormGroup({
