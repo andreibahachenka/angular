@@ -26,6 +26,7 @@ export class AdminPageComponent implements OnInit {
     public deleteMessage: string = 'Are you sure you want to delete this user?';
 
 
+    public phoneValidationExp = /^[0-9-+()]*$/;
     public emailValidationExp =
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -66,7 +67,8 @@ export class AdminPageComponent implements OnInit {
             Validators.pattern(this.emailValidationExp)
         ]),
         phone: new FormControl(this.phone, [
-            Validators.required
+            Validators.required,
+            Validators.pattern(this.phoneValidationExp)
         ]),
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
@@ -81,7 +83,8 @@ export class AdminPageComponent implements OnInit {
             Validators.pattern(this.emailValidationExp)
         ]),
         phone: new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.pattern(this.phoneValidationExp)
         ]),
         status: new FormControl('', Validators.required),
     });
