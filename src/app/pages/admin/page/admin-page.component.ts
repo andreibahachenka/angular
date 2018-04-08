@@ -25,8 +25,9 @@ export class AdminPageComponent implements OnInit {
     public createUserMessage: string = 'Create User';
     public deleteMessage: string = 'Are you sure you want to delete this user?';
 
+
     public emailValidationExp =
-        "/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/"
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     public objectKeys = Object.keys;
 
@@ -62,10 +63,10 @@ export class AdminPageComponent implements OnInit {
         surname: new FormControl(this.surName, Validators.required),
         email: new FormControl(this.email, [
             Validators.required,
-            Validators.email]),
-        phone: new FormControl(this.phone, [
-            Validators.required,
             Validators.pattern(this.emailValidationExp)
+        ]),
+        phone: new FormControl(this.phone, [
+            Validators.required
         ]),
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
@@ -77,11 +78,10 @@ export class AdminPageComponent implements OnInit {
         surname: new FormControl('', Validators.required),
         email: new FormControl('', [
             Validators.required,
-            Validators.email
+            Validators.pattern(this.emailValidationExp)
         ]),
         phone: new FormControl('', [
-            Validators.required,
-            Validators.pattern(this.emailValidationExp)
+            Validators.required
         ]),
         status: new FormControl('', Validators.required),
     });

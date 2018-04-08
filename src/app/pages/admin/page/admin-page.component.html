@@ -48,12 +48,24 @@
                 <mat-form-field>
                     <input matInput placeholder="Username" [(ngModel)]="userName" formControlName="username" [maxlength]="20"/>
                 </mat-form-field><br>
+                <div *ngIf="inputEditForm.controls.username.invalid
+                 && inputEditForm.controls.username.touched"
+                     class="error-message">Username can't be blank
+                </div>
                 <mat-form-field>
                     <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
                 </mat-form-field><br>
+                <div *ngIf="inputEditForm.controls.name.invalid
+                 && inputEditForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
                 <mat-form-field>
                     <input matInput placeholder="Surname" [(ngModel)]="surName" formControlName="surname" [maxlength]="20"/>
                 </mat-form-field><br>
+                <div *ngIf="inputEditForm.controls.surname.invalid
+                 && inputEditForm.controls.surname.touched"
+                     class="error-message">Surname can't be blank
+                </div>
                 <mat-form-field>
                     <input matInput placeholder="Email" [(ngModel)]="email" formControlName="email" [maxlength]="40"/>
                 </mat-form-field><br>
@@ -98,12 +110,24 @@
                 <mat-form-field>
                     <input matInput placeholder="Username" formControlName="username" [maxlength]="20"/>
                 </mat-form-field><br>
+                <div *ngIf="inputCreateForm.controls.username.invalid
+                 && inputCreateForm.controls.username.touched"
+                     class="error-message">Username can't be blank
+                </div>
                 <mat-form-field>
                     <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
                 </mat-form-field><br>
+                <div *ngIf="inputCreateForm.controls.name.invalid
+                 && inputCreateForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
                 <mat-form-field>
                     <input matInput placeholder="Surname" formControlName="surname" [maxlength]="20"/>
                 </mat-form-field><br>
+                <div *ngIf="inputCreateForm.controls.surname.invalid
+                 && inputCreateForm.controls.surname.touched"
+                     class="error-message">Surname can't be blank
+                </div>
                 <mat-form-field>
                     <input matInput placeholder="Email" formControlName="email" [maxlength]="40"/>
                 </mat-form-field><br>
