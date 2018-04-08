@@ -25,6 +25,9 @@ export class AdminPageComponent implements OnInit {
     public createUserMessage: string = 'Create User';
     public deleteMessage: string = 'Are you sure you want to delete this user?';
 
+    public emailValidationExp =
+        "/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/"
+
     public objectKeys = Object.keys;
 
     public statuses = {
@@ -53,50 +56,32 @@ export class AdminPageComponent implements OnInit {
         { name : 'Points'}
     ];
 
-    public inputForm: FormGroup = new FormGroup({
-        name: new FormControl(this.name, [
-            Validators.required,
-            Validators.maxLength(20)
-        ]),
-        username: new FormControl(this.userName, [
-            Validators.required,
-            Validators.maxLength(20)
-        ]),
-        surname: new FormControl(this.surName, [
-            Validators.required,
-            Validators.maxLength(20)
-            ]),
+    public inputEditForm: FormGroup = new FormGroup({
+        name: new FormControl(this.name, Validators.required),
+        username: new FormControl(this.userName, Validators.required),
+        surname: new FormControl(this.surName, Validators.required),
         email: new FormControl(this.email, [
             Validators.required,
             Validators.email]),
         phone: new FormControl(this.phone, [
             Validators.required,
-            Validators.pattern("^[0-9\-\+\s\(\)]*$")
+            Validators.pattern(this.emailValidationExp)
         ]),
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
     });
 
     public inputCreateForm: FormGroup = new FormGroup({
-        name: new FormControl('', [
-            Validators.required,
-            Validators.maxLength(20)
-        ]),
-        username: new FormControl('',[
-            Validators.required,
-            Validators.maxLength(20)
-        ]),
-        surname: new FormControl('',[
-            Validators.required,
-            Validators.maxLength(20)
-        ]),
+        name: new FormControl('', Validators.required),
+        username: new FormControl('', Validators.required),
+        surname: new FormControl('', Validators.required),
         email: new FormControl('', [
             Validators.required,
             Validators.email
         ]),
         phone: new FormControl('', [
             Validators.required,
-            Validators.pattern("^[0-9\-\+\s\(\)]*$")
+            Validators.pattern(this.emailValidationExp)
         ]),
         status: new FormControl('', Validators.required),
     });

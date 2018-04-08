@@ -41,25 +41,33 @@
             <hr>
         </div>
         <div class="report-block">
-            <form [formGroup]="inputForm">
+            <form [formGroup]="inputEditForm">
                 <mat-form-field>
                     <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Username" [(ngModel)]="userName" formControlName="username"/>
+                    <input matInput placeholder="Username" [(ngModel)]="userName" formControlName="username" [maxlength]="20"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name"/>
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Surname" [(ngModel)]="surName" formControlName="surname"/>
+                    <input matInput placeholder="Surname" [(ngModel)]="surName" formControlName="surname" [maxlength]="20"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Email" [(ngModel)]="email" formControlName="email"/>
+                    <input matInput placeholder="Email" [(ngModel)]="email" formControlName="email" [maxlength]="40"/>
                 </mat-form-field><br>
+                <div *ngIf="inputEditForm.controls.email.invalid
+                 && inputEditForm.controls.email.touched"
+                     class="error-message">Incorrect email
+                </div>
                 <mat-form-field>
-                    <input matInput placeholder="Phone" [(ngModel)]="phone" formControlName="phone"/>
+                    <input matInput placeholder="Phone" [(ngModel)]="phone" formControlName="phone" [maxlength]="25"/>
                 </mat-form-field><br>
+                <div *ngIf="inputEditForm.controls.phone.invalid
+                 && inputEditForm.controls.phone.touched"
+                     class="error-message">Incorrect phone
+                </div>
                 <mat-form-field>
                     <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
                         <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
@@ -72,8 +80,8 @@
         <div class="buttons">
             <button color="primary"
                     mat-raised-button
-                    (click)="saveChanges(inputForm.value)"
-                    [disabled]="inputForm.invalid">
+                    (click)="saveChanges(inputEditForm.value)"
+                    [disabled]="inputEditForm.invalid">
                 Save
             </button>
             <button mat-raised-button (click)="cancel()">Cancel</button>
@@ -88,20 +96,28 @@
         <div class="report-block">
             <form [formGroup]="inputCreateForm">
                 <mat-form-field>
-                    <input matInput placeholder="Username" formControlName="username"/>
+                    <input matInput placeholder="Username" formControlName="username" [maxlength]="20"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Name" formControlName="name"/>
+                    <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Surname" formControlName="surname"/>
+                    <input matInput placeholder="Surname" formControlName="surname" [maxlength]="20"/>
                 </mat-form-field><br>
                 <mat-form-field>
-                    <input matInput placeholder="Email" formControlName="email"/>
+                    <input matInput placeholder="Email" formControlName="email" [maxlength]="40"/>
                 </mat-form-field><br>
+                <div *ngIf="inputCreateForm.controls.email.invalid
+                 && inputCreateForm.controls.email.touched"
+                     class="error-message">Incorrect email
+                </div>
                 <mat-form-field>
-                    <input matInput placeholder="Phone" formControlName="phone"/>
+                    <input matInput placeholder="Phone" formControlName="phone" [maxlength]="25"/>
                 </mat-form-field><br>
+                <div *ngIf="inputCreateForm.controls.phone.invalid
+                 && inputCreateForm.controls.phone.touched"
+                     class="error-message">Incorrect phone
+                </div>
                 <mat-form-field>
                     <mat-select placeholder="Status" formControlName="status">
                         <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
