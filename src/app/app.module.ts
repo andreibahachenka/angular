@@ -39,7 +39,8 @@ import {
 //SERVICES
 import {
     RestApiService,
-    NavMenuService
+    NavMenuService,
+    NotificationService
 } from './services';
 
 import { AdminPageService } from './pages/admin/page/services/admin-page.service';
@@ -104,6 +105,7 @@ interface StoreType {
    */
   providers: [
       RestApiService,
+      NotificationService,
       NavMenuService,
       AdminPageService,
       LoginService,

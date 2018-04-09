@@ -107,3 +107,22 @@ a {
 		}
 	}
 }
+
+//notification styles
+.notification {
+	&-success {
+		button {
+			color: #4CAF50;
+		}
+	}
+	&-warning {
+		button {
+			color: #FF9800;
+		}
+	}
+	&-error {
+		button {
+			color: #f44336;
+		}
+	}
+}

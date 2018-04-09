@@ -3,12 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/';
 
 import { LocalStorageConfig } from '../../app-config/locastorage.config';
+import { NotificationService } from './notification.service';
+
+const message = 'Erorr loading data';
 
 @Injectable()
 export class RestApiService {
 
     constructor(
         private http: HttpClient,
+        private notificationService: NotificationService,
     ) {
     }
 
@@ -32,6 +36,7 @@ export class RestApiService {
                     if (errorCallback) {
                         errorCallback(err);
                     } else {
+                        this.notificationService.error(message);
                         console.error(err);
                     }
                     observer.error(err);
@@ -56,6 +61,7 @@ export class RestApiService {
                     if (errorCallback) {
                         errorCallback(err);
                     } else {
+                        this.notificationService.error(message);
                         console.error(err);
                     }
                     observer.error(err);
@@ -80,6 +86,7 @@ export class RestApiService {
                         if (errorCallback) {
                             errorCallback(err);
                         } else {
+                            this.notificationService.error(message);
                             console.error(err);
                         }
                         observer.error(err);
@@ -104,6 +111,7 @@ export class RestApiService {
                         if (errorCallback) {
                             errorCallback(err);
                         } else {
+                            this.notificationService.error(message);
                             console.error(err);
                         }
                         observer.error(err);
