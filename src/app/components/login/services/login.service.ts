@@ -3,6 +3,9 @@ import { Observable } from 'rxjs/Observable';
 
 import { RestApiService } from './../../../services';
 import { PathConfig } from './../../../../app-config/path.config';
+import { NotificationService } from './../../../services/notification.service';
+
+const errorMessage = 'The user name or password is incorrect';
 
 @Injectable()
 export class LoginService {
@@ -11,7 +14,8 @@ export class LoginService {
     @ViewChild('apppassword') apppassword: ElementRef;
 
     constructor(
-        private restApiService: RestApiService
+        private restApiService: RestApiService,
+        private notificationService: NotificationService
     ) {
     }
 
@@ -24,6 +28,7 @@ export class LoginService {
                     password: password.value,
                 }),
                 (err) => {
+                    this.notificationService.error(errorMessage);
                     console.error(err);
                 }
             ).first()

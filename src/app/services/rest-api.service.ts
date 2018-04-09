@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/';
+import { omitBy, isEmpty } from 'lodash';
 
 import { LocalStorageConfig } from '../../app-config/locastorage.config';
 import { NotificationService } from './notification.service';
@@ -21,13 +22,24 @@ export class RestApiService {
         const queryUrl = isParamString ? `${url}?${params}` : url;
 
         return new Observable((observer) => {
-            this.http.get(queryUrl,
-                { headers:
-                    {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
-                    }
-                })
+            this.http.get(queryUrl,!isParamString ? {
+                params: this.createParams(params),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                }
+            }: {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                }
+            })
+                // { headers:
+                //     {
+                //         'Content-Type': 'application/json',
+                //         'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                //     }
+                // })
                 .subscribe(
                 (response) => {
                     observer.next(response);
@@ -35,7 +47,6 @@ export class RestApiService {
                 (err) => {
                     if (errorCallback) {
                         errorCallback(err);
-                        this.notificationService.error(message);
                     } else {
                         this.notificationService.error(message);
                         console.error(err);
@@ -62,7 +73,6 @@ export class RestApiService {
                 (err) => {
                     if (errorCallback) {
                         errorCallback(err);
-                        this.notificationService.error(message);
                     } else {
                         this.notificationService.error(message);
                         console.error(err);
@@ -88,7 +98,6 @@ export class RestApiService {
                     (err) => {
                         if (errorCallback) {
                             errorCallback(err);
-                            this.notificationService.error(message);
                         } else {
                             this.notificationService.error(message);
                             console.error(err);
@@ -114,7 +123,6 @@ export class RestApiService {
                     (err) => {
                         if (errorCallback) {
                             errorCallback(err);
-                            this.notificationService.error(message);
                         } else {
                             this.notificationService.error(message);
                             console.error(err);
@@ -122,5 +130,14 @@ export class RestApiService {
                         observer.error(err);
                     });
         }).first();
+    }
+
+    private createParams(paramsObject: any): any {
+        return !paramsObject ? null : omitBy(paramsObject, (propValue) => {
+            return propValue === ''
+                || propValue === undefined
+                || propValue === null
+                || (typeof propValue === 'object' && isEmpty(propValue));
+        });
     }
 }

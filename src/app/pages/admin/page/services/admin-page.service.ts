@@ -2,20 +2,25 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { RestApiService } from '../../../../services/rest-api.service';
-import { PathConfig } from './../../../../../app-config/path.config'
+import { PathConfig } from './../../../../../app-config/path.config';
+import { NotificationService } from './../../../../services/notification.service';
+
+const errorMessage = 'Erorr loading data';
 
 @Injectable()
 export class AdminPageService {
     constructor(
-        private restApiService: RestApiService
+        private restApiService: RestApiService,
+        private notificationService: NotificationService
     ) {
     }
 
-    public getUser(): Observable<any> {
+    public getUser(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.getItems(
-                `${PathConfig.getUsersEndpoint}`,
+                `${PathConfig.getFilterEndpoint}`, data,
                 (err) => {
+                    this.notificationService.error(errorMessage);
                     console.error(err);
                 }
             ).first()
@@ -31,6 +36,7 @@ export class AdminPageService {
                 `${PathConfig.createUserEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
+                    this.notificationService.error(errorMessage);
                     console.error(err);
                 }
             ).first()
@@ -46,6 +52,7 @@ export class AdminPageService {
                 `${PathConfig.updateUserEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
+                    this.notificationService.error(errorMessage);
                     console.log(err);
                 }
             ).first()
@@ -64,6 +71,7 @@ export class AdminPageService {
                 `${PathConfig.removeUserEndpoint}`,
                 JSON.stringify(dataToDelete),
                 (err) => {
+                    this.notificationService.error(errorMessage);
                     console.log(err);
                 }
             ).first()

@@ -63,9 +63,24 @@ mat-form-field {
 	margin: 20px 0 0 40px;
 }
 
+.filter-button {
+	width: 150px;
+	margin: 20px 0 0 40px;
+}
+
+.clear-button {
+	width: 150px;
+	background-color: #FF9800;
+	color: #fff;
+}
+
 .error-message {
 	font-size: 11px;
 	color: #f44336;
 	margin-top: -10px;
 	margin-bottom: 10px;
+}
+
+.filter-form {
+	margin: 20px 0 0 40px;
 }

@@ -46,6 +46,11 @@ export class AdminPageComponent implements OnInit {
     public status: any;
     public id: string = '';
 
+    public filterName: string = '';
+    public filterSurname: string = '';
+    public filterEmail: string = '';
+    public filterPhone: string = '';
+
     @ViewChild('editModal') public editModal: ElementRef;
     @ViewChild('deleteModal') public deleteModal: ElementRef;
     @ViewChild('createModal') public createModal: ElementRef;
@@ -89,6 +94,13 @@ export class AdminPageComponent implements OnInit {
         status: new FormControl('', Validators.required),
     });
 
+    public inputFilterForm: FormGroup = new FormGroup({
+        name: new FormControl(''),
+        surname: new FormControl(''),
+        email: new FormControl(''),
+        phone: new FormControl('')
+    });
+
     constructor(
         private navMenuService: NavMenuService,
         private adminPageService: AdminPageService,
@@ -103,8 +115,8 @@ export class AdminPageComponent implements OnInit {
         this.getUsers();
     }
 
-    public getUsers(): void {
-        this.adminPageService.getUser()
+    public getUsers(searchParameters?: any): void {
+        this.adminPageService.getUser(searchParameters)
             .subscribe((res) => {
             this.tableData = res.users;
 
@@ -188,8 +200,28 @@ export class AdminPageComponent implements OnInit {
                 })
     }
 
+    public filterData(searchParameters): void {
+        searchParameters.name = this.inputFilterForm.value.name;
+        searchParameters.surname = this.inputFilterForm.value.surname;
+        searchParameters.email = this.inputFilterForm.value.email;
+        searchParameters.phone = this.inputFilterForm.value.phone;
+
+        this.adminPageService.getUser(searchParameters)
+            .subscribe(() => {
+            this.getUsers(searchParameters);
+                // this.getUsers();
+            },
+            (err) => {
+                console.error(err);
+            })
+    }
+
     public cancel(): void {
         this.inputCreateForm.reset();
         this.modalWindowService.closeModalWindow();
+    }
+
+    public clearForm(): void {
+        this.inputFilterForm.reset();
     }
 }
