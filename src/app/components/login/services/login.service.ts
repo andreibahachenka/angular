@@ -1,9 +1,8 @@
 import { Injectable, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { RestApiService } from './../../../services';
+import { RestApiService, NotificationService } from './../../../services';
 import { PathConfig } from './../../../../app-config/path.config';
-import { NotificationService } from './../../../services/notification.service';
 
 const errorMessage = 'The user name or password is incorrect';
 

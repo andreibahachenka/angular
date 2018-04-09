@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { RestApiService } from '../../../../services/rest-api.service';
+import { RestApiService, NotificationService } from '../../../../services';
 import { PathConfig } from './../../../../../app-config/path.config';
-import { NotificationService } from './../../../../services/notification.service';
 
 const errorMessage = 'Erorr loading data';
 

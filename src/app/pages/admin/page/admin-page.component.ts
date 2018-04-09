@@ -208,8 +208,7 @@ export class AdminPageComponent implements OnInit {
 
         this.adminPageService.getUser(searchParameters)
             .subscribe(() => {
-            this.getUsers(searchParameters);
-                // this.getUsers();
+                this.getUsers(searchParameters);
             },
             (err) => {
                 console.error(err);
