@@ -15,7 +15,6 @@ export class NotificationService {
     }
 
     public error(message: string) {
-        console.log('SUCEEEESSSS');
         this.snackBar.open(message, 'Error', this.configError);
     }
 

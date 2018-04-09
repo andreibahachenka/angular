@@ -35,6 +35,7 @@ export class RestApiService {
                 (err) => {
                     if (errorCallback) {
                         errorCallback(err);
+                        this.notificationService.error(message);
                     } else {
                         this.notificationService.error(message);
                         console.error(err);
@@ -45,6 +46,7 @@ export class RestApiService {
     }
 
     public postItem(url: string, body?: any, errorCallback?): Observable<any> {
+        console.log('POST');
         return new Observable((observer) => {
             this.http.post(url, body,
                 { headers:
@@ -60,6 +62,7 @@ export class RestApiService {
                 (err) => {
                     if (errorCallback) {
                         errorCallback(err);
+                        this.notificationService.error(message);
                     } else {
                         this.notificationService.error(message);
                         console.error(err);
@@ -85,6 +88,7 @@ export class RestApiService {
                     (err) => {
                         if (errorCallback) {
                             errorCallback(err);
+                            this.notificationService.error(message);
                         } else {
                             this.notificationService.error(message);
                             console.error(err);
@@ -110,6 +114,7 @@ export class RestApiService {
                     (err) => {
                         if (errorCallback) {
                             errorCallback(err);
+                            this.notificationService.error(message);
                         } else {
                             this.notificationService.error(message);
                             console.error(err);
