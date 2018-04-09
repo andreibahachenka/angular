@@ -18,7 +18,7 @@ export class AdminPageService {
     public getUser(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.getItems(
-                `${PathConfig.getFilterEndpoint}`, data,
+                `${PathConfig.getUsersEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);
