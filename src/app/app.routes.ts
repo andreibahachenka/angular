@@ -5,6 +5,7 @@ import { AdminPageComponent } from './pages/admin/page'
 import { AuthGuard } from './guards/auth.guard';
 
 import { RoutesConfig } from './../app-config/routes.config'
+import { AdministratorsPageComponent } from "./pages/administrators/page/administrators-page.component";
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: RoutesConfig.login, pathMatch: 'full' },
@@ -14,6 +15,8 @@ export const ROUTES: Routes = [
     { path: RoutesConfig.adminUrl, redirectTo: RoutesConfig.startAdminRoute, pathMatch: 'full'},
 
     { path: RoutesConfig.startAdminRoute, component: AdminPageComponent, canActivate: [AuthGuard] },
+
+    { path: RoutesConfig.adminAdministrators, component: AdministratorsPageComponent, canActivate: [AuthGuard] },
 
     { path: '**', redirectTo: RoutesConfig.login, pathMatch: 'full' }
 ];

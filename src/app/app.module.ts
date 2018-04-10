@@ -18,13 +18,15 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { LoginPageComponent } from './pages/login/page';
 import { AdminPageComponent } from './pages/admin/page';
+import { AdministratorsPageComponent } from './pages/administrators/page';
 
 import { AuthGuard } from './guards/auth.guard';
 
 //PAGES
 import {
     LoginPageModule,
-    AdminPageModule
+    AdminPageModule,
+    AdministratorsPageModule
 } from './pages'
 
 //COMPONENTS
@@ -44,6 +46,7 @@ import {
 } from './services';
 
 import { AdminPageService } from './pages/admin/page/services/admin-page.service';
+import { AdministratorsPageService } from './pages/administrators/page/services/administrators-page.service';
 import { LoginService } from './components/login/services/login.service';
 import { ModalWindowService } from './components/modal-window/services/modal-window.service';
 
@@ -72,6 +75,7 @@ interface StoreType {
       LoginPageComponent,
       LoginComponent,
       AdminPageComponent,
+      AdministratorsPageComponent,
       TableComponent,
       HeaderComponent,
       NavMenuComponent,
@@ -100,6 +104,7 @@ interface StoreType {
      */
     ...environment.showDevModule ? [] : [],
   ],
+
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
@@ -109,6 +114,7 @@ interface StoreType {
       NavMenuService,
       AdminPageService,
       LoginService,
+      AdministratorsPageService,
       ModalWindowService,
       AuthGuard,
       environment.ENV_PROVIDERS,

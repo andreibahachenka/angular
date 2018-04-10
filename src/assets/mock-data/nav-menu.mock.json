@@ -3,5 +3,10 @@
 		"title": "Users",
 		"url": "/users",
 		"image": "group"
+	},
+	{
+		"title": "Administrators",
+		"url": "/administrators",
+		"image": "group"
 	}
 ]

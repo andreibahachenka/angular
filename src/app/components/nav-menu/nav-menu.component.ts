@@ -40,7 +40,7 @@ export class NavMenuComponent implements OnChanges {
         }
     }
 
-    public routeTo(): void {
-        this.router.navigate([RoutesConfig.startAdminRoute]);
+    public routeTo(url): void {
+        this.router.navigate([RoutesConfig.adminUrl + url]);
     }
 }
