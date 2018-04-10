@@ -57,7 +57,6 @@ export class RestApiService {
     }
 
     public postItem(url: string, body?: any, errorCallback?): Observable<any> {
-        console.log('POST');
         return new Observable((observer) => {
             this.http.post(url, body,
                 { headers:

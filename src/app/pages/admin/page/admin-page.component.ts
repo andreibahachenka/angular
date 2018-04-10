@@ -91,6 +91,14 @@ export class AdminPageComponent implements OnInit {
             Validators.required,
             Validators.pattern(this.phoneValidationExp)
         ]),
+        shop_id: new FormControl('', [
+            Validators.required,
+            Validators.pattern(this.phoneValidationExp)
+        ]),
+        city_id: new FormControl('', [
+            Validators.required,
+            Validators.pattern(this.phoneValidationExp)
+        ]),
         status: new FormControl('', Validators.required),
     });
 
