@@ -8,16 +8,16 @@ import {
 import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
 
 import { NavMenuService } from '../../../services/nav-menu.service';
-import { AdminPageService } from './services/admin-page.service';
+import { UsersPageService } from './services/users-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
 
 @Component({
-    selector: 'app-admin',
-    styleUrls: ['admin-page.component.scss'],
-    templateUrl: 'admin-page.component.html'
+    selector: 'app-users',
+    styleUrls: ['users-page.component.scss'],
+    templateUrl: 'users-page.component.html'
 })
-export class AdminPageComponent implements OnInit {
+export class UsersPageComponent implements OnInit {
     public navItems: NavItemModel[];
     public tableData: any[] = [];
     public modifiedTableData: any[] = [];
@@ -111,7 +111,7 @@ export class AdminPageComponent implements OnInit {
 
     constructor(
         private navMenuService: NavMenuService,
-        private adminPageService: AdminPageService,
+        private usersPageService: UsersPageService,
         private modalWindowService: ModalWindowService
     ) {
     }
@@ -124,7 +124,7 @@ export class AdminPageComponent implements OnInit {
     }
 
     public getUsers(searchParameters?: any): void {
-        this.adminPageService.getUser(searchParameters)
+        this.usersPageService.getUser(searchParameters)
             .subscribe((res) => {
             this.tableData = res.users;
 
@@ -176,7 +176,7 @@ export class AdminPageComponent implements OnInit {
     }
 
     public saveChanges(data: NgForm): void {
-        this.adminPageService.updateUser(data)
+        this.usersPageService.updateUser(data)
             .subscribe((res) => {
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
@@ -187,7 +187,7 @@ export class AdminPageComponent implements OnInit {
     }
 
     public applyDelete(id): void {
-        this.adminPageService.deleteUser(id)
+        this.usersPageService.deleteUser(id)
             .subscribe((res) => {
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
@@ -198,7 +198,7 @@ export class AdminPageComponent implements OnInit {
     }
 
     public sendCreateForm(data): void {
-        this.adminPageService.setUser(data)
+        this.usersPageService.setUser(data)
             .subscribe((res) => {
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
@@ -214,7 +214,7 @@ export class AdminPageComponent implements OnInit {
         searchParameters.email = this.inputFilterForm.value.email;
         searchParameters.phone = this.inputFilterForm.value.phone;
 
-        this.adminPageService.getUser(searchParameters)
+        this.usersPageService.getUser(searchParameters)
             .subscribe(() => {
                 this.getUsers(searchParameters);
             },

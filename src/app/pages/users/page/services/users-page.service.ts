@@ -7,7 +7,7 @@ import { PathConfig } from './../../../../../app-config/path.config';
 const errorMessage = 'Erorr loading data';
 
 @Injectable()
-export class AdminPageService {
+export class UsersPageService {
     constructor(
         private restApiService: RestApiService,
         private notificationService: NotificationService

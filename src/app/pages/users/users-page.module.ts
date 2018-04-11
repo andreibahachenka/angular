@@ -4,30 +4,30 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialSharedModule } from 'app/core';
 
-import { AdminPageComponent } from './page';
-import { AdminPageRoutes } from './admin-page.routes';
-import { AdminPageService } from "./page/services/admin-page.service";
+import { UsersPageComponent } from './page';
+import { UsersPageRoutes } from './users-page.routes';
+import { UsersPageService } from "./page/services/users-page.service";
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        AdminPageRoutes,
+        UsersPageRoutes,
     ],
 
     declarations: [
-        AdminPageComponent
+        UsersPageComponent
     ],
 
     exports: [
-        AdminPageComponent
+        UsersPageComponent
     ],
 
     providers: [
-        AdminPageService
+        UsersPageService
     ]
 })
 
-export class AdminPageModule { }
+export class UsersPageModule { }
 

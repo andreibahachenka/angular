@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { LoginPageComponent } from './pages/login/page';
-import { AdminPageComponent } from './pages/admin/page';
+import { UsersPageComponent } from './pages/users/page';
 import { AdministratorsPageComponent } from './pages/administrators/page';
 
 import { AuthGuard } from './guards/auth.guard';
@@ -25,7 +25,7 @@ import { AuthGuard } from './guards/auth.guard';
 //PAGES
 import {
     LoginPageModule,
-    AdminPageModule,
+    UsersPageModule,
     AdministratorsPageModule
 } from './pages'
 
@@ -45,7 +45,7 @@ import {
     NotificationService
 } from './services';
 
-import { AdminPageService } from './pages/admin/page/services/admin-page.service';
+import { UsersPageService } from './pages/users/page/services/users-page.service';
 import { AdministratorsPageService } from './pages/administrators/page/services/administrators-page.service';
 import { LoginService } from './components/login/services/login.service';
 import { ModalWindowService } from './components/modal-window/services/modal-window.service';
@@ -74,7 +74,7 @@ interface StoreType {
       AppComponent,
       LoginPageComponent,
       LoginComponent,
-      AdminPageComponent,
+      UsersPageComponent,
       AdministratorsPageComponent,
       TableComponent,
       HeaderComponent,
@@ -112,7 +112,7 @@ interface StoreType {
       RestApiService,
       NotificationService,
       NavMenuService,
-      AdminPageService,
+      UsersPageService,
       LoginService,
       AdministratorsPageService,
       ModalWindowService,

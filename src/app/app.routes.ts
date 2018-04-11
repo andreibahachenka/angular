@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login/page'
-import { AdminPageComponent } from './pages/admin/page'
+import { UsersPageComponent } from './pages/users/page'
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -14,7 +14,7 @@ export const ROUTES: Routes = [
 
     { path: RoutesConfig.adminUrl, redirectTo: RoutesConfig.startAdminRoute, pathMatch: 'full'},
 
-    { path: RoutesConfig.startAdminRoute, component: AdminPageComponent, canActivate: [AuthGuard] },
+    { path: RoutesConfig.startAdminRoute, component: UsersPageComponent, canActivate: [AuthGuard] },
 
     { path: RoutesConfig.adminAdministrators, component: AdministratorsPageComponent, canActivate: [AuthGuard] },
 
