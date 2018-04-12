@@ -18,3 +18,69 @@
 		background-color: #32353b;
 	}
 }
+
+.modal-window {
+	.report-block {
+		&__error-title {
+			white-space: pre-line;
+			color: #f44336;
+		}
+	}
+}
+
+mat-form-field {
+	min-width: 500px;
+}
+
+.modal-header {
+	height: 50px;
+	span {
+		font-size: 22px;
+		font-weight: bold;
+	}
+}
+
+.delete-message {
+	margin-bottom: 30px;
+	font-size: 18px;
+}
+
+.delete-button {
+	background: #f44336;
+}
+
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+	button {
+		margin-left: 8px;
+	}
+}
+
+.create-button {
+	background-color: #4CAF50;
+	color: #fff;
+	margin: 20px 0 0 40px;
+}
+
+.filter-button {
+	width: 150px;
+	margin: 20px 0 0 40px;
+}
+
+.clear-button {
+	width: 150px;
+	background-color: #FF9800;
+	color: #fff;
+}
+
+.error-message {
+	font-size: 11px;
+	color: #f44336;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+.filter-form {
+	margin: 20px 0 0 40px;
+}

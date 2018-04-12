@@ -32,6 +32,7 @@ import {
 //COMPONENTS
 import {
     LoginComponent,
+    AdministratorsTableComponent,
     TableComponent,
     HeaderComponent,
     NavMenuComponent,
@@ -76,6 +77,7 @@ interface StoreType {
       LoginComponent,
       UsersPageComponent,
       AdministratorsPageComponent,
+      AdministratorsTableComponent,
       TableComponent,
       HeaderComponent,
       NavMenuComponent,

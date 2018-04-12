@@ -1,0 +1,34 @@
+<ngx-datatable
+        class="bootstrap main-table"
+        [rows]="rows"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [loadingIndicator]="loadingIndicator">
+
+    <ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="10">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ng-container *ngFor="let column of columns">
+        <ngx-datatable-column name="{{column.name}}" prop="{{column.prop}}" [width]="100">
+        </ngx-datatable-column>
+    </ng-container>
+
+    <ngx-datatable-column name="Action" [cellClass]="'action-btn-cell'" [width]="100">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <button class="button-edit" mat-icon-button (click)="openEdit(row)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button color="warn" mat-icon-button mat-color (click)="openDelete(row)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </ng-template>
+    </ngx-datatable-column>
+
+</ngx-datatable>
