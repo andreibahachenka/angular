@@ -22,13 +22,6 @@ import { AdministratorsPageComponent } from './pages/administrators/page';
 
 import { AuthGuard } from './guards/auth.guard';
 
-//PAGES
-import {
-    LoginPageModule,
-    UsersPageModule,
-    AdministratorsPageModule
-} from './pages'
-
 //COMPONENTS
 import {
     LoginComponent,
