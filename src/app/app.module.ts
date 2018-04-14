@@ -10,17 +10,20 @@ import { MaterialSharedModule } from "./core/material-shared.module";
 /*
  * Platform and Environment providers/directives/pipes
  */
+
 import { environment } from 'environments/environment';
 import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { AuthGuard } from './guards/auth.guard';
+
+//PAGES
 import { LoginPageComponent } from './pages/login/page';
 import { UsersPageComponent } from './pages/users/page';
+import { LotteriesPageComponent } from './pages/lotteries/page';
 import { AdministratorsPageComponent } from './pages/administrators/page';
-
-import { AuthGuard } from './guards/auth.guard';
 
 //COMPONENTS
 import {
@@ -32,17 +35,19 @@ import {
     ModalWindowComponent
 } from './components';
 
-//SERVICES
+//GLOBAL SERVICES
 import {
     RestApiService,
     NavMenuService,
     NotificationService
 } from './services';
 
+//LOCAL SERVICES
 import { UsersPageService } from './pages/users/page/services/users-page.service';
 import { AdministratorsPageService } from './pages/administrators/page/services/administrators-page.service';
 import { LoginService } from './components/login/services/login.service';
 import { ModalWindowService } from './components/modal-window/services/modal-window.service';
+import { LotteriesPageService } from './pages/lotteries/page/services/lotteries-page.service';
 
 //styles
 import '../styles/styles.scss';
@@ -69,6 +74,7 @@ interface StoreType {
       LoginPageComponent,
       LoginComponent,
       UsersPageComponent,
+      LotteriesPageComponent,
       AdministratorsPageComponent,
       AdministratorsTableComponent,
       TableComponent,
@@ -110,6 +116,7 @@ interface StoreType {
       UsersPageService,
       LoginService,
       AdministratorsPageService,
+      LotteriesPageService,
       ModalWindowService,
       AuthGuard,
       environment.ENV_PROVIDERS,

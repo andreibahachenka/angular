@@ -3,5 +3,6 @@ export const RoutesConfig = {
     login: 'login',
     users: 'users',
     startAdminRoute: 'admin/users',
-    adminAdministrators : 'admin/administrators'
+    adminAdministrators : 'admin/administrators',
+    adminLotteries: 'admin/lotteries'
 };

@@ -12,5 +12,11 @@ export const PathConfig = {
     getAdministratorsEndpoint: 'http://46.30.42.15:8066/v1/admin/?limit=&offset=&id=&name=&username=',
     createAdministratorEndpoint: 'http://46.30.42.15:8066/v1/admin/create',
     updateAdministratorEndpoint: 'http://46.30.42.15:8066/v1/admin/update',
-    removeAdministratorEndpoint: 'http://46.30.42.15:8066/v1/admin/remove'
+    removeAdministratorEndpoint: 'http://46.30.42.15:8066/v1/admin/remove',
+
+    //lotteries
+    getLotteriesEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries?limit=limit&offset=offset',
+    createLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lottries/create',
+    updateLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/update',
+    removeLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/remove'
 };
