@@ -14,10 +14,10 @@ export class LotteriesPageService {
     ) {
     }
 
-    public getAdministrator(data?: any): Observable<any> {
+    public getLotteries(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.getItems(
-                `${PathConfig.getAdministratorsEndpoint}`, data,
+                `${PathConfig.getLotteriesEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);

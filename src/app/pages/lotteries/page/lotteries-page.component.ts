@@ -17,10 +17,11 @@ import { ModalWindowService } from './../../../components/modal-window/services/
     styleUrls: ['lotteries-page.component.scss'],
     templateUrl: 'lotteries-page.component.html'
 })
-export class LotteriesPageComponent {
-    // public tableData: any[] = [];
-    // public modifiedTableData: any[] = [];
-    // public navItems: NavItemModel[];
+export class LotteriesPageComponent implements OnInit{
+
+    public tableData: any[] = [];
+    public modifiedTableData: any[] = [];
+    public navItems: NavItemModel[];
     //
     // public editAdministratorMessage: string = 'Edit Administrator';
     // public createAdministratorMessage: string = 'Create Administrator';
@@ -43,11 +44,17 @@ export class LotteriesPageComponent {
     //     2: 'Waiting moderation'
     // };
     //
-    // public columns: any = [
-    //     { name : 'Username'},
-    //     { name : 'Name'},
-    //     { name : 'Status'}
-    // ];
+    public columns: any = [
+        { name : 'ID'},
+        { name : 'Name'},
+        { name : 'Quantity'},
+        { name : 'Quantity'},
+        { name : 'Number of win bet'},
+        { name : 'Status'},
+        { name : 'Price'},
+        { name : 'Price'},
+        { name : 'Present'},
+    ];
     //
     // public inputEditForm: FormGroup = new FormGroup({
     //     name: new FormControl(this.name, Validators.required),
@@ -66,19 +73,19 @@ export class LotteriesPageComponent {
     //     confirmpassword: new FormControl('', Validators.required)
     // }, this.pwdMatchValidator);
     //
-    // constructor(
-    //     private navMenuService: NavMenuService,
-    //     private modalWindowService: ModalWindowService,
-    //     private lotteriesPageService: LotteriesPageService
-    // ) {
-    // }
-    //
-    // public ngOnInit() {
-    //     this.navMenuService.getMainNavMenu()
-    //         .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
-    //
-    //     this.getAdministrators();
-    // }
+    constructor(
+        private navMenuService: NavMenuService,
+        private modalWindowService: ModalWindowService,
+        private lotteriesPageService: LotteriesPageService
+    ) {
+    }
+
+    public ngOnInit() {
+        this.navMenuService.getMainNavMenu()
+            .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
+
+        this.getLotteries();
+    }
     //
     // public pwdMatchValidator(frm: FormGroup) {
     //     return frm.get('password').value === frm.get('confirmpassword').value
@@ -86,23 +93,23 @@ export class LotteriesPageComponent {
     // }
     //
     //
-    // public getAdministrators(searchParameters?: any): void {
-    //     this.lotteriesPageService.getAdministrator(searchParameters)
-    //         .subscribe((res) => {
-    //             this.tableData = res.admins;
-    //
-    //             this.modifiedTableData = this.tableData;
-    //             this.modifiedTableData.map((obj) => {
-    //                 if (obj.status === 1) {
-    //                     obj.status = 'Active';
-    //                 } else if (obj.status === 2) {
-    //                     obj.status = 'Waiting moderation';
-    //                 } else if (obj.status === 0) {
-    //                     obj.status = 'Not Active';
-    //                 }
-    //             });
-    //         });
-    // }
+    public getLotteries(searchParameters?: any): void {
+        this.lotteriesPageService.getLotteries(searchParameters)
+            .subscribe((res) => {
+                this.tableData = res.admins;
+
+                this.modifiedTableData = this.tableData;
+                this.modifiedTableData.map((obj) => {
+                    if (obj.status === 1) {
+                        obj.status = 'Active';
+                    } else if (obj.status === 2) {
+                        obj.status = 'Waiting moderation';
+                    } else if (obj.status === 0) {
+                        obj.status = 'Not Active';
+                    }
+                });
+            });
+    }
     //
     // public createAdmin(): void {
     //     this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });

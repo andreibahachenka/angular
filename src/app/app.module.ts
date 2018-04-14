@@ -32,7 +32,8 @@ import {
     TableComponent,
     HeaderComponent,
     NavMenuComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    LotteriesTableComponent
 } from './components';
 
 //GLOBAL SERVICES
@@ -80,7 +81,8 @@ interface StoreType {
       TableComponent,
       HeaderComponent,
       NavMenuComponent,
-      ModalWindowComponent
+      ModalWindowComponent,
+      LotteriesTableComponent
   ],
   /**
    * Import Angular's modules.
