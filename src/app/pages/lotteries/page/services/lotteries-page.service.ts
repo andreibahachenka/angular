@@ -29,10 +29,10 @@ export class LotteriesPageService {
         })
     }
 
-    public setAdministrator(data): Observable<any> {
+    public setLottery(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.createAdministratorEndpoint}`,
+                `${PathConfig.createLotteryEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
                     this.notificationService.error(errorMessage);
@@ -45,10 +45,10 @@ export class LotteriesPageService {
         })
     }
 
-    public updateAdministrator(data): Observable<any> {
+    public updateLottery(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.updateAdministratorEndpoint}`,
+                `${PathConfig.updateLotteryEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
                     this.notificationService.error(errorMessage);
@@ -61,13 +61,13 @@ export class LotteriesPageService {
         })
     }
 
-    public deleteAdministrator(data): Observable<any> {
+    public deleteLottery(data): Observable<any> {
         let dataToDelete = {
             id: data
         };
         return new Observable((observer) => {
             this.restApiService.deleteItem(
-                `${PathConfig.removeAdministratorEndpoint}`,
+                `${PathConfig.removeLotteryEndpoint}`,
                 JSON.stringify(dataToDelete),
                 (err) => {
                     this.notificationService.error(errorMessage);

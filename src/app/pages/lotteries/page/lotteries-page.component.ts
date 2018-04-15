@@ -48,10 +48,9 @@ export class LotteriesPageComponent implements OnInit{
         { name : 'ID'},
         { name : 'Name'},
         { name : 'Quantity'},
-        { name : 'Quantity'},
         { name : 'Number of win bet'},
         { name : 'Status'},
-        { name : 'Price'},
+        { name : 'Cost'},
         { name : 'Price'},
         { name : 'Present'},
     ];
@@ -96,7 +95,8 @@ export class LotteriesPageComponent implements OnInit{
     public getLotteries(searchParameters?: any): void {
         this.lotteriesPageService.getLotteries(searchParameters)
             .subscribe((res) => {
-                this.tableData = res.admins;
+            console.log('res', res);
+                this.tableData = res.lotteries;
 
                 this.modifiedTableData = this.tableData;
                 this.modifiedTableData.map((obj) => {

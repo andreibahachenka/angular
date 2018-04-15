@@ -15,7 +15,7 @@ export const PathConfig = {
     removeAdministratorEndpoint: 'http://46.30.42.15:8066/v1/admin/remove',
 
     //lotteries
-    getLotteriesEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries?limit=limit&offset=offset',
+    getLotteriesEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries',
     createLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lottries/create',
     updateLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/update',
     removeLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/remove'
