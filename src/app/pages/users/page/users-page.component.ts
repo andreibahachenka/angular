@@ -128,19 +128,6 @@ export class UsersPageComponent implements OnInit {
             .subscribe((res) => {
             this.tableData = res.users;
 
-            //converters
-            // this.tableData = this.tableData.map((obj) => {
-            //     obj['shopId'] = obj['shop_id'];
-            //     delete obj['shop_id'];
-            //     return obj;
-            // });
-            //
-            // this.tableData = this.tableData.map((obj) => {
-            //     obj['cityId'] = obj['city_id'];
-            //     delete obj['city_id'];
-            //     return obj;
-            // });
-
                 this.modifiedTableData = this.tableData;
                 this.modifiedTableData.map((obj) => {
                     if (obj.status === 1) {

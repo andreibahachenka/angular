@@ -13,6 +13,22 @@
 
         <mat-sidenav-content>
             <div class="main-сontainer__content">
+                <form [formGroup]="inputFilterForm" class="filter-form">
+                    <mat-form-field>
+                        <input matInput placeholder="Name" [(ngModel)]="filterName" formControlName="name"/>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Username" [(ngModel)]="filterUsername" formControlName="username"/>
+                    </mat-form-field>
+                </form>
+
+                <button class="filter-button" color="primary"
+                        mat-raised-button
+                        (click)="filterData(inputFilterForm.value)">
+                    Search
+                </button>
+                <button class="clear-button" mat-raised-button (click)="clearForm()">Clear</button><br>
+
                 <button class="create-button" mat-raised-button (click)="createAdmin()">Create administrator</button>
                 <administrators-table-component
                         [rows]="modifiedTableData"

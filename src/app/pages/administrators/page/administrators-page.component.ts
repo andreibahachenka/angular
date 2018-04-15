@@ -31,6 +31,9 @@ export class AdministratorsPageComponent implements OnInit {
     public status: any;
     public id: string = '';
 
+    public filterName: string = '';
+    public filterUsername: string = '';
+
     public objectKeys = Object.keys;
 
     @ViewChild('deleteModal') public deleteModal: ElementRef;
@@ -65,6 +68,11 @@ export class AdministratorsPageComponent implements OnInit {
         password: new FormControl('', Validators.required),
         confirmpassword: new FormControl('', Validators.required)
     }, this.pwdMatchValidator);
+
+    public inputFilterForm: FormGroup = new FormGroup({
+        name: new FormControl(''),
+        username: new FormControl('')
+    });
 
     constructor(
         private navMenuService: NavMenuService,
@@ -102,6 +110,23 @@ export class AdministratorsPageComponent implements OnInit {
                     }
                 });
             });
+    }
+
+    public filterData(searchParameters): void {
+        searchParameters.name = this.inputFilterForm.value.name;
+        searchParameters.username = this.inputFilterForm.value.username;
+
+        this.administratorsPageService.getAdministrator(searchParameters)
+            .subscribe(() => {
+                    this.getAdministrators(searchParameters);
+                },
+                (err) => {
+                    console.error(err);
+                })
+    }
+
+    public clearForm(): void {
+        this.inputFilterForm.reset();
     }
 
     public createAdmin(): void {
