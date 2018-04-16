@@ -95,7 +95,6 @@ export class LotteriesPageComponent implements OnInit{
     public getLotteries(searchParameters?: any): void {
         this.lotteriesPageService.getLotteries(searchParameters)
             .subscribe((res) => {
-            console.log('res', res);
                 this.tableData = res.lotteries;
 
                 this.modifiedTableData = this.tableData;

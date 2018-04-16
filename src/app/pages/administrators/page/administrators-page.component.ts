@@ -155,7 +155,6 @@ export class AdministratorsPageComponent implements OnInit {
             username: data.username,
             status: data.status
         };
-        console.log(adminForm);
         this.administratorsPageService.updateAdministrator(adminForm)
             .subscribe((res) => {
                     this.getAdministrators();

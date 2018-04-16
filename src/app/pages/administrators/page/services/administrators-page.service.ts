@@ -15,7 +15,6 @@ export class AdministratorsPageService {
     }
 
     public getAdministrator(data?: any): Observable<any> {
-        console.log('data', data);
         return new Observable((observer) => {
             this.restApiService.getItems(
                 `${PathConfig.getAdministratorsEndpoint}`, data,
