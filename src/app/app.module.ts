@@ -32,7 +32,7 @@ import { LoginPageComponent } from './pages/login/page';
 import {
     LoginComponent,
     AdministratorsTableComponent,
-    TableComponent,
+    UsersTableComponent,
     HeaderComponent,
     NavMenuComponent,
     ModalWindowComponent,
@@ -82,7 +82,7 @@ interface StoreType {
       LotteriesPageComponent,
       AdministratorsPageComponent,
       AdministratorsTableComponent,
-      TableComponent,
+      UsersTableComponent,
       HeaderComponent,
       NavMenuComponent,
       ModalWindowComponent,

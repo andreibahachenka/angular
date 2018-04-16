@@ -24,12 +24,12 @@
     <br>
 
     <button class="create-button" mat-raised-button (click)="createUser()">Create user</button>
-    <table-component
+    <users-table-component
             [rows]="modifiedTableData"
             [columns]="columns"
             (onEdit)="openEdit($event)"
             (onDelete)="openDelete($event)"
-    ></table-component>
+    ></users-table-component>
     <router-outlet></router-outlet>
 </div>
 
