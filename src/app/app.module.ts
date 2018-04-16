@@ -21,12 +21,11 @@ import { AuthGuard } from './guards/auth.guard';
 
 //PAGES
 import {
+    LoginPageComponent,
     UsersPageComponent,
     LotteriesPageComponent,
     AdministratorsPageComponent
 } from './pages';
-
-import { LoginPageComponent } from './pages/login/page';
 
 //COMPONENTS
 import {

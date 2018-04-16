@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { RoutesConfig } from './../app-config/routes.config';
 
-import { LoginPageComponent } from './pages/login/page';
 import { AdminComponent } from './components/';
 
 import { AuthGuard } from './guards/auth.guard';
 
 import {
+    LoginPageComponent,
     UsersPageComponent,
     LotteriesPageComponent,
     AdministratorsPageComponent
