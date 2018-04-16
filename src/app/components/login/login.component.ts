@@ -30,7 +30,7 @@ export class LoginComponent {
         this.loginService.loginTo(login, password)
             .subscribe((res) => {
                     localStorage.setItem(LocalStorageConfig.token, res.token);
-                    this.router.navigate([RoutesConfig.startAdminRoute]);
+                    this.router.navigate([RoutesConfig.adminUsers]);
                 },
                 (err) => {
                     this.checkInput = true;

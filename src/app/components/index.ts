@@ -5,4 +5,5 @@ export * from './table/table.component';
 export * from './modal-window/modal-window.component';
 export * from './table/administrators-table/administrators-table.component';
 export * from './table/lotteries-table/lotteries-table.component';
+export * from './admin/admin.component';
 

@@ -1,0 +1,17 @@
+<div class="main-wrapper">
+    <app-header class="main-wrapper__header"
+                (onSideNavToogle)="sideNavMenu.toggle()"
+    ></app-header>
+
+    <mat-sidenav-container class="main-сontainer" >
+        <mat-sidenav class="main-сontainer__side-menu" [mode]="'over'" #sideNavMenu>
+            <app-nav-menu
+                    [navMenuList]="navItems"
+                    [hotLinksGroupTitle]="'Hot Links'">
+            </app-nav-menu>
+        </mat-sidenav>
+        <mat-sidenav-content>
+        <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

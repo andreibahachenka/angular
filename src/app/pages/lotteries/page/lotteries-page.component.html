@@ -1,29 +1,12 @@
-<div class="main-wrapper">
-    <app-header class="main-wrapper__header"
-                (onSideNavToogle)="sideNavMenu.toggle()"
-    ></app-header>
-
-    <mat-sidenav-container class="main-сontainer">
-        <mat-sidenav class="main-сontainer__side-menu" [mode]="'over'" #sideNavMenu>
-            <app-nav-menu
-                    [navMenuList]="navItems"
-                    [hotLinksGroupTitle]="'Hot Links'">
-            </app-nav-menu>
-        </mat-sidenav>
-
-        <mat-sidenav-content>
-            <div class="main-сontainer__content">
-                <button class="create-button" mat-raised-button (click)="createAdmin()">Create lottery</button>
-                <lotteries-table-component
-                        [rows]="modifiedTableData"
-                        [columns]="columns"
-                        (onEdit)="openEdit($event)"
-                        (onDelete)="openDelete($event)"
-                ></lotteries-table-component>
-                <router-outlet></router-outlet>
-            </div>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+<div class="main-сontainer__content">
+    <button class="create-button" mat-raised-button (click)="createAdmin()">Create lottery</button>
+    <lotteries-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+            (onEdit)="openEdit($event)"
+            (onDelete)="openDelete($event)"
+    ></lotteries-table-component>
+    <router-outlet></router-outlet>
 </div>
 
 <!--<app-modal-window class="modal-window">-->

@@ -1,21 +1,7 @@
-.main-wrapper {
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-}
-
 .main-сontainer {
 	flex: 1;
 	&__content {
 		min-width: 1200px;
-	}
-	&__side-menu {
-		min-width: 225px;
-		background-color: #32353b;
 	}
 }
 

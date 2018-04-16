@@ -20,10 +20,13 @@ import { AppState, InternalStateType } from './app.service';
 import { AuthGuard } from './guards/auth.guard';
 
 //PAGES
+import {
+    UsersPageComponent,
+    LotteriesPageComponent,
+    AdministratorsPageComponent
+} from './pages';
+
 import { LoginPageComponent } from './pages/login/page';
-import { UsersPageComponent } from './pages/users/page';
-import { LotteriesPageComponent } from './pages/lotteries/page';
-import { AdministratorsPageComponent } from './pages/administrators/page';
 
 //COMPONENTS
 import {
@@ -33,7 +36,8 @@ import {
     HeaderComponent,
     NavMenuComponent,
     ModalWindowComponent,
-    LotteriesTableComponent
+    LotteriesTableComponent,
+    AdminComponent
 } from './components';
 
 //GLOBAL SERVICES
@@ -82,7 +86,8 @@ interface StoreType {
       HeaderComponent,
       NavMenuComponent,
       ModalWindowComponent,
-      LotteriesTableComponent
+      LotteriesTableComponent,
+      AdminComponent
   ],
   /**
    * Import Angular's modules.
