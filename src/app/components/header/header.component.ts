@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { LocalStorageConfig } from '../../../app-config/locastorage.config';
 import { RoutesConfig } from '../../../app-config/routes.config';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -15,8 +15,6 @@ export class HeaderComponent {
 
     public admin: string = 'Admin';
     public logoutName: string = 'Logout';
-
-    // public appToolBarLogo: string = PathConfig.mainLogoPath;
 
     constructor(
         private router: Router

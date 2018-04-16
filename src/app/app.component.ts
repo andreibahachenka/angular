@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NavMenuService} from "./services/nav-menu.service";
-import {NavItemModel} from "./components/nav-menu/models/nav-menu.model";
-import {ModalWindowService} from "./components/modal-window/services/modal-window.service";
+
+import { NavMenuService } from './services/nav-menu.service';
+import { NavItemModel } from './components/nav-menu/models/nav-menu.model';
+import { ModalWindowService } from './components/modal-window/services/modal-window.service';
 
 import { ModalWindowState } from './components/modal-window/models/modal-window-state.model';
 
@@ -14,7 +15,7 @@ import { ModalWindowState } from './components/modal-window/models/modal-window-
   styleUrls: ['./app.component.css'],
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public modalWindowState: ModalWindowState;
 
   constructor(
