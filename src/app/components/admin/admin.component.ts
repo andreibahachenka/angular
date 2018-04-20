@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavMenuService } from './../../services/nav-menu.service';
-import { NavItemModel } from './../../../app/components/nav-menu/models/nav-menu.model';
 
-/**
- * App Component
- * Top Level Component
- */
+
+import { NavMenuService } from '../../services/nav-menu.service';
+import { NavItemModel } from '../nav-menu/models/nav-menu.model';
+
 @Component({
     selector: 'app-admin',
     styleUrls: ['./admin.component.scss'],
