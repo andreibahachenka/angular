@@ -34,12 +34,6 @@ export class RestApiService {
                     'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
                 }
             })
-                // { headers:
-                //     {
-                //         'Content-Type': 'application/json',
-                //         'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
-                //     }
-                // })
                 .subscribe(
                 (response) => {
                     observer.next(response);
@@ -57,28 +51,53 @@ export class RestApiService {
     }
 
     public postItem(url: string, body?: any, errorCallback?): Observable<any> {
-        return new Observable((observer) => {
-            this.http.post(url, body,
-                { headers:
+        if (body instanceof FormData) {
+            return new Observable((observer) => {
+                this.http.post(url, body,
+                    { headers:
+                        {
+                            'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                        }
+                    })
+                    .subscribe(
+                        (response) => {
+                            observer.next(response);
+                        },
+                        (err) => {
+                            if (errorCallback) {
+                                errorCallback(err);
+                            } else {
+                                this.notificationService.error(message);
+                                console.error(err);
+                            }
+                            observer.error(err);
+                        });
+            }).first();
+
+        } else {
+            return new Observable((observer) => {
+                this.http.post(url, body,
                     {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
-                    }
-                })
-                .subscribe(
-                (response) => {
-                    observer.next(response);
-                },
-                (err) => {
-                    if (errorCallback) {
-                        errorCallback(err);
-                    } else {
-                        this.notificationService.error(message);
-                        console.error(err);
-                    }
-                    observer.error(err);
-                });
-        }).first();
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem(LocalStorageConfig.token)}`
+                        }
+                    })
+                    .subscribe(
+                        (response) => {
+                            observer.next(response);
+                        },
+                        (err) => {
+                            if (errorCallback) {
+                                errorCallback(err);
+                            } else {
+                                this.notificationService.error(message);
+                                console.error(err);
+                            }
+                            observer.error(err);
+                        });
+            }).first();
+        }
     }
 
     public deleteItem(url: string, body: any, errorCallback?: any): Observable<any> {

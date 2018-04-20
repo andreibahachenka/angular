@@ -16,7 +16,9 @@ export const PathConfig = {
 
     //lotteries
     getLotteriesEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries',
-    createLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lottries/create',
+    createLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/create',
     updateLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/update',
-    removeLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/remove'
+    removeLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/remove',
+
+    uploadLotteryImageEndpoint:'http://46.30.42.15:8066/v1/services/photo/upload'
 };

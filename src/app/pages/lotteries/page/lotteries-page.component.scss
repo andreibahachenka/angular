@@ -14,6 +14,19 @@
 	}
 }
 
+.upload-btn {
+	position: relative;
+	color: #000;
+	&__input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+	}
+}
+
 mat-form-field {
 	min-width: 500px;
 }

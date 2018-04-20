@@ -1,5 +1,5 @@
 <div class="main-сontainer__content">
-    <button class="create-button" mat-raised-button (click)="createAdmin()">Create lottery</button>
+    <button class="create-button" mat-raised-button (click)="createLottery()">Create lottery</button>
     <lotteries-table-component
             [rows]="modifiedTableData"
             [columns]="columns"
@@ -9,137 +9,156 @@
     <router-outlet></router-outlet>
 </div>
 
-<!--<app-modal-window class="modal-window">-->
-    <!--<div class="content" #deleteModal>-->
-        <!--<div class="delete-message">{{deleteMessage}}</div>-->
-        <!--<div class="buttons">-->
-            <!--<button color="primary" class="delete-button" mat-raised-button (click)="applyDelete(id)">Yes</button>-->
-            <!--<button mat-raised-button (click)="cancel()">No</button>-->
-        <!--</div>-->
-    <!--</div>-->
+<app-modal-window class="modal-window">
+    <div class="content" #deleteModal>
+        <div class="delete-message">{{deleteMessage}}</div>
+        <div class="buttons">
+            <button color="primary" class="delete-button" mat-raised-button (click)="applyDelete(id)">Yes</button>
+            <button mat-raised-button (click)="cancel()">No</button>
+        </div>
+    </div>
 
-    <!--<div class="content" #editModal>-->
-        <!--<div class="modal-header">-->
-            <!--<span>{{editAdministratorMessage}}</span>-->
-            <!--<hr>-->
-        <!--</div>-->
-        <!--<div class="report-block">-->
-            <!--<form [formGroup]="inputEditForm">-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="Username" [(ngModel)]="userName" formControlName="username"-->
-                           <!--[maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputEditForm.controls.username.invalid-->
-                 <!--&& inputEditForm.controls.username.touched"-->
-                     <!--class="error-message">Username can't be blank-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputEditForm.controls.name.invalid-->
-                 <!--&& inputEditForm.controls.name.touched"-->
-                     <!--class="error-message">Name can't be blank-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput type="password" placeholder="Password" [(ngModel)]="password"-->
-                           <!--formControlName="password" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputEditForm.controls.password.invalid-->
-                <!--&& inputEditForm.controls.password.touched"-->
-                     <!--class="error-message">Password can't be blank-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput type="password" placeholder="Confirm Password" [(ngModel)]="confirmpassword"-->
-                           <!--formControlName="confirmpassword" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputEditForm.errors?.mismatch"-->
-                     <!--class="error-message">Password doesn't match-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">-->
-                        <!--<mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">-->
-                            <!--{{ statuses[status] }}-->
-                        <!--</mat-option>-->
-                    <!--</mat-select>-->
-                <!--</mat-form-field>-->
-            <!--</form>-->
-        <!--</div>-->
-        <!--<div class="buttons">-->
-            <!--<button color="primary"-->
-                    <!--mat-raised-button-->
-                    <!--(click)="saveChanges(inputEditForm.value)"-->
-                    <!--[disabled]="inputEditForm.invalid">-->
-                <!--Save-->
-            <!--</button>-->
-            <!--<button mat-raised-button (click)="cancel()">Cancel</button>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="content" #editModal>
+        <div class="modal-header">
+            <span>{{editLotteryMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputEditForm">
+                <mat-form-field>
+                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.name.invalid
+                 && inputEditForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.description.invalid
+                 && inputEditForm.controls.description.touched"
+                     class="error-message">Description can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Total" [(ngModel)]="total" formControlName="total"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.total.invalid
+                 && inputEditForm.controls.total.touched"
+                     class="error-message">Total can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Cost" [(ngModel)]="cost" formControlName="cost"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.cost.invalid
+                 && inputEditForm.controls.cost.touched"
+                     class="error-message">Cost can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.prize.invalid
+                 && inputEditForm.controls.prize.touched"
+                     class="error-message">Prize can't be blank
+                </div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="saveChanges(inputEditForm.value)"
+                    [disabled]="inputEditForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
 
-    <!--<div class="content" #createModal>-->
-        <!--<div class="modal-header">-->
-            <!--<span>{{createAdministratorMessage}}</span>-->
-            <!--<hr>-->
-        <!--</div>-->
-        <!--<div class="report-block">-->
-            <!--<form [formGroup]="inputCreateForm">-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="Username" formControlName="username" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputCreateForm.controls.username.invalid-->
-                 <!--&& inputCreateForm.controls.username.touched"-->
-                     <!--class="error-message">Username can't be blank-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputCreateForm.controls.name.invalid-->
-                 <!--&& inputCreateForm.controls.name.touched"-->
-                     <!--class="error-message">Name can't be blank-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput type="password" placeholder="Password" [(ngModel)]="password"-->
-                           <!--formControlName="password" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputCreateForm.controls.password.invalid-->
-                <!--&& inputCreateForm.controls.password.touched"-->
-                     <!--class="error-message">Password can't be blank-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<input matInput type="password" placeholder="Confirm Password" [(ngModel)]="confirmpassword"-->
-                           <!--formControlName="confirmpassword" [maxlength]="20"/>-->
-                <!--</mat-form-field>-->
-                <!--<br>-->
-                <!--<div *ngIf="inputCreateForm.errors?.mismatch"-->
-                     <!--class="error-message">Password doesn't match-->
-                <!--</div>-->
-                <!--<mat-form-field>-->
-                    <!--<mat-select placeholder="Status" formControlName="status">-->
-                        <!--<mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">-->
-                            <!--{{ statuses[status] }}-->
-                        <!--</mat-option>-->
-                    <!--</mat-select>-->
-                <!--</mat-form-field>-->
-            <!--</form>-->
-        <!--</div>-->
-        <!--<div class="buttons">-->
-            <!--<button color="primary"-->
-                    <!--mat-raised-button-->
-                    <!--(click)="sendCreateForm(inputCreateForm.value)"-->
-                    <!--[disabled]="inputCreateForm.invalid">-->
-                <!--Save-->
-            <!--</button>-->
-            <!--<button mat-raised-button (click)="cancel()">Cancel</button>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</app-modal-window>-->
+    <div class="content" #createModal>
+        <div class="modal-header">
+            <span>{{createLotteryMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputCreateForm">
+                <mat-form-field>
+                    <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.name.invalid
+                 && inputCreateForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.description.invalid
+                 && inputCreateForm.controls.description.touched"
+                     class="error-message">Description can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Total" [(ngModel)]="total" formControlName="total"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.total.invalid
+                 && inputCreateForm.controls.total.touched"
+                     class="error-message">Total can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Cost" [(ngModel)]="cost" formControlName="cost"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.cost.invalid
+                 && inputCreateForm.controls.cost.touched"
+                     class="error-message">Cost can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.prize.invalid
+                 && inputCreateForm.controls.prize.touched"
+                     class="error-message">Prize can't be blank
+                </div>
+                <br>
+                <mat-form-field>
+                    <mat-select placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="Photo"  class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
+                </button>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</app-modal-window>
