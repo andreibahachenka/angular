@@ -5,8 +5,8 @@ import {
     Router,
     RouterStateSnapshot
 } from '@angular/router';
-import { LocalStorageConfig } from "../../app-config/locastorage.config";
-import { RoutesConfig } from "../../app-config/routes.config";
+import { LocalStorageConfig } from '../../app-config/locastorage.config';
+import { RoutesConfig } from '../../app-config/routes.config';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
