@@ -38,7 +38,7 @@
                      class="error-message">Name can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description"/>
+                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description" [maxlength]="50"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputEditForm.controls.description.invalid
@@ -46,7 +46,7 @@
                      class="error-message">Description can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Total" [(ngModel)]="total" formControlName="total"/>
+                    <input matInput type="number" placeholder="Total" [(ngModel)]="total" formControlName="total" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputEditForm.controls.total.invalid
@@ -54,7 +54,7 @@
                      class="error-message">Total can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Cost" [(ngModel)]="cost" formControlName="cost"/>
+                    <input matInput type="number" placeholder="Cost" [(ngModel)]="cost" formControlName="cost" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputEditForm.controls.cost.invalid
@@ -62,7 +62,7 @@
                      class="error-message">Cost can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize"/>
+                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputEditForm.controls.prize.invalid
@@ -76,6 +76,11 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <br>
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
+                </button>
             </form>
         </div>
         <div class="buttons">
@@ -105,7 +110,7 @@
                      class="error-message">Name can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description"/>
+                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description" [maxlength]="50"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.description.invalid
@@ -113,7 +118,7 @@
                      class="error-message">Description can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Total" [(ngModel)]="total" formControlName="total"/>
+                    <input matInput type="number" placeholder="Total" [(ngModel)]="total" formControlName="total" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.total.invalid
@@ -121,7 +126,7 @@
                      class="error-message">Total can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Cost" [(ngModel)]="cost" formControlName="cost"/>
+                    <input matInput type="number" placeholder="Cost" [(ngModel)]="cost" formControlName="cost" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.cost.invalid
@@ -129,7 +134,7 @@
                      class="error-message">Cost can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize"/>
+                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.prize.invalid
@@ -147,7 +152,7 @@
                 <br>
                 <button mat-raised-button class="upload-btn">
                     {{upload}}
-                    <input type="file" #fileInput placeholder="Photo"  class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
+                    <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
                 </button>
             </form>
         </div>

@@ -5,12 +5,17 @@ import {
     ElementRef
 } from '@angular/core';
 
-import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
+import {
+    NgForm,
+    FormGroup,
+    FormControl,
+    Validators
+} from '@angular/forms';
 
 import { NavMenuService, FileUploadService } from '../../../services';
 import { LotteriesPageService } from './services/lotteries-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
-import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
+import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 
 @Component({
     selector: 'app-lotteries',
@@ -66,7 +71,8 @@ export class LotteriesPageComponent implements OnInit{
         id: new FormControl(this.id),
         total: new FormControl(this.total, Validators.required),
         cost: new FormControl(this.cost, Validators.required),
-        prize: new FormControl(this.prize, Validators.required)
+        prize: new FormControl(this.prize, Validators.required),
+        photo: new FormControl(this.photo)
     });
 
     public inputCreateForm: FormGroup = new FormGroup({
@@ -97,7 +103,6 @@ export class LotteriesPageComponent implements OnInit{
     public getLotteries(searchParameters?: any): void {
         this.lotteriesPageService.getLotteries(searchParameters)
             .subscribe((res) => {
-            console.log('res', res);
                 this.tableData = res.lotteries;
 
                 this.modifiedTableData = this.tableData;
@@ -135,17 +140,17 @@ export class LotteriesPageComponent implements OnInit{
     }
 
     public saveChanges(data): void {
-        let adminForm = {
+        let lotteryForm = {
             id: data.id,
             name: data.name,
             cost: data.cost,
             total: data.total,
             status: data.status,
             product_name: data.prize,
-            product_photo: this.photo
+            product_photo: this.photo,
+            description: data.description
         };
-        console.log('dataCreate',adminForm);
-        this.lotteriesPageService.updateLottery(adminForm)
+        this.lotteriesPageService.updateLottery(lotteryForm)
             .subscribe((res) => {
                     this.getLotteries();
                     this.modalWindowService.closeModalWindow();
@@ -169,16 +174,13 @@ export class LotteriesPageComponent implements OnInit{
     public handleFileInput(files: FileList): void {
         let photo = files.item(0);
         this.fileUploadService.uploadFile(photo)
-            // .switchMap((result) => this.lotteriesPageService.getLotteries())
             .subscribe((result: any) => {
                 this.photo = result.url;
-                console.log(result.url);
             });
     }
 
     public sendCreateForm(data): void {
-        console.log('sendform photo', data.photo);
-        let adminForm = {
+        let lotteryForm = {
             name: data.name,
             cost: data.cost,
             total: data.total,
@@ -187,8 +189,7 @@ export class LotteriesPageComponent implements OnInit{
             product_name: data.prize,
             product_photo: this.photo
         };
-        console.log('adminForm', adminForm);
-        this.lotteriesPageService.setLottery(adminForm)
+        this.lotteriesPageService.setLottery(lotteryForm)
             .subscribe((res) => {
                     this.getLotteries();
                     this.modalWindowService.closeModalWindow();
