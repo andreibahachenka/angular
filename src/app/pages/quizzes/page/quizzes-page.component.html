@@ -1,0 +1,101 @@
+<div class="main-сontainer__content">
+    <button class="create-button" mat-raised-button (click)="createQuiz()">{{createQuizMessage}}</button>
+    <quizzes-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+            (onEdit)="openEdit($event)"
+    ></quizzes-table-component>
+    <router-outlet></router-outlet>
+</div>
+
+<app-modal-window class="modal-window">
+    <div class="content" #editModal>
+        <div class="modal-header">
+            <span>{{editQuizMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputEditForm">
+                <mat-form-field>
+                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.name.invalid
+                 && inputEditForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="topic" placeholder="Topic" formControlName="topic">
+                        <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topic">
+                            {{ topics[topic] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="saveChanges(inputEditForm.value)"
+                    [disabled]="inputEditForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="content" #createModal>
+        <div class="modal-header">
+            <span>{{createQuizMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputCreateForm">
+                <mat-form-field>
+                    <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.name.invalid
+                 && inputCreateForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="topic" placeholder="Topic" formControlName="topic">
+                        <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topic">
+                            {{ topics[topic] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-select placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</app-modal-window>

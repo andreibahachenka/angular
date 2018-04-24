@@ -9,9 +9,9 @@ import {
     LoginPageComponent,
     UsersPageComponent,
     LotteriesPageComponent,
-    AdministratorsPageComponent
+    AdministratorsPageComponent,
+    QuizzesPageComponent
 } from './pages';
-
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: RoutesConfig.login, pathMatch: 'full' },
@@ -25,6 +25,8 @@ export const ROUTES: Routes = [
         { path: RoutesConfig.adminAdministrators, component: AdministratorsPageComponent, canActivate: [AuthGuard] },
 
         { path: RoutesConfig.adminLotteries, component: LotteriesPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminQuizzes, component: QuizzesPageComponent, canActivate: [AuthGuard] },
         ]
     },
 

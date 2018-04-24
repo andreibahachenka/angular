@@ -1,9 +1,9 @@
 export * from './header/header.component';
 export * from './login/login.component';
 export * from './nav-menu/nav-menu.component';
-export * from './table/users-table/users-table.component';
 export * from './modal-window/modal-window.component';
-export * from './table/administrators-table/administrators-table.component';
-export * from './table/lotteries-table/lotteries-table.component';
 export * from './admin/admin.component';
+
+//tables
+export * from './table/index';
 

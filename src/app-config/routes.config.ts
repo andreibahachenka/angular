@@ -4,5 +4,6 @@ export const RoutesConfig = {
     users: 'users',
     adminUsers: 'admin/users',
     adminAdministrators : 'admin/administrators',
-    adminLotteries: 'admin/lotteries'
+    adminLotteries: 'admin/lotteries',
+    adminQuizzes: 'admin/quizzes'
 };

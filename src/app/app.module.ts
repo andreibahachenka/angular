@@ -24,13 +24,15 @@ import {
     LoginPageComponent,
     UsersPageComponent,
     LotteriesPageComponent,
-    AdministratorsPageComponent
+    AdministratorsPageComponent,
+    QuizzesPageComponent
 } from './pages';
 
 //COMPONENTS
 import {
     LoginComponent,
     AdministratorsTableComponent,
+    QuizzesTableComponent,
     UsersTableComponent,
     HeaderComponent,
     NavMenuComponent,
@@ -53,9 +55,11 @@ import { AdministratorsPageService } from './pages/administrators/page/services/
 import { LoginService } from './components/login/services/login.service';
 import { ModalWindowService } from './components/modal-window/services/modal-window.service';
 import { LotteriesPageService } from './pages/lotteries/page/services/lotteries-page.service';
+import { QuizzesPageService } from './pages/quizzes/page/services/quizzes-page.service';
 
 //styles
 import '../styles/styles.scss';
+import '../styles/table.scss';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -82,6 +86,8 @@ interface StoreType {
       LotteriesPageComponent,
       AdministratorsPageComponent,
       AdministratorsTableComponent,
+      QuizzesPageComponent,
+      QuizzesTableComponent,
       UsersTableComponent,
       HeaderComponent,
       NavMenuComponent,
@@ -122,6 +128,7 @@ interface StoreType {
       NavMenuService,
       UsersPageService,
       LoginService,
+      QuizzesPageService,
       AdministratorsPageService,
       LotteriesPageService,
       ModalWindowService,
