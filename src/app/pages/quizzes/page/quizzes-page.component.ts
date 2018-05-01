@@ -166,7 +166,7 @@ export class QuizzesPageComponent implements OnInit{
         this.name = item.name;
         this.status = item.status;
         this.id = item.id;
-        this.topic = item.topic;
+        this.topic = item.brand.name;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }

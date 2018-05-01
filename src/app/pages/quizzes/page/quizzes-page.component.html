@@ -30,7 +30,7 @@
                 </div>
                 <mat-form-field>
                     <mat-select [(ngModel)]="topic" placeholder="Topic" formControlName="topic">
-                        <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topic">
+                        <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topics[topic]">
                             {{ topics[topic] }}
                         </mat-option>
                     </mat-select>
@@ -38,7 +38,7 @@
                 <br>
                 <mat-form-field>
                     <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
-                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="statuses[status]">
                             {{ statuses[status] }}
                         </mat-option>
                     </mat-select>

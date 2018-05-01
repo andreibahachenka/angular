@@ -82,7 +82,7 @@
                 </div>
                 <mat-form-field>
                     <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
-                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="statuses[status]">
                             {{ statuses[status] }}
                         </mat-option>
                     </mat-select>

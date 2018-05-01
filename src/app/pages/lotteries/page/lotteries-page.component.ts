@@ -130,6 +130,7 @@ export class LotteriesPageComponent implements OnInit{
         this.prize = item.product_name;
         this.cost = item.cost;
         this.total = item.total;
+        this.photo = item.product_photo;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
@@ -150,6 +151,7 @@ export class LotteriesPageComponent implements OnInit{
             product_photo: this.photo,
             description: data.description
         };
+        console.log(lotteryForm)
         this.lotteriesPageService.updateLottery(lotteryForm)
             .subscribe((res) => {
                     this.getLotteries();
