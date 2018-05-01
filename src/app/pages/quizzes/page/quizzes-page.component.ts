@@ -36,8 +36,52 @@ export class QuizzesPageComponent implements OnInit{
     public id: string = '';
     public topic = {};
     public questions: any;
+
     public text: string = '';
+    public text1: string = '';
+    public text2: string = '';
+    public text3: string = '';
+    public text4: string = '';
+
     public image: string = '';
+    public image1: string = '';
+    public image2: string = '';
+    public image3: string = '';
+    public image4: string = '';
+    public image5: string = '';
+
+    public answer: string = '';
+
+    public answerForQuestion1: string = '';
+    public answer1ForQuestion1: string = '';
+    public answer2ForQuestion1: string = '';
+    public answer3ForQuestion1: string = '';
+    public answer4ForQuestion1: string = '';
+
+    public answerForQuestion2: string = '';
+    public answer1ForQuestion2: string = '';
+    public answer2ForQuestion2: string = '';
+    public answer3ForQuestion2: string = '';
+    public answer4ForQuestion2: string = '';
+
+    public answerForQuestion3: string = '';
+    public answer1ForQuestion3: string = '';
+    public answer2ForQuestion3: string = '';
+    public answer3ForQuestion3: string = '';
+    public answer4ForQuestion3: string = '';
+
+    public answerForQuestion4: string = '';
+    public answer1ForQuestion4: string = '';
+    public answer2ForQuestion4: string = '';
+    public answer3ForQuestion4: string = '';
+    public answer4ForQuestion4: string = '';
+
+    public answerForQuestion5: string = '';
+    public answer1ForQuestion5: string = '';
+    public answer2ForQuestion5: string = '';
+    public answer3ForQuestion5: string = '';
+    public answer4ForQuestion5: string = '';
+
 
     public objectKeys = Object.keys;
 
@@ -71,6 +115,56 @@ export class QuizzesPageComponent implements OnInit{
         topic: new FormControl(this.topic, Validators.required),
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
+        questions: new FormGroup({
+            number: new FormControl(1),
+            text: new FormControl(this.text),
+            image: new FormControl(this.image1),
+            answer: new FormControl(this.answerForQuestion1),
+            answer1: new FormControl(this.answer1ForQuestion1, Validators.required),
+            answer2: new FormControl(this.answer2ForQuestion1, Validators.required),
+            answer3: new FormControl(this.answer3ForQuestion1, Validators.required),
+            answer4: new FormControl(this.answer4ForQuestion1, Validators.required),
+        }),
+        questions1: new FormGroup({
+            number: new FormControl(2),
+            text: new FormControl(this.text1, Validators.required),
+            image: new FormControl(this.image2),
+            answer: new FormControl(this.answerForQuestion2),
+            answer1: new FormControl(this.answer1ForQuestion2, Validators.required),
+            answer2: new FormControl(this.answer2ForQuestion2, Validators.required),
+            answer3: new FormControl(this.answer3ForQuestion2, Validators.required),
+            answer4: new FormControl(this.answer4ForQuestion2, Validators.required),
+        }),
+        questions2: new FormGroup({
+            number: new FormControl(3),
+            text: new FormControl(this.text2, Validators.required),
+            image: new FormControl(this.image3),
+            answer: new FormControl(this.answerForQuestion3),
+            answer1: new FormControl(this.answer1ForQuestion3, Validators.required),
+            answer2: new FormControl(this.answer2ForQuestion3, Validators.required),
+            answer3: new FormControl(this.answer3ForQuestion3, Validators.required),
+            answer4: new FormControl(this.answer4ForQuestion3, Validators.required),
+        }),
+        questions3: new FormGroup({
+            number: new FormControl(4),
+            text: new FormControl(this.text3, Validators.required),
+            image: new FormControl(this.image4),
+            answer: new FormControl(this.answerForQuestion4),
+            answer1: new FormControl(this.answer1ForQuestion4, Validators.required),
+            answer2: new FormControl(this.answer2ForQuestion4, Validators.required),
+            answer3: new FormControl(this.answer3ForQuestion4, Validators.required),
+            answer4: new FormControl(this.answer4ForQuestion4, Validators.required),
+        }),
+        questions4: new FormGroup({
+            number: new FormControl(5),
+            text: new FormControl(this.text4, Validators.required),
+            image: new FormControl(this.image5),
+            answer: new FormControl(this.answerForQuestion5),
+            answer1: new FormControl(this.answer1ForQuestion5, Validators.required),
+            answer2: new FormControl(this.answer2ForQuestion5, Validators.required),
+            answer3: new FormControl(this.answer3ForQuestion5, Validators.required),
+            answer4: new FormControl(this.answer4ForQuestion5, Validators.required),
+        }),
     });
 
     public inputCreateForm: FormGroup = new FormGroup({
@@ -141,10 +235,10 @@ export class QuizzesPageComponent implements OnInit{
         this.navMenuService.getMainNavMenu()
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
 
-        this.getLotteries();
+        this.getQuizzes();
     }
 
-    public getLotteries(searchParameters?: any): void {
+    public getQuizzes(searchParameters?: any): void {
         this.quizzesPageService.getQuizzes(searchParameters)
             .subscribe((res) => {
                 this.tableData = res.quizzes;
@@ -172,10 +266,60 @@ export class QuizzesPageComponent implements OnInit{
         this.id = item.id;
         this.topic = item.brand.name;
 
+        this.image1 = item.questions[0].image;
+        this.image2 = item.questions[1].image;
+        this.image3 = item.questions[2].image;
+        this.image4 = item.questions[3].image;
+        this.image5 = item.questions[4].image;
+
+        this.text = item.questions[0].text;
+        this.text1 = item.questions[1].text;
+        this.text2 = item.questions[2].text;
+        this.text3 = item.questions[3].text;
+        this.text4 = item.questions[4].text;
+
+        this.answerForQuestion1 = item.questions[0].answer;
+        this.answer1ForQuestion1 = item.questions[0].answer1;
+        this.answer2ForQuestion1 = item.questions[0].answer2;
+        this.answer3ForQuestion1 = item.questions[0].answer3;
+        this.answer4ForQuestion1 = item.questions[0].answer4;
+
+        this.answerForQuestion2 = item.questions[1].answer;
+        this.answer1ForQuestion2 = item.questions[1].answer1;
+        this.answer2ForQuestion2 = item.questions[1].answer2;
+        this.answer3ForQuestion2 = item.questions[1].answer3;
+        this.answer4ForQuestion2 = item.questions[1].answer4;
+
+        this.answerForQuestion3 = item.questions[2].answer;
+        this.answer1ForQuestion3 = item.questions[2].answer1;
+        this.answer2ForQuestion3 = item.questions[2].answer2;
+        this.answer3ForQuestion3 = item.questions[3].answer3;
+        this.answer4ForQuestion3 = item.questions[3].answer4;
+
+        this.answerForQuestion4 = item.questions[3].answer;
+        this.answer1ForQuestion4 = item.questions[3].answer1;
+        this.answer2ForQuestion4 = item.questions[3].answer2;
+        this.answer3ForQuestion4 = item.questions[3].answer3;
+        this.answer4ForQuestion4 = item.questions[3].answer4;
+
+        this.answerForQuestion5 = item.questions[4].answer;
+        this.answer1ForQuestion5 = item.questions[4].answer1;
+        this.answer2ForQuestion5 = item.questions[4].answer2;
+        this.answer3ForQuestion5 = item.questions[4].answer3;
+        this.answer4ForQuestion5 = item.questions[4].answer4;
+
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
 
     public saveChanges(data): void {
+        console.log('DATAAAAAAAA', data);
+        console.log('img1', this.image1);
+        console.log('img2', this.image2);
+        data.questions.image = this.image1;
+        data.questions1.image = this.image2;
+        data.questions2.image = this.image3;
+        data.questions3.image = this.image4;
+        data.questions4.image = this.image5;
         let quizForm = {
             id: data.id,
             name: data.name,
@@ -183,11 +327,12 @@ export class QuizzesPageComponent implements OnInit{
             brand: data.topic = {
                 id: data.topic,
                 name: this.topics[data.topic]
-            }
+            },
+            questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
         this.quizzesPageService.updateQuiz(quizForm)
             .subscribe((res) => {
-                    this.getLotteries();
+                    this.getQuizzes();
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
@@ -214,7 +359,7 @@ export class QuizzesPageComponent implements OnInit{
 
         this.quizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
-                    this.getLotteries();
+                    this.getQuizzes();
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
