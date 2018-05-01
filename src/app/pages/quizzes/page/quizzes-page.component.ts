@@ -6,10 +6,9 @@ import {
 } from '@angular/core';
 
 import {
-    NgForm,
     FormGroup,
     FormControl,
-    Validators
+    Validators,
 } from '@angular/forms';
 
 import { NavMenuService } from '../../../services';
@@ -34,7 +33,9 @@ export class QuizzesPageComponent implements OnInit{
     public name: string = '';
     public status: any;
     public id: string = '';
-    public topic: string = '';
+    public topic = {};
+    public questions: any;
+    public text = '';
 
     public objectKeys = Object.keys;
 
@@ -53,24 +54,13 @@ export class QuizzesPageComponent implements OnInit{
         3: 'LD'
     };
 
-//     public topics = [
-//     {
-//         id: 1,
-//         name: 'Winston'
-//     },
-//     {
-//         id: 2,
-//         name: 'Camel'
-//     },
-//     {
-//         id: 3,
-//         name: 'LD'
-//     }
-// ];
-
     public columns: any = [
         { name : 'Status'},
     ];
+
+    public questionArray = ['questions', 'questions1', 'questions2', 'questions3', 'questions4'];
+    public rightAnswers = [1, 2, 3 ,4];
+    public answers = ['answer1', 'answer2', 'answer3', 'answer4'];
 
     public inputEditForm: FormGroup = new FormGroup({
         name: new FormControl(this.name, Validators.required),
@@ -82,13 +72,63 @@ export class QuizzesPageComponent implements OnInit{
     public inputCreateForm: FormGroup = new FormGroup({
         name: new FormControl('', Validators.required),
         topic: new FormControl('', Validators.required),
-        status: new FormControl('', Validators.required)
+        status: new FormControl('', Validators.required),
+        questions: new FormGroup({
+            number: new FormControl(1),
+            text: new FormControl(''),
+            image: new FormControl(''),
+            answer: new FormControl(''),
+            answer1: new FormControl('', Validators.required),
+            answer2: new FormControl('', Validators.required),
+            answer3: new FormControl('', Validators.required),
+            answer4: new FormControl('', Validators.required),
+        }),
+        questions1: new FormGroup({
+            number: new FormControl(2),
+            text: new FormControl('', Validators.required),
+            image: new FormControl(''),
+            answer: new FormControl(''),
+            answer1: new FormControl('', Validators.required),
+            answer2: new FormControl('', Validators.required),
+            answer3: new FormControl('', Validators.required),
+            answer4: new FormControl('', Validators.required),
+        }),
+        questions2: new FormGroup({
+            number: new FormControl(3),
+            text: new FormControl('', Validators.required),
+            image: new FormControl(''),
+            answer: new FormControl(''),
+            answer1: new FormControl('', Validators.required),
+            answer2: new FormControl('', Validators.required),
+            answer3: new FormControl('', Validators.required),
+            answer4: new FormControl('', Validators.required),
+        }),
+        questions3: new FormGroup({
+            number: new FormControl(4),
+            text: new FormControl('', Validators.required),
+            image: new FormControl(''),
+            answer: new FormControl(''),
+            answer1: new FormControl('', Validators.required),
+            answer2: new FormControl('', Validators.required),
+            answer3: new FormControl('', Validators.required),
+            answer4: new FormControl('', Validators.required),
+        }),
+        questions4: new FormGroup({
+            number: new FormControl(5),
+            text: new FormControl('', Validators.required),
+            image: new FormControl(''),
+            answer: new FormControl(''),
+            answer1: new FormControl('', Validators.required),
+            answer2: new FormControl('', Validators.required),
+            answer3: new FormControl('', Validators.required),
+            answer4: new FormControl('', Validators.required),
+        }),
     });
 
     constructor(
         private navMenuService: NavMenuService,
         private modalWindowService: ModalWindowService,
-        private quizzesPageService: QuizzesPageService
+        private quizzesPageService: QuizzesPageService,
     ) {
     }
 
@@ -126,7 +166,7 @@ export class QuizzesPageComponent implements OnInit{
         this.name = item.name;
         this.status = item.status;
         this.id = item.id;
-        // this.topic = item.topic;
+        this.topic = item.topic;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
@@ -136,8 +176,12 @@ export class QuizzesPageComponent implements OnInit{
             id: data.id,
             name: data.name,
             status: data.status,
-            // description: data.description
+            brand: data.topic = {
+                id: data.topic,
+                name: this.topics[data.topic]
+            }
         };
+        console.log('quizForm', quizForm);
         this.quizzesPageService.updateQuiz(quizForm)
             .subscribe((res) => {
                     this.getLotteries();
@@ -152,8 +196,14 @@ export class QuizzesPageComponent implements OnInit{
         let quizForm = {
             name: data.name,
             status: data.status,
-            // topic: data.topic,
+            brand: data.topic = {
+                id: data.topic,
+                name: this.topics[data.topic]
+            },
+            questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
+        console.log('DATA',data);
+        console.log('quizForm', quizForm);
         this.quizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
                     this.getLotteries();
@@ -169,5 +219,4 @@ export class QuizzesPageComponent implements OnInit{
         this.inputEditForm.reset();
         this.modalWindowService.closeModalWindow();
     }
-
 }

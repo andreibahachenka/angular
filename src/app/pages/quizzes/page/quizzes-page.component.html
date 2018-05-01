@@ -80,12 +80,39 @@
                 </mat-form-field>
                 <br>
                 <mat-form-field>
-                    <mat-select placeholder="Status" formControlName="status">
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
                         <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
                             {{ statuses[status] }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <br>
+
+                <!--Question1-->
+                <fieldset *ngFor="let questionElement of questionArray; let i = index" formGroupName={{questionElement}}>
+                    <mat-form-field>
+                        <input matInput placeholder="Question {{i+1}}" formControlName="text" [maxlength]="100"/>
+                    </mat-form-field>
+
+                    <div *ngFor="let answer of answers">
+                        <mat-form-field>
+                            <input matInput placeholder="Answer for Question {{i+1}}" formControlName={{answer}} [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <input matInput placeholder="Image" [(ngModel)]="image" formControlName="image"/>
+                    </mat-form-field>
+                </fieldset>
+
             </form>
         </div>
         <div class="buttons">
