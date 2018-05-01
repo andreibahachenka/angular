@@ -110,7 +110,7 @@
                      class="error-message">Name can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description" [maxlength]="50"/>
+                    <input matInput placeholder="Description" formControlName="description" [maxlength]="50"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.description.invalid
@@ -118,7 +118,7 @@
                      class="error-message">Description can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="Total" [(ngModel)]="total" formControlName="total" [maxlength]="20"/>
+                    <input matInput type="number" placeholder="Total" formControlName="total" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.total.invalid
@@ -126,7 +126,7 @@
                      class="error-message">Total can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput type="number" placeholder="Cost" [(ngModel)]="cost" formControlName="cost" [maxlength]="20"/>
+                    <input matInput type="number" placeholder="Cost" formControlName="cost" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.cost.invalid
@@ -134,7 +134,7 @@
                      class="error-message">Cost can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize" [maxlength]="20"/>
+                    <input matInput placeholder="Prize" formControlName="prize" [maxlength]="20"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputCreateForm.controls.prize.invalid

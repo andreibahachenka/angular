@@ -11,7 +11,7 @@ import {
     Validators,
 } from '@angular/forms';
 
-import { NavMenuService } from '../../../services';
+import { NavMenuService, FileUploadService } from '../../../services';
 import { QuizzesPageService } from './services/quizzes-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
@@ -29,13 +29,15 @@ export class QuizzesPageComponent implements OnInit{
 
     public editQuizMessage: string = 'Edit Quiz';
     public createQuizMessage: string = 'Create Quiz';
+    public upload: string = 'Upload image';
 
     public name: string = '';
     public status: any;
     public id: string = '';
     public topic = {};
     public questions: any;
-    public text = '';
+    public text: string = '';
+    public image: string = '';
 
     public objectKeys = Object.keys;
 
@@ -58,6 +60,8 @@ export class QuizzesPageComponent implements OnInit{
         { name : 'Status'},
     ];
 
+    public images = [];
+
     public questionArray = ['questions', 'questions1', 'questions2', 'questions3', 'questions4'];
     public rightAnswers = [1, 2, 3 ,4];
     public answers = ['answer1', 'answer2', 'answer3', 'answer4'];
@@ -76,7 +80,7 @@ export class QuizzesPageComponent implements OnInit{
         questions: new FormGroup({
             number: new FormControl(1),
             text: new FormControl(''),
-            image: new FormControl(''),
+            image: new FormControl(this.image),
             answer: new FormControl(''),
             answer1: new FormControl('', Validators.required),
             answer2: new FormControl('', Validators.required),
@@ -86,7 +90,7 @@ export class QuizzesPageComponent implements OnInit{
         questions1: new FormGroup({
             number: new FormControl(2),
             text: new FormControl('', Validators.required),
-            image: new FormControl(''),
+            image: new FormControl(),
             answer: new FormControl(''),
             answer1: new FormControl('', Validators.required),
             answer2: new FormControl('', Validators.required),
@@ -96,7 +100,7 @@ export class QuizzesPageComponent implements OnInit{
         questions2: new FormGroup({
             number: new FormControl(3),
             text: new FormControl('', Validators.required),
-            image: new FormControl(''),
+            image: new FormControl(),
             answer: new FormControl(''),
             answer1: new FormControl('', Validators.required),
             answer2: new FormControl('', Validators.required),
@@ -106,7 +110,7 @@ export class QuizzesPageComponent implements OnInit{
         questions3: new FormGroup({
             number: new FormControl(4),
             text: new FormControl('', Validators.required),
-            image: new FormControl(''),
+            image: new FormControl(),
             answer: new FormControl(''),
             answer1: new FormControl('', Validators.required),
             answer2: new FormControl('', Validators.required),
@@ -116,7 +120,7 @@ export class QuizzesPageComponent implements OnInit{
         questions4: new FormGroup({
             number: new FormControl(5),
             text: new FormControl('', Validators.required),
-            image: new FormControl(''),
+            image: new FormControl(),
             answer: new FormControl(''),
             answer1: new FormControl('', Validators.required),
             answer2: new FormControl('', Validators.required),
@@ -129,6 +133,7 @@ export class QuizzesPageComponent implements OnInit{
         private navMenuService: NavMenuService,
         private modalWindowService: ModalWindowService,
         private quizzesPageService: QuizzesPageService,
+        private fileUploadService: FileUploadService
     ) {
     }
 
@@ -142,7 +147,6 @@ export class QuizzesPageComponent implements OnInit{
     public getLotteries(searchParameters?: any): void {
         this.quizzesPageService.getQuizzes(searchParameters)
             .subscribe((res) => {
-            console.log('res', res);
                 this.tableData = res.quizzes;
 
                 this.modifiedTableData = this.tableData;
@@ -181,7 +185,6 @@ export class QuizzesPageComponent implements OnInit{
                 name: this.topics[data.topic]
             }
         };
-        console.log('quizForm', quizForm);
         this.quizzesPageService.updateQuiz(quizForm)
             .subscribe((res) => {
                     this.getLotteries();
@@ -193,6 +196,12 @@ export class QuizzesPageComponent implements OnInit{
     }
 
     public sendCreateForm(data): void {
+        //converting to necessary object
+        data.questions.image = this.images[0];
+        data.questions1.image = this.images[1];
+        data.questions2.image = this.images[2];
+        data.questions3.image = this.images[3];
+        data.questions4.image = this.images[4];
         let quizForm = {
             name: data.name,
             status: data.status,
@@ -202,8 +211,7 @@ export class QuizzesPageComponent implements OnInit{
             },
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
-        console.log('DATA',data);
-        console.log('quizForm', quizForm);
+
         this.quizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
                     this.getLotteries();
@@ -218,5 +226,13 @@ export class QuizzesPageComponent implements OnInit{
         this.inputCreateForm.reset();
         this.inputEditForm.reset();
         this.modalWindowService.closeModalWindow();
+    }
+
+    public handleFileInput(files: FileList, index): void {
+        let photo = files.item(0);
+        this.fileUploadService.uploadFile(photo)
+            .subscribe((result: any) => {
+                this.images[index] = result.url;
+            });
     }
 }

@@ -108,9 +108,10 @@
                         </mat-select>
                     </mat-form-field>
                     <br>
-                    <mat-form-field>
-                        <input matInput placeholder="Image" [(ngModel)]="image" formControlName="image"/>
-                    </mat-form-field>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
                 </fieldset>
 
             </form>
