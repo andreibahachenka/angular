@@ -170,21 +170,13 @@
                  && inputCreateForm.controls.shop_id.touched"
                      class="error-message">Shop ID can't be blank
                 </div>
-                <!--<mat-form-field>-->
-                    <!--<input matInput placeholder="City ID" formControlName="city_id" [maxlength]="25"/>-->
-                <!--</mat-form-field><br>-->
-                <!--<div *ngIf="inputCreateForm.controls.city_id.invalid-->
-                 <!--&& inputCreateForm.controls.city_id.touched"-->
-                     <!--class="error-message">City ID can't be blank-->
-                <!--</div>-->
-
-                <!--<mat-form-field>-->
-                    <!--<mat-select placeholder="City ID" formControlName="city_id">-->
-                        <!--<mat-option *ngFor="let city of objectKeys(cities)" [value]="city_id">-->
-                            <!--{{ cities.name }}-->
-                        <!--</mat-option>-->
-                    <!--</mat-select>-->
-                <!--</mat-form-field>-->
+                <mat-form-field>
+                    <mat-select placeholder="City ID" formControlName="city_id">
+                        <mat-option *ngFor="let city of objectKeys(cities)" [value]="city_id">
+                            {{ cities.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <br>
                 <mat-form-field>
                     <mat-select placeholder="Status" formControlName="status">

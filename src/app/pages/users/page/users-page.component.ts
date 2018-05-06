@@ -179,7 +179,6 @@ export class UsersPageComponent implements OnInit {
     }
 
     public createUser(): void {
-        console.log('cities', Object.keys(this.cities));
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 
