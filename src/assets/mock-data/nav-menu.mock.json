@@ -18,5 +18,10 @@
 		"title": "Quizzes",
 		"url": "/quizzes",
 		"image": "school"
+	},
+	{
+		"title": "Special Quizzes",
+		"url": "/special-quizzes",
+		"image": "school"
 	}
 ]

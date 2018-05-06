@@ -12,24 +12,26 @@ import {
 } from '@angular/forms';
 
 import { NavMenuService, FileUploadService } from '../../../services';
-import { QuizzesPageService } from './services/quizzes-page.service';
+import { SpecialQuizzesPageService } from './services/special-quizzes-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 
 @Component({
     selector: 'app-quizzes',
-    styleUrls: ['quizzes-page.component.scss'],
-    templateUrl: 'quizzes-page.component.html'
+    styleUrls: ['special-quizzes-page.component.scss'],
+    templateUrl: 'special-quizzes-page.component.html'
 })
-export class QuizzesPageComponent implements OnInit{
+export class SpecialQuizzesPageComponent implements OnInit{
 
     public tableData: any[] = [];
     public modifiedTableData: any[] = [];
     public navItems: NavItemModel[];
 
-    public editQuizMessage: string = 'Edit Quiz';
-    public createQuizMessage: string = 'Create Quiz';
+    public editQuizMessage: string = 'Edit Special Quiz';
+    public createQuizMessage: string = 'Create Special Quiz';
     public upload: string = 'Upload image';
+
+    public specialQuiz = 'specialQuiz';
 
     public name: string = '';
     public status: any;
@@ -226,7 +228,7 @@ export class QuizzesPageComponent implements OnInit{
     constructor(
         private navMenuService: NavMenuService,
         private modalWindowService: ModalWindowService,
-        private quizzesPageService: QuizzesPageService,
+        private specialQuizzesPageService: SpecialQuizzesPageService,
         private fileUploadService: FileUploadService
     ) {
     }
@@ -239,7 +241,7 @@ export class QuizzesPageComponent implements OnInit{
     }
 
     public getQuizzes(searchParameters?: any): void {
-        this.quizzesPageService.getQuizzes(searchParameters)
+        this.specialQuizzesPageService.getQuizzes(searchParameters)
             .subscribe((res) => {
                 this.tableData = res.quizzes;
 
@@ -327,7 +329,7 @@ export class QuizzesPageComponent implements OnInit{
             },
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
-        this.quizzesPageService.updateQuiz(quizForm)
+        this.specialQuizzesPageService.updateQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();
                     this.modalWindowService.closeModalWindow();
@@ -354,7 +356,7 @@ export class QuizzesPageComponent implements OnInit{
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
 
-        this.quizzesPageService.setQuiz(quizForm)
+        this.specialQuizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();
                     this.modalWindowService.closeModalWindow();

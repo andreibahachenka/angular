@@ -29,5 +29,10 @@ export const PathConfig = {
     //Quizzes
     getQuizzesEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes',
     createQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/create',
-    updateQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/update'
+    updateQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/update',
+
+    //Special quizzes
+    getSpecialQuizzesEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/special',
+    createSpecialQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/special/create',
+    updateSpecialQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/special/update',
 };

@@ -5,5 +5,6 @@ export const RoutesConfig = {
     adminUsers: 'admin/users',
     adminAdministrators : 'admin/administrators',
     adminLotteries: 'admin/lotteries',
-    adminQuizzes: 'admin/quizzes'
+    adminQuizzes: 'admin/quizzes',
+    adminSpecialQuizzes: 'admin/special-quizzes',
 };

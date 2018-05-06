@@ -1,0 +1,316 @@
+<div class="main-сontainer__content">
+    <button class="create-button" mat-raised-button (click)="createQuiz()">{{createQuizMessage}}</button>
+    <quizzes-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+            (onEdit)="openEdit($event)"
+            [specialQuiz]="specialQuiz"
+    ></quizzes-table-component>
+    <router-outlet></router-outlet>
+</div>
+
+<app-modal-window class="modal-window">
+    <div class="content" #editModal>
+        <div class="modal-header">
+            <span>{{editQuizMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputEditForm">
+                <mat-form-field>
+                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.name.invalid
+                 && inputEditForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="topic" placeholder="Topic" formControlName="topic">
+                        <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topic">
+                            {{ topics[topic] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!--Questions-->
+                <fieldset formGroupName="questions">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="text" placeholder="Question 1" formControlName="text" [maxlength]="100" readonly/>
+                    </mat-form-field>
+
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer1ForQuestion1" placeholder="Answer for Question 1" formControlName="answer1" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer2ForQuestion1" placeholder="Answer for Question 1" formControlName="answer2" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer3ForQuestion1" placeholder="Answer for Question 1" formControlName="answer3" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer4ForQuestion1" placeholder="Answer for Question 1" formControlName="answer4" [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion1">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
+                </fieldset>
+
+                <fieldset formGroupName="questions1">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="text1" placeholder="Question 2" formControlName="text" [maxlength]="100" readonly/>
+                    </mat-form-field>
+
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer1ForQuestion2" placeholder="Answer for Question 2" formControlName="answer1" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer2ForQuestion2" placeholder="Answer for Question 2" formControlName="answer2" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer3ForQuestion2" placeholder="Answer for Question 2" formControlName="answer3" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer4ForQuestion2" placeholder="Answer for Question 2" formControlName="answer4" [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion2">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
+                </fieldset>
+
+                <fieldset formGroupName="questions2">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="text2" placeholder="Question 3" formControlName="text" [maxlength]="100" readonly/>
+                    </mat-form-field>
+
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer1ForQuestion3" placeholder="Answer for Question 3" formControlName="answer1" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer2ForQuestion3" placeholder="Answer for Question 3" formControlName="answer2" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer3ForQuestion3" placeholder="Answer for Question 3" formControlName="answer3" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer4ForQuestion3" placeholder="Answer for Question 3" formControlName="answer4" [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion3">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
+                </fieldset>
+
+                <fieldset formGroupName="questions3">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="text3" placeholder="Question 4" formControlName="text" [maxlength]="100" readonly/>
+                    </mat-form-field>
+
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer1ForQuestion4" placeholder="Answer for Question 4" formControlName="answer1" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer2ForQuestion4" placeholder="Answer for Question 4" formControlName="answer2" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer3ForQuestion4" placeholder="Answer for Question 4" formControlName="answer3" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer4ForQuestion4" placeholder="Answer for Question 4" formControlName="answer4" [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion4">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
+                </fieldset>
+
+                <fieldset formGroupName="questions4">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="text4" placeholder="Question 5" formControlName="text" [maxlength]="100" readonly/>
+                    </mat-form-field>
+
+                    <div>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer1ForQuestion5" placeholder="Answer for Question 5" formControlName="answer1" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer2ForQuestion5" placeholder="Answer for Question 5" formControlName="answer2" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer3ForQuestion5" placeholder="Answer for Question 5" formControlName="answer3" [maxlength]="100"/>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="answer4ForQuestion5" placeholder="Answer for Question 5" formControlName="answer4" [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion5">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="saveChanges(inputEditForm.value)"
+                    [disabled]="inputEditForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="content" #createModal>
+        <div class="modal-header">
+            <span>{{createQuizMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputCreateForm">
+                <mat-form-field>
+                    <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.name.invalid
+                 && inputCreateForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="topic" placeholder="Topic" formControlName="topic">
+                        <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topic">
+                            {{ topics[topic] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+
+                <!--Questions-->
+                <fieldset *ngFor="let questionElement of questionArray; let i = index" formGroupName={{questionElement}}>
+                    <mat-form-field>
+                        <input matInput placeholder="Question {{i+1}}" formControlName="text" [maxlength]="100"/>
+                    </mat-form-field>
+
+                    <div *ngFor="let answer of answers">
+                        <mat-form-field>
+                            <input matInput placeholder="Answer for Question {{i+1}}" formControlName={{answer}} [maxlength]="100"/>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-select placeholder="Answer" formControlName="answer">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button class="upload-btn">
+                        {{upload}}
+                        <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
+                    </button>
+                </fieldset>
+
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</app-modal-window>

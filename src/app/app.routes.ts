@@ -10,7 +10,8 @@ import {
     UsersPageComponent,
     LotteriesPageComponent,
     AdministratorsPageComponent,
-    QuizzesPageComponent
+    QuizzesPageComponent,
+    SpecialQuizzesPageComponent
 } from './pages';
 
 export const ROUTES: Routes = [
@@ -27,6 +28,8 @@ export const ROUTES: Routes = [
         { path: RoutesConfig.adminLotteries, component: LotteriesPageComponent, canActivate: [AuthGuard] },
 
         { path: RoutesConfig.adminQuizzes, component: QuizzesPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminSpecialQuizzes, component: SpecialQuizzesPageComponent, canActivate: [AuthGuard] },
         ]
     },
 

@@ -25,7 +25,8 @@ import {
     UsersPageComponent,
     LotteriesPageComponent,
     AdministratorsPageComponent,
-    QuizzesPageComponent
+    QuizzesPageComponent,
+    SpecialQuizzesPageComponent
 } from './pages';
 
 //COMPONENTS
@@ -57,6 +58,7 @@ import { LoginService } from './components/login/services/login.service';
 import { ModalWindowService } from './components/modal-window/services/modal-window.service';
 import { LotteriesPageService } from './pages/lotteries/page/services/lotteries-page.service';
 import { QuizzesPageService } from './pages/quizzes/page/services/quizzes-page.service';
+import { SpecialQuizzesPageService } from './pages/special-quizzes/page/services/special-quizzes-page.service';
 
 //styles
 import '../styles/styles.scss';
@@ -94,7 +96,8 @@ interface StoreType {
       NavMenuComponent,
       ModalWindowComponent,
       LotteriesTableComponent,
-      AdminComponent
+      AdminComponent,
+      SpecialQuizzesPageComponent
   ],
   /**
    * Import Angular's modules.
@@ -135,6 +138,7 @@ interface StoreType {
       ModalWindowService,
       FileUploadService,
       GettingCityService,
+      SpecialQuizzesPageService,
       AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS

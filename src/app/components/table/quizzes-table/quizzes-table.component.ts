@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class QuizzesTableComponent {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
+    @Input() public specialQuiz: string;
     @Output() public onEdit: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
