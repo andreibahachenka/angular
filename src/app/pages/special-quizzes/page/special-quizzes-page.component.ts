@@ -17,7 +17,7 @@ import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 
 @Component({
-    selector: 'app-quizzes',
+    selector: 'app-special-quizzes',
     styleUrls: ['special-quizzes-page.component.scss'],
     templateUrl: 'special-quizzes-page.component.html'
 })
