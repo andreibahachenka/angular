@@ -34,7 +34,7 @@ export class QuizzesPageComponent implements OnInit{
     public name: string = '';
     public status: any;
     public id: string = '';
-    public topic = {};
+    public topic: any;
     public questions: any;
 
     public text: string = '';
@@ -266,55 +266,52 @@ export class QuizzesPageComponent implements OnInit{
         this.id = item.id;
         this.topic = item.brand.name;
 
-        this.image1 = item.questions[0].image;
-        this.image2 = item.questions[1].image;
-        this.image3 = item.questions[2].image;
-        this.image4 = item.questions[3].image;
-        this.image5 = item.questions[4].image;
+        this.image1 = item.questions[1].image;
+        this.image2 = item.questions[2].image;
+        this.image3 = item.questions[3].image;
+        this.image4 = item.questions[4].image;
+        this.image5 = item.questions[0].image;
 
-        this.text = item.questions[0].text;
-        this.text1 = item.questions[1].text;
-        this.text2 = item.questions[2].text;
-        this.text3 = item.questions[3].text;
-        this.text4 = item.questions[4].text;
+        this.text = item.questions[1].text;
+        this.text1 = item.questions[2].text;
+        this.text2 = item.questions[3].text;
+        this.text3 = item.questions[4].text;
+        this.text4 = item.questions[0].text;
 
-        this.answerForQuestion1 = item.questions[0].answer;
-        this.answer1ForQuestion1 = item.questions[0].answer1;
-        this.answer2ForQuestion1 = item.questions[0].answer2;
-        this.answer3ForQuestion1 = item.questions[0].answer3;
-        this.answer4ForQuestion1 = item.questions[0].answer4;
+        this.answerForQuestion1 = item.questions[1].answer;
+        this.answer1ForQuestion1 = item.questions[1].answer1;
+        this.answer2ForQuestion1 = item.questions[1].answer2;
+        this.answer3ForQuestion1 = item.questions[1].answer3;
+        this.answer4ForQuestion1 = item.questions[1].answer4;
 
-        this.answerForQuestion2 = item.questions[1].answer;
-        this.answer1ForQuestion2 = item.questions[1].answer1;
-        this.answer2ForQuestion2 = item.questions[1].answer2;
-        this.answer3ForQuestion2 = item.questions[1].answer3;
-        this.answer4ForQuestion2 = item.questions[1].answer4;
+        this.answerForQuestion2 = item.questions[2].answer;
+        this.answer1ForQuestion2 = item.questions[2].answer1;
+        this.answer2ForQuestion2 = item.questions[2].answer2;
+        this.answer3ForQuestion2 = item.questions[2].answer3;
+        this.answer4ForQuestion2 = item.questions[2].answer4;
 
-        this.answerForQuestion3 = item.questions[2].answer;
-        this.answer1ForQuestion3 = item.questions[2].answer1;
-        this.answer2ForQuestion3 = item.questions[2].answer2;
+        this.answerForQuestion3 = item.questions[3].answer;
+        this.answer1ForQuestion3 = item.questions[3].answer1;
+        this.answer2ForQuestion3 = item.questions[3].answer2;
         this.answer3ForQuestion3 = item.questions[3].answer3;
         this.answer4ForQuestion3 = item.questions[3].answer4;
 
-        this.answerForQuestion4 = item.questions[3].answer;
-        this.answer1ForQuestion4 = item.questions[3].answer1;
-        this.answer2ForQuestion4 = item.questions[3].answer2;
-        this.answer3ForQuestion4 = item.questions[3].answer3;
-        this.answer4ForQuestion4 = item.questions[3].answer4;
+        this.answerForQuestion4 = item.questions[4].answer;
+        this.answer1ForQuestion4 = item.questions[4].answer1;
+        this.answer2ForQuestion4 = item.questions[4].answer2;
+        this.answer3ForQuestion4 = item.questions[4].answer3;
+        this.answer4ForQuestion4 = item.questions[4].answer4;
 
-        this.answerForQuestion5 = item.questions[4].answer;
-        this.answer1ForQuestion5 = item.questions[4].answer1;
-        this.answer2ForQuestion5 = item.questions[4].answer2;
-        this.answer3ForQuestion5 = item.questions[4].answer3;
-        this.answer4ForQuestion5 = item.questions[4].answer4;
+        this.answerForQuestion5 = item.questions[0].answer;
+        this.answer1ForQuestion5 = item.questions[0].answer1;
+        this.answer2ForQuestion5 = item.questions[0].answer2;
+        this.answer3ForQuestion5 = item.questions[0].answer3;
+        this.answer4ForQuestion5 = item.questions[0].answer4;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
 
     public saveChanges(data): void {
-        console.log('DATAAAAAAAA', data);
-        console.log('img1', this.image1);
-        console.log('img2', this.image2);
         data.questions.image = this.image1;
         data.questions1.image = this.image2;
         data.questions2.image = this.image3;

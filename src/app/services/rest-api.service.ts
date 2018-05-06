@@ -6,7 +6,7 @@ import { omitBy, isEmpty } from 'lodash';
 import { LocalStorageConfig } from '../../app-config/locastorage.config';
 import { NotificationService } from './notification.service';
 
-const message = 'Erorr loading data';
+const message = 'Error loading data';
 
 @Injectable()
 export class RestApiService {

@@ -69,9 +69,9 @@
                     </div>
 
                     <mat-form-field>
-                        <mat-select placeholder="Answer" formControlName="answer">
-                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="answerForQuestion1">
-                                {{ answerForQuestion1 }}
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion1">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -106,9 +106,9 @@
                     </div>
 
                     <mat-form-field>
-                        <mat-select placeholder="Answer" formControlName="answer">
-                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="answerForQuestion2">
-                                {{ answerForQuestion2 }}
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion2">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -143,9 +143,9 @@
                     </div>
 
                     <mat-form-field>
-                        <mat-select placeholder="Answer" formControlName="answer">
-                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="answerForQuestion3">
-                                {{ answerForQuestion3 }}
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion3">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -180,9 +180,9 @@
                     </div>
 
                     <mat-form-field>
-                        <mat-select placeholder="Answer" formControlName="answer">
-                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="answerForQuestion4">
-                                {{ answerForQuestion4 }}
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion4">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -217,9 +217,9 @@
                     </div>
 
                     <mat-form-field>
-                        <mat-select placeholder="Answer" formControlName="answer">
-                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="answerForQuestion5">
-                                {{ answerForQuestion5 }}
+                        <mat-select placeholder="Answer" formControlName="answer" [(ngModel)]="answerForQuestion5">
+                            <mat-option *ngFor="let rightAnswer of rightAnswers" [value]="rightAnswer">
+                                {{ rightAnswer }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>

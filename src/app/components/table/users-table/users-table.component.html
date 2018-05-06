@@ -21,13 +21,25 @@
     </ngx-datatable-column>
 </ng-container>
 
+    <ngx-datatable-column name="Shop ID" [cellClass]="'action-btn-cell'" [width]="100">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.shop_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="City ID" [cellClass]="'action-btn-cell'" [width]="100">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.city_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
     <ngx-datatable-column name="Phone" [cellClass]="'action-btn-cell'" [width]="150">
         <ng-template let-row="row" ngx-datatable-cell-template>
             <span>{{row.phone}}</span>
         </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Email" [cellClass]="'action-btn-cell'" [width]="220">
+    <ngx-datatable-column name="Email" [cellClass]="'action-btn-cell'" [width]="180">
         <ng-template let-row="row" ngx-datatable-cell-template>
             <span>{{row.email}}</span>
         </ng-template>

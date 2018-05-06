@@ -7,7 +7,7 @@ import {
 
 import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
 
-import { NavMenuService } from '../../../services/nav-menu.service';
+import { NavMenuService, GettingCityService } from '../../../services/';
 import { UsersPageService } from './services/users-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
@@ -32,10 +32,13 @@ export class UsersPageComponent implements OnInit {
 
     public objectKeys = Object.keys;
 
+    public cities = {};
+
     public statuses = {
         1: 'Active',
         0: 'Not Active',
-        2: 'Waiting moderation'
+        2: 'Waiting moderation',
+        3: 'Waiting for deletion'
     };
 
     public name: string = '';
@@ -45,6 +48,8 @@ export class UsersPageComponent implements OnInit {
     public email: string = '';
     public status: any;
     public id: string = '';
+    public shop_id: string;
+    public city_id: string;
 
     public filterName: string = '';
     public filterSurname: string = '';
@@ -77,6 +82,14 @@ export class UsersPageComponent implements OnInit {
         ]),
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
+        shop_id: new FormControl(this.shop_id, [
+            Validators.required,
+            Validators.pattern(this.phoneValidationExp)
+        ]),
+        city_id: new FormControl(this.city_id, [
+            Validators.required,
+            Validators.pattern(this.phoneValidationExp)
+        ]),
     });
 
     public inputCreateForm: FormGroup = new FormGroup({
@@ -112,7 +125,8 @@ export class UsersPageComponent implements OnInit {
     constructor(
         private navMenuService: NavMenuService,
         private usersPageService: UsersPageService,
-        private modalWindowService: ModalWindowService
+        private modalWindowService: ModalWindowService,
+        private gettingCityService: GettingCityService,
     ) {
     }
 
@@ -121,6 +135,8 @@ export class UsersPageComponent implements OnInit {
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
 
         this.getUsers();
+        this.gettingCityService.getCity()
+            .subscribe((item)=> this.cities = item);
     }
 
     public getUsers(searchParameters?: any): void {
@@ -136,7 +152,9 @@ export class UsersPageComponent implements OnInit {
                         obj.status = 'Waiting moderation';
                     } else if (obj.status === 0) {
                         obj.status = 'Not Active';
-                    }
+                    } else if (obj.status === 3) {
+                        obj.status = 'Waiting for deletion';
+                }
                 });
             });
     }
@@ -149,6 +167,8 @@ export class UsersPageComponent implements OnInit {
         this.email = item.email;
         this.status = item.status;
         this.id = item.id;
+        this.shop_id = item.shop_id;
+        this.city_id = item.city_id;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
@@ -159,6 +179,7 @@ export class UsersPageComponent implements OnInit {
     }
 
     public createUser(): void {
+        console.log('cities', Object.keys(this.cities));
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 
@@ -212,10 +233,12 @@ export class UsersPageComponent implements OnInit {
 
     public cancel(): void {
         this.inputCreateForm.reset();
+        this.inputEditForm.reset();
         this.modalWindowService.closeModalWindow();
     }
 
     public clearForm(): void {
         this.inputFilterForm.reset();
     }
+
 }

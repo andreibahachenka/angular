@@ -20,9 +20,14 @@ export const PathConfig = {
     updateLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/update',
     removeLotteryEndpoint: 'http://46.30.42.15:8066/v1/admin/lotteries/remove',
 
-    uploadLotteryImageEndpoint:'http://46.30.42.15:8066/v1/services/photo/upload',
+    //Image converter
+    uploadImageEndpoint:'http://46.30.42.15:8066/v1/services/photo/upload',
+
+    //Get cities
+    getCityEndpoint: 'http://46.30.42.15:8066/v1/services/cities',
 
     //Quizzes
     getQuizzesEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes',
-    createQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/create'
+    createQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/create',
+    updateQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/update'
 };

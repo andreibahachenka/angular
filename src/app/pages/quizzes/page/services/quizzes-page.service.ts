@@ -48,7 +48,7 @@ export class QuizzesPageService {
     public updateQuiz(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.updateLotteryEndpoint}`,
+                `${PathConfig.updateQuizEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
                     this.notificationService.error(errorMessage);

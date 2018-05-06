@@ -16,7 +16,7 @@ export class FileUploadService {
         let formData: FormData = new FormData();
         formData.append('photo', fileToUpload, fileToUpload.name);
         return this.restApiService
-            .postItem(PathConfig.uploadLotteryImageEndpoint, formData);
+            .postItem(PathConfig.uploadImageEndpoint, formData);
     }
 
 }

@@ -46,7 +46,8 @@ import {
     RestApiService,
     NavMenuService,
     NotificationService,
-    FileUploadService
+    FileUploadService,
+    GettingCityService
 } from './services';
 
 //LOCAL SERVICES
@@ -133,6 +134,7 @@ interface StoreType {
       LotteriesPageService,
       ModalWindowService,
       FileUploadService,
+      GettingCityService,
       AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
