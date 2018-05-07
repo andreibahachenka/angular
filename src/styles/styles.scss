@@ -5,6 +5,8 @@
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@ng-select/ng-select/themes/material.theme.css';
+
 
 head, body {
 	margin: 0;
@@ -21,6 +23,10 @@ a {
 .main-table {
 	margin-top: 20px !important;
 	word-break: break-all;
+}
+
+.ng-select-container > *{
+	font-family: 'helvetica', Arial, 'sans serif';
 }
 
 .ngx-datatable.bootstrap {

@@ -94,12 +94,16 @@
                  && inputEditForm.controls.shop_id.touched"
                      class="error-message">Shop ID must be a number
                 </div>
-                <mat-form-field>
-                    <input matInput placeholder="City ID" [(ngModel)]="city_id" formControlName="city_id" [maxlength]="25"/>
-                </mat-form-field><br>
+                <ng-select [items]="cities"
+                           bindLabel="name"
+                           bindValue="id"
+                           placeholder="City"
+                           formControlName="city_id"
+                           [(ngModel)]="city_id">
+                </ng-select>
                 <div *ngIf="inputEditForm.controls.city_id.invalid
                  && inputEditForm.controls.city_id.touched"
-                     class="error-message">City ID can't be blank
+                     class="error-message">City can't be blank
                 </div>
                 <mat-form-field>
                     <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
@@ -170,14 +174,16 @@
                  && inputCreateForm.controls.shop_id.touched"
                      class="error-message">Shop ID can't be blank
                 </div>
-                <mat-form-field>
-                    <mat-select placeholder="City ID" formControlName="city_id">
-                        <mat-option *ngFor="let city of objectKeys(cities)" [value]="city_id">
-                            {{ cities.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <br>
+                    <ng-select [items]="cities"
+                               bindLabel="name"
+                               bindValue="id"
+                               placeholder="City"
+                               formControlName="city_id">
+                    </ng-select>
+                <div *ngIf="inputCreateForm.controls.city_id.invalid
+                 && inputCreateForm.controls.city_id.touched"
+                     class="error-message">City can't be blank
+                </div>
                 <mat-form-field>
                     <mat-select placeholder="Status" formControlName="status">
                         <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">

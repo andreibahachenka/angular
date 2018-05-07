@@ -5,7 +5,8 @@ import {
     ElementRef
 } from '@angular/core';
 
-import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { NavMenuService, GettingCityService } from '../../../services/';
 import { UsersPageService } from './services/users-page.service';
@@ -25,14 +26,13 @@ export class UsersPageComponent implements OnInit {
     public createUserMessage: string = 'Create User';
     public deleteMessage: string = 'Are you sure you want to delete this user?';
 
-
     public phoneValidationExp = /^[0-9-+()]*$/;
     public emailValidationExp =
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     public objectKeys = Object.keys;
 
-    public cities = {};
+    public cities = [];
 
     public statuses = {
         1: 'Active',

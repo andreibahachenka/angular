@@ -6,6 +6,7 @@ import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { MaterialSharedModule } from "./core/material-shared.module";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -106,6 +107,7 @@ interface StoreType {
       BrowserModule,
       BrowserAnimationsModule,
       FormsModule,
+      NgSelectModule,
       ReactiveFormsModule,
       HttpClientModule,
       NgxDatatableModule,
