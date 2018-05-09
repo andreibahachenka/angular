@@ -1,0 +1,59 @@
+<ngx-datatable
+        class="bootstrap main-table"
+        [rows]="rows"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="10"
+        [loadingIndicator]="loadingIndicator">
+
+    <ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="40">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ng-container *ngFor="let column of columns">
+        <ngx-datatable-column name="{{column.name}}" prop="{{column.prop}}">
+        </ngx-datatable-column>
+    </ng-container>
+
+    <ngx-datatable-column name="First Player (id)" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="row.winner_id === row.user.id; else unset" style="color: #03A9F4">{{row.user.username}} ({{row.user.id}})</span>
+            <ng-template #unset>
+                <span>{{row.user.username}} ({{row.user.id}})</span>
+            </ng-template>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="First Player Points" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_points}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Second Player (id)" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span *ngIf="row.winner_id === row.user2.id; else unset2" style="color: #03A9F4">{{row.user2.username}} ({{row.user2.id}})</span>
+            <ng-template #unset2>
+                <span>{{row.user2.username}} ({{row.user2.id}})</span>
+            </ng-template>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Second Player Points" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user2_points}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Date created" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.created_at | date:"HH:mm:ss, dd.MM.yyyy"}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+</ngx-datatable>

@@ -35,4 +35,7 @@ export const PathConfig = {
     getSpecialQuizzesEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/special',
     createSpecialQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/special/create',
     updateSpecialQuizEndpoint: 'http://46.30.42.15:8066/v1/admin/quizzes/special/update',
+
+    //Games
+    getGamesEndpoint: 'http://46.30.42.15:8066/v1/admin/games',
 };

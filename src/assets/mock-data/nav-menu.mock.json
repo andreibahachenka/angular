@@ -23,5 +23,10 @@
 		"title": "Special Quizzes",
 		"url": "/special-quizzes",
 		"image": "adb"
+	},
+	{
+		"title": "Games",
+		"url": "/games",
+		"image": "play_circle_outline"
 	}
 ]

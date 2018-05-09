@@ -1,0 +1,13 @@
+.main-сontainer {
+	flex: 1;
+	&__content {
+		min-width: 1200px;
+	}
+}
+
+.error-message {
+	font-size: 11px;
+	color: #f44336;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
