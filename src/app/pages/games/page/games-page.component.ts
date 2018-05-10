@@ -5,17 +5,9 @@ import {
     ElementRef
 } from '@angular/core';
 
-import {
-    NgForm,
-    FormGroup,
-    FormControl,
-    Validators
-} from '@angular/forms';
-
-import { NavMenuService, FileUploadService } from '../../../services';
+import { NavMenuService } from '../../../services';
 import { GamesPageService } from './services/games-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
-import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 
 @Component({
     selector: 'app-games',
@@ -27,7 +19,6 @@ export class GamesPageComponent implements OnInit {
     public tableData: any[] = [];
     public modifiedTableData: any[] = [];
     public navItems: NavItemModel[];
-    public fileToUpload: File;
 
     public editLotteryMessage: string = 'Edit Lottery';
     public createLotteryMessage: string = 'Create Lottery';
@@ -62,7 +53,6 @@ export class GamesPageComponent implements OnInit {
     constructor(
         private navMenuService: NavMenuService,
         private gamesPageService: GamesPageService,
-        private fileUploadService: FileUploadService
     ) {
     }
 
@@ -76,29 +66,9 @@ export class GamesPageComponent implements OnInit {
     public getLotteries(searchParameters?: any): void {
         this.gamesPageService.getGames(searchParameters)
             .subscribe((res) => {
-            console.log('response', res);
-            console.log('date', res.games);
-            // console.log(new Date(parseInt(res.games.created_at.substr(6))));
                 this.tableData = res.games;
 
                 this.modifiedTableData = this.tableData;
-                // this.modifiedTableData.map((obj) => {
-                //     if (obj.status === 1) {
-                //         obj.status = 'Active';
-                //     } else if (obj.status === 2) {
-                //         obj.status = 'Waiting moderation';
-                //     } else if (obj.status === 0) {
-                //         obj.status = 'Not Active';
-                //     }
-                // });
-            });
-    }
-
-    public handleFileInput(files: FileList): void {
-        let photo = files.item(0);
-        this.fileUploadService.uploadFile(photo)
-            .subscribe((result: any) => {
-                this.photo = result.url;
             });
     }
 }
