@@ -11,7 +11,7 @@ import {
     Validators,
 } from '@angular/forms';
 
-import { NavMenuService, FileUploadService } from '../../../services';
+import { NavMenuService, FileUploadService, UtilsService } from '../../../services';
 import { SpecialQuizzesPageService } from './services/special-quizzes-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
@@ -229,7 +229,8 @@ export class SpecialQuizzesPageComponent implements OnInit{
         private navMenuService: NavMenuService,
         private modalWindowService: ModalWindowService,
         private specialQuizzesPageService: SpecialQuizzesPageService,
-        private fileUploadService: FileUploadService
+        private fileUploadService: FileUploadService,
+        private utilsService: UtilsService
     ) {
     }
 
@@ -264,9 +265,9 @@ export class SpecialQuizzesPageComponent implements OnInit{
 
     public openEdit(item: any): void {
         this.name = item.name;
-        this.status = item.status;
+        this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
-        this.topic = item.brand.name;
+        this.topic = this.status = this.utilsService.getKeyByValue(this.topics, item.brand.name);
 
         this.image1 = item.questions[0].image;
         this.image2 = item.questions[1].image;
