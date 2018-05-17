@@ -12,7 +12,7 @@ import {
     Validators
 } from '@angular/forms';
 
-import { NavMenuService, FileUploadService } from '../../../services';
+import { NavMenuService, FileUploadService, UtilsService } from '../../../services';
 import { LotteriesPageService } from './services/lotteries-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
@@ -89,7 +89,8 @@ export class LotteriesPageComponent implements OnInit{
         private navMenuService: NavMenuService,
         private modalWindowService: ModalWindowService,
         private lotteriesPageService: LotteriesPageService,
-        private fileUploadService: FileUploadService
+        private fileUploadService: FileUploadService,
+        private utilsService: UtilsService,
     ) {
     }
 
@@ -124,7 +125,7 @@ export class LotteriesPageComponent implements OnInit{
 
     public openEdit(item: any): void {
         this.name = item.name;
-        this.status = item.status;
+        this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
         this.description = item.description;
         this.prize = item.product_name;

@@ -47,7 +47,7 @@
                 <!--Questions-->
                 <fieldset formGroupName="questions">
                     <mat-form-field>
-                        <input matInput [(ngModel)]="text" placeholder="Question 1" formControlName="text" [maxlength]="100"/>
+                        <input matInput [(ngModel)]="text" placeholder="Question 1" formControlName="text"/>
                     </mat-form-field>
 
                     <div>
@@ -84,7 +84,7 @@
 
                 <fieldset formGroupName="questions1">
                     <mat-form-field>
-                        <input matInput [(ngModel)]="text1" placeholder="Question 2" formControlName="text" [maxlength]="100"/>
+                        <input matInput [(ngModel)]="text1" placeholder="Question 2" formControlName="text"/>
                     </mat-form-field>
 
                     <div>
@@ -121,7 +121,7 @@
 
                 <fieldset formGroupName="questions2">
                     <mat-form-field>
-                        <input matInput [(ngModel)]="text2" placeholder="Question 3" formControlName="text" [maxlength]="100"/>
+                        <input matInput [(ngModel)]="text2" placeholder="Question 3" formControlName="text"/>
                     </mat-form-field>
 
                     <div>
@@ -158,7 +158,7 @@
 
                 <fieldset formGroupName="questions3">
                     <mat-form-field>
-                        <input matInput [(ngModel)]="text3" placeholder="Question 4" formControlName="text" [maxlength]="100"/>
+                        <input matInput [(ngModel)]="text3" placeholder="Question 4" formControlName="text"/>
                     </mat-form-field>
 
                     <div>
@@ -195,7 +195,7 @@
 
                 <fieldset formGroupName="questions4">
                     <mat-form-field>
-                        <input matInput [(ngModel)]="text4" placeholder="Question 5" formControlName="text" [maxlength]="100"/>
+                        <input matInput [(ngModel)]="text4" placeholder="Question 5" formControlName="text"/>
                     </mat-form-field>
 
                     <div>
@@ -277,7 +277,7 @@
                 <!--Questions-->
                 <fieldset *ngFor="let questionElement of questionArray; let i = index" formGroupName={{questionElement}}>
                     <mat-form-field>
-                        <input matInput placeholder="Question {{i+1}}" formControlName="text" [maxlength]="100"/>
+                        <input matInput placeholder="Question {{i+1}}" formControlName="text"/>
                     </mat-form-field>
 
                     <div *ngFor="let answer of answers">

@@ -7,7 +7,7 @@ import {
 
 import {NgForm, FormGroup, FormControl, Validators} from '@angular/forms';
 
-import { NavMenuService } from '../../../services/nav-menu.service';
+import { NavMenuService, UtilsService } from '../../../services/';
 import { AdministratorsPageService } from './services/administrators-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
@@ -77,7 +77,8 @@ export class AdministratorsPageComponent implements OnInit {
     constructor(
         private navMenuService: NavMenuService,
         private modalWindowService: ModalWindowService,
-        private administratorsPageService: AdministratorsPageService
+        private administratorsPageService: AdministratorsPageService,
+        private utilsService: UtilsService,
     ) {
     }
 
@@ -136,7 +137,7 @@ export class AdministratorsPageComponent implements OnInit {
     public openEdit(item: any): void {
         this.name = item.name;
         this.userName = item.username;
-        this.status = item.status;
+        this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });

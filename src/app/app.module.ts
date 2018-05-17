@@ -51,7 +51,8 @@ import {
     NavMenuService,
     NotificationService,
     FileUploadService,
-    GettingCityService
+    GettingCityService,
+    UtilsService
 } from './services';
 
 //LOCAL SERVICES
@@ -135,6 +136,7 @@ interface StoreType {
    */
   providers: [
       RestApiService,
+      UtilsService,
       NotificationService,
       NavMenuService,
       UsersPageService,

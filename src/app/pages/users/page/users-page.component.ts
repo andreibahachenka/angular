@@ -8,7 +8,7 @@ import {
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { NavMenuService, GettingCityService } from '../../../services/';
+import { NavMenuService, GettingCityService, UtilsService } from '../../../services/';
 import { UsersPageService } from './services/users-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
@@ -83,8 +83,7 @@ export class UsersPageComponent implements OnInit {
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
         shop_id: new FormControl(this.shop_id, [
-            Validators.required,
-            Validators.pattern(this.phoneValidationExp)
+            Validators.required
         ]),
         city_id: new FormControl(this.city_id, [
             Validators.required,
@@ -105,8 +104,7 @@ export class UsersPageComponent implements OnInit {
             Validators.pattern(this.phoneValidationExp)
         ]),
         shop_id: new FormControl('', [
-            Validators.required,
-            Validators.pattern(this.phoneValidationExp)
+            Validators.required
         ]),
         city_id: new FormControl('', [
             Validators.required,
@@ -127,6 +125,7 @@ export class UsersPageComponent implements OnInit {
         private usersPageService: UsersPageService,
         private modalWindowService: ModalWindowService,
         private gettingCityService: GettingCityService,
+        private utilsService: UtilsService,
     ) {
     }
 
@@ -165,7 +164,7 @@ export class UsersPageComponent implements OnInit {
         this.surName = item.surname;
         this.phone = item.phone;
         this.email = item.email;
-        this.status = item.status;
+        this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
         this.shop_id = item.shop_id;
         this.city_id = item.city_id;
@@ -239,5 +238,4 @@ export class UsersPageComponent implements OnInit {
     public clearForm(): void {
         this.inputFilterForm.reset();
     }
-
 }
