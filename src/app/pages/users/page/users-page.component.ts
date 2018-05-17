@@ -83,8 +83,7 @@ export class UsersPageComponent implements OnInit {
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
         shop_id: new FormControl(this.shop_id, [
-            Validators.required,
-            Validators.pattern(this.phoneValidationExp)
+            Validators.required
         ]),
         city_id: new FormControl(this.city_id, [
             Validators.required,
@@ -105,8 +104,7 @@ export class UsersPageComponent implements OnInit {
             Validators.pattern(this.phoneValidationExp)
         ]),
         shop_id: new FormControl('', [
-            Validators.required,
-            Validators.pattern(this.phoneValidationExp)
+            Validators.required
         ]),
         city_id: new FormControl('', [
             Validators.required,
