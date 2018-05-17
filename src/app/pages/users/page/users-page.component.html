@@ -56,10 +56,6 @@
                 <mat-form-field>
                     <input matInput placeholder="Username" [(ngModel)]="userName" formControlName="username" [maxlength]="20"/>
                 </mat-form-field><br>
-                <div *ngIf="inputEditForm.controls.username.invalid
-                 && inputEditForm.controls.username.touched"
-                     class="error-message">Username can't be blank
-                </div>
                 <mat-form-field>
                     <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
                 </mat-form-field><br>
@@ -136,10 +132,6 @@
                 <mat-form-field>
                     <input matInput placeholder="Username" formControlName="username" [maxlength]="20"/>
                 </mat-form-field><br>
-                <div *ngIf="inputCreateForm.controls.username.invalid
-                 && inputCreateForm.controls.username.touched"
-                     class="error-message">Username can't be blank
-                </div>
                 <mat-form-field>
                     <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
                 </mat-form-field><br>

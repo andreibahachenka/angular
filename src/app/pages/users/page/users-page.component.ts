@@ -70,7 +70,7 @@ export class UsersPageComponent implements OnInit {
 
     public inputEditForm: FormGroup = new FormGroup({
         name: new FormControl(this.name, Validators.required),
-        username: new FormControl(this.userName, Validators.required),
+        username: new FormControl(this.userName),
         surname: new FormControl(this.surName, Validators.required),
         email: new FormControl(this.email, [
             Validators.required,
@@ -93,7 +93,7 @@ export class UsersPageComponent implements OnInit {
 
     public inputCreateForm: FormGroup = new FormGroup({
         name: new FormControl('', Validators.required),
-        username: new FormControl('', Validators.required),
+        username: new FormControl(''),
         surname: new FormControl('', Validators.required),
         email: new FormControl('', [
             Validators.required,
