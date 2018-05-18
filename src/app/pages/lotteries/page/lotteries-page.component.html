@@ -81,6 +81,7 @@
                     {{upload}}
                     <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
                 </button>
+                <span *ngIf="isImageUploaded" class="upload-text">Image was uploaded</span>
             </form>
         </div>
         <div class="buttons">
@@ -154,6 +155,7 @@
                     {{upload}}
                     <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
                 </button>
+                <span *ngIf="isImageUploaded" class="upload-text">Image was uploaded</span>
             </form>
         </div>
         <div class="buttons">

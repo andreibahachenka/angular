@@ -32,6 +32,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public upload: string = 'Upload image';
 
     public specialQuiz = 'specialQuiz';
+    public isImageUploaded = [];
 
     public name: string = '';
     public status: any;
@@ -260,10 +261,12 @@ export class SpecialQuizzesPageComponent implements OnInit{
     }
 
     public createQuiz(): void {
+        this.questionArray.map((item, i) => this.isImageUploaded[i] = false);
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 
     public openEdit(item: any): void {
+        item.questions.map((item, i) => this.isImageUploaded[i] = false);
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
@@ -378,6 +381,11 @@ export class SpecialQuizzesPageComponent implements OnInit{
         this.fileUploadService.uploadFile(photo)
             .subscribe((result: any) => {
                 this.images[index] = result.url;
-            });
+                this.isImageUploaded[index] = true;
+                },
+            (err) => {
+                console.log(err);
+                this.isImageUploaded[index] = false;
+            })
     }
 }

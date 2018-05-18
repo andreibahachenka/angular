@@ -2,7 +2,7 @@ import {
     Component,
     OnInit,
     ViewChild,
-    ElementRef
+    ElementRef,
 } from '@angular/core';
 
 import {
@@ -20,7 +20,7 @@ import { ModalWindowService } from '../../../components/modal-window/services/mo
 @Component({
     selector: 'app-lotteries',
     styleUrls: ['lotteries-page.component.scss'],
-    templateUrl: 'lotteries-page.component.html'
+    templateUrl: 'lotteries-page.component.html',
 })
 export class LotteriesPageComponent implements OnInit{
 
@@ -42,6 +42,7 @@ export class LotteriesPageComponent implements OnInit{
     public cost: number;
     public prize: string = '';
     public photo: string = '';
+    public isImageUploaded: boolean = false;
 
     public objectKeys = Object.keys;
 
@@ -90,7 +91,7 @@ export class LotteriesPageComponent implements OnInit{
         private modalWindowService: ModalWindowService,
         private lotteriesPageService: LotteriesPageService,
         private fileUploadService: FileUploadService,
-        private utilsService: UtilsService,
+        private utilsService: UtilsService
     ) {
     }
 
@@ -120,10 +121,12 @@ export class LotteriesPageComponent implements OnInit{
     }
 
     public createLottery(): void {
+        this.isImageUploaded = false;
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 
     public openEdit(item: any): void {
+        this.isImageUploaded = false;
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
@@ -152,7 +155,6 @@ export class LotteriesPageComponent implements OnInit{
             product_photo: this.photo,
             description: data.description
         };
-        console.log(lotteryForm)
         this.lotteriesPageService.updateLottery(lotteryForm)
             .subscribe((res) => {
                     this.getLotteries();
@@ -179,7 +181,12 @@ export class LotteriesPageComponent implements OnInit{
         this.fileUploadService.uploadFile(photo)
             .subscribe((result: any) => {
                 this.photo = result.url;
-            });
+                this.isImageUploaded = true;
+            },
+            (err) => {
+                console.log(err);
+                this.isImageUploaded = false;
+             })
     }
 
     public sendCreateForm(data): void {
