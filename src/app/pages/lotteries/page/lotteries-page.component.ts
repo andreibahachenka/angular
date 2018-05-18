@@ -126,7 +126,7 @@ export class LotteriesPageComponent implements OnInit{
     }
 
     public openEdit(item: any): void {
-        this.isImageUploaded = false;
+        this.isImageUploaded = true;
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;

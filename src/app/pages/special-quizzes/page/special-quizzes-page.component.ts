@@ -266,7 +266,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
     }
 
     public openEdit(item: any): void {
-        item.questions.map((item, i) => this.isImageUploaded[i] = false);
+        item.questions.map((item, i) => this.isImageUploaded[i] = true);
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;

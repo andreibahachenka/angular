@@ -81,7 +81,7 @@
                         {{upload}}
                         <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, 0)">
                     </button>
-                    <span *ngIf="isImageUploaded[0]" class="upload-text">Image was uploaded</span>
+                    <img *ngIf="isImageUploaded[0]" class="upload-text" src="{{images[0] ? images[0] : image1}}" alt="preview-image">
                 </fieldset>
 
                 <fieldset formGroupName="questions1">
@@ -119,7 +119,7 @@
                         {{upload}}
                         <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, 1)">
                     </button>
-                    <span *ngIf="isImageUploaded[1]" class="upload-text">Image was uploaded</span>
+                    <img *ngIf="isImageUploaded[1]" class="upload-text" src="{{images[1] ? images[1] : image2}}" alt="preview-image">
                 </fieldset>
 
                 <fieldset formGroupName="questions2">
@@ -157,7 +157,7 @@
                         {{upload}}
                         <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, 2)">
                     </button>
-                    <span *ngIf="isImageUploaded[2]" class="upload-text">Image was uploaded</span>
+                    <img *ngIf="isImageUploaded[2]" class="upload-text" src="{{images[2] ? images[2] : image3}}" alt="preview-image">
                 </fieldset>
 
                 <fieldset formGroupName="questions3">
@@ -195,7 +195,7 @@
                         {{upload}}
                         <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, 3)">
                     </button>
-                    <span *ngIf="isImageUploaded[3]" class="upload-text">Image was uploaded</span>
+                    <img *ngIf="isImageUploaded[3]" class="upload-text" src="{{images[3] ? images[3] : image4}}" alt="preview-image">
                 </fieldset>
 
                 <fieldset formGroupName="questions4">
@@ -233,7 +233,7 @@
                         {{upload}}
                         <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, 4)">
                     </button>
-                    <span *ngIf="isImageUploaded[4]" class="upload-text">Image was uploaded</span>
+                    <img *ngIf="isImageUploaded[4]" class="upload-text" src="{{images[4] ? images[4] : image5}}" alt="preview-image">
                 </fieldset>
             </form>
         </div>
@@ -304,7 +304,7 @@
                         {{upload}}
                         <input type="file" #fileInput placeholder="Image" class="upload-btn__input" formControlName="image" (change)="handleFileInput($event.target.files, i)">
                     </button>
-                    <span *ngIf="isImageUploaded[i]" class="upload-text">Image was uploaded</span>
+                    <img *ngIf="isImageUploaded[i]" class="upload-text" src={{images[i]}} alt="preview-image">
                 </fieldset>
 
             </form>
