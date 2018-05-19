@@ -81,6 +81,7 @@
                     {{upload}}
                     <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
                 </button>
+                <img *ngIf="isImageUploaded" class="upload-text" src="{{photo}}" alt="preview-image">
             </form>
         </div>
         <div class="buttons">
@@ -141,7 +142,6 @@
                  && inputCreateForm.controls.prize.touched"
                      class="error-message">Prize can't be blank
                 </div>
-                <br>
                 <mat-form-field>
                     <mat-select placeholder="Status" formControlName="status">
                         <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
@@ -154,6 +154,7 @@
                     {{upload}}
                     <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
                 </button>
+                <img *ngIf="isImageUploaded" class="upload-text" src="{{photo}}" alt="preview-image">
             </form>
         </div>
         <div class="buttons">
