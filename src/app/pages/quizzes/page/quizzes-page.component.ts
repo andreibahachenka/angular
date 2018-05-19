@@ -37,6 +37,7 @@ export class QuizzesPageComponent implements OnInit{
     public id: string = '';
     public topic: any;
     public questions: any;
+    public number: number;
 
     public text: string = '';
     public text1: string = '';
@@ -259,6 +260,7 @@ export class QuizzesPageComponent implements OnInit{
     }
 
     public createQuiz(): void {
+        this.inputCreateForm.reset();
         this.questionArray.map((item, i) => this.isImageUploaded[i] = false);
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
@@ -267,8 +269,9 @@ export class QuizzesPageComponent implements OnInit{
         item.questions.map((item, i) => this.isImageUploaded[i] = true);
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
+        console.log(this.status);
         this.id = item.id;
-        this.topic = this.status = this.utilsService.getKeyByValue(this.topics, item.brand.name);
+        this.topic = this.utilsService.getKeyByValue(this.topics, item.brand.name);
 
         this.image1 = item.questions[0].image;
         this.image2 = item.questions[1].image;
@@ -338,7 +341,7 @@ export class QuizzesPageComponent implements OnInit{
                 },
                 (err) => {
                     console.error(err);
-                })
+                });
     }
 
     public sendCreateForm(data): void {
@@ -361,6 +364,7 @@ export class QuizzesPageComponent implements OnInit{
         this.quizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();
+                    this.inputCreateForm.reset();
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {

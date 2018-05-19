@@ -131,6 +131,7 @@ export class AdministratorsPageComponent implements OnInit {
     }
 
     public createAdmin(): void {
+        this.inputCreateForm.reset();
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 

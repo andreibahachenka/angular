@@ -121,6 +121,7 @@ export class LotteriesPageComponent implements OnInit{
     }
 
     public createLottery(): void {
+        this.inputCreateForm.reset();
         this.isImageUploaded = false;
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
