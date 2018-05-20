@@ -269,7 +269,6 @@ export class QuizzesPageComponent implements OnInit{
         item.questions.map((item, i) => this.isImageUploaded[i] = true);
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
-        console.log(this.status);
         this.id = item.id;
         this.topic = this.utilsService.getKeyByValue(this.topics, item.brand.name);
 
@@ -324,6 +323,11 @@ export class QuizzesPageComponent implements OnInit{
         data.questions2.image = this.image3;
         data.questions3.image = this.image4;
         data.questions4.image = this.image5;
+        data.questions.number = 1;
+        data.questions1.number = 2;
+        data.questions2.number = 3;
+        data.questions3.number = 4;
+        data.questions4.number = 5;
         let quizForm = {
             id: data.id,
             name: data.name,
@@ -345,12 +349,18 @@ export class QuizzesPageComponent implements OnInit{
     }
 
     public sendCreateForm(data): void {
+
         //converting to necessary object
         data.questions.image = this.images[0];
         data.questions1.image = this.images[1];
         data.questions2.image = this.images[2];
         data.questions3.image = this.images[3];
         data.questions4.image = this.images[4];
+        data.questions.number = 1;
+        data.questions1.number = 2;
+        data.questions2.number = 3;
+        data.questions3.number = 4;
+        data.questions4.number = 5;
         let quizForm = {
             name: data.name,
             status: data.status,
@@ -360,7 +370,6 @@ export class QuizzesPageComponent implements OnInit{
             },
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
-
         this.quizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();

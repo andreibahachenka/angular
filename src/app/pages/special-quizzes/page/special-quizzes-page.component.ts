@@ -324,6 +324,11 @@ export class SpecialQuizzesPageComponent implements OnInit{
         data.questions2.image = this.image3;
         data.questions3.image = this.image4;
         data.questions4.image = this.image5;
+        data.questions.number = 1;
+        data.questions1.number = 2;
+        data.questions2.number = 3;
+        data.questions3.number = 4;
+        data.questions4.number = 5;
         let quizForm = {
             id: data.id,
             name: data.name,
@@ -351,6 +356,11 @@ export class SpecialQuizzesPageComponent implements OnInit{
         data.questions2.image = this.images[2];
         data.questions3.image = this.images[3];
         data.questions4.image = this.images[4];
+        data.questions.number = 1;
+        data.questions1.number = 2;
+        data.questions2.number = 3;
+        data.questions3.number = 4;
+        data.questions4.number = 5;
         let quizForm = {
             name: data.name,
             status: data.status,
