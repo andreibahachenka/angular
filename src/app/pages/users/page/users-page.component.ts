@@ -154,6 +154,10 @@ export class UsersPageComponent implements OnInit {
                     } else if (obj.status === 3) {
                         obj.status = 'Waiting for deletion';
                 }
+
+                    if (obj.is_bot === 1) {
+                        obj.name = `${obj.name} (Bot)`;
+                    }
                 });
             });
     }
