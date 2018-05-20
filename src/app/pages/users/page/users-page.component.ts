@@ -182,6 +182,7 @@ export class UsersPageComponent implements OnInit {
     }
 
     public createUser(): void {
+        this.inputCreateForm.reset();
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 

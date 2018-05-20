@@ -37,6 +37,7 @@ export class QuizzesPageComponent implements OnInit{
     public id: string = '';
     public topic: any;
     public questions: any;
+    public number: number;
 
     public text: string = '';
     public text1: string = '';
@@ -259,6 +260,7 @@ export class QuizzesPageComponent implements OnInit{
     }
 
     public createQuiz(): void {
+        this.inputCreateForm.reset();
         this.questionArray.map((item, i) => this.isImageUploaded[i] = false);
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
@@ -268,7 +270,7 @@ export class QuizzesPageComponent implements OnInit{
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
-        this.topic = this.status = this.utilsService.getKeyByValue(this.topics, item.brand.name);
+        this.topic = this.utilsService.getKeyByValue(this.topics, item.brand.name);
 
         this.image1 = item.questions[0].image;
         this.image2 = item.questions[1].image;
@@ -321,6 +323,11 @@ export class QuizzesPageComponent implements OnInit{
         data.questions2.image = this.image3;
         data.questions3.image = this.image4;
         data.questions4.image = this.image5;
+        data.questions.number = 1;
+        data.questions1.number = 2;
+        data.questions2.number = 3;
+        data.questions3.number = 4;
+        data.questions4.number = 5;
         let quizForm = {
             id: data.id,
             name: data.name,
@@ -338,16 +345,22 @@ export class QuizzesPageComponent implements OnInit{
                 },
                 (err) => {
                     console.error(err);
-                })
+                });
     }
 
     public sendCreateForm(data): void {
+
         //converting to necessary object
         data.questions.image = this.images[0];
         data.questions1.image = this.images[1];
         data.questions2.image = this.images[2];
         data.questions3.image = this.images[3];
         data.questions4.image = this.images[4];
+        data.questions.number = 1;
+        data.questions1.number = 2;
+        data.questions2.number = 3;
+        data.questions3.number = 4;
+        data.questions4.number = 5;
         let quizForm = {
             name: data.name,
             status: data.status,
@@ -357,10 +370,10 @@ export class QuizzesPageComponent implements OnInit{
             },
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
-
         this.quizzesPageService.setQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();
+                    this.inputCreateForm.reset();
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
