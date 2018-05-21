@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AssociationOfItemDisplayModel, NavItemModel } from './models';
@@ -13,6 +13,7 @@ import { RoutesConfig } from '../../../app-config';
 export class NavMenuComponent implements OnChanges {
     @Input() public navMenuList: NavItemModel[];
     @Input() public hotLinksGroupTitle: string;
+    @Output() public onSideNavToogle: EventEmitter<null> = new EventEmitter<null>();
 
     public itemDisplayList: AssociationOfItemDisplayModel[];
     public hotLinksGroup: NavItemModel;
@@ -42,5 +43,10 @@ export class NavMenuComponent implements OnChanges {
 
     public routeTo(url): void {
         this.router.navigate([RoutesConfig.adminUrl + url]);
+        this.hideNavMenu();
+    }
+
+    public hideNavMenu(): void {
+        this.onSideNavToogle.emit();
     }
 }

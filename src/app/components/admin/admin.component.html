@@ -6,6 +6,7 @@
     <mat-sidenav-container class="main-сontainer" >
         <mat-sidenav class="main-сontainer__side-menu" [mode]="'over'" #sideNavMenu>
             <app-nav-menu
+                    (onSideNavToogle)="sideNavMenu.toggle()"
                     [navMenuList]="navItems"
                     [hotLinksGroupTitle]="'Hot Links'">
             </app-nav-menu>
