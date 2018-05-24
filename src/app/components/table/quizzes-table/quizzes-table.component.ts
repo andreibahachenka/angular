@@ -10,6 +10,7 @@ export class QuizzesTableComponent {
     @Input() public columns: any[] = [];
     @Input() public specialQuiz: string;
     @Output() public onEdit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onSendToAll: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
     ){
@@ -17,5 +18,9 @@ export class QuizzesTableComponent {
 
     public openEdit(item: any): void {
         this.onEdit.emit(item);
+    }
+
+    public openSendToAll(id: any): void {
+        this.onSendToAll.emit(id);
     }
 }

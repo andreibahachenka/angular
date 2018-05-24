@@ -30,6 +30,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public editQuizMessage: string = 'Edit Special Quiz';
     public createQuizMessage: string = 'Create Special Quiz';
     public upload: string = 'Upload image';
+    public sendToAllMessage: string = 'Are you sure you want to send it to all?';
 
     public specialQuiz = 'specialQuiz';
     public isImageUploaded = [];
@@ -90,6 +91,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
 
     @ViewChild('createModal') public createModal: ElementRef;
     @ViewChild('editModal') public editModal: ElementRef;
+    @ViewChild('sendToAll') public sendToAll: ElementRef;
 
     public statuses = {
         1: 'Active',
@@ -399,5 +401,21 @@ export class SpecialQuizzesPageComponent implements OnInit{
                 console.log(err);
                 this.isImageUploaded[index] = false;
             })
+    }
+
+    public openSend(item) {
+        this.id = item.id;
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.sendToAll });
+    }
+
+    public applySend(id) {
+        console.log(id);
+        this.specialQuizzesPageService.sendToAll(id)
+            .subscribe((res) => {
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
     }
 }

@@ -61,4 +61,23 @@ export class SpecialQuizzesPageService {
         })
     }
 
+    public sendToAll(data): Observable<any> {
+        let id = {
+            id: data
+        };
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.sendSpecialQuizEndpoint}`,
+                JSON.stringify(id),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
 }

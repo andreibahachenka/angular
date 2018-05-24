@@ -38,7 +38,7 @@
                 <mat-icon>edit</mat-icon>
             </button>
 
-            <button *ngIf="specialQuiz" class="button-send" mat-icon-button title="Send to all">
+            <button *ngIf="specialQuiz" class="button-send" mat-icon-button title="Send to all" (click)="openSendToAll(row)">
                 <mat-icon>send</mat-icon>
             </button>
         </ng-template>
