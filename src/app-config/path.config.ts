@@ -40,4 +40,18 @@ export const PathConfig = {
 
     //Games
     getGamesEndpoint: `${mainPath}/v1/admin/games`,
+
+    //Orders
+    getOrdersEndpoint: `${mainPath}/v1/admin/orders`,
+    createOrderEndpoint: `${mainPath}/v1/admin/orders/create`,
+    removeOrderEndpoint: `${mainPath}/v1/admin/orders/remove`,
+
+    //Prizes
+    getPrizesEndpoint: `${mainPath}/v1/admin/products`,
+    createPrizeEndpoint: `${mainPath}/v1/admin/product/create`,
+    updatePrizesEndpoint: `${mainPath}/v1/admin/product/update`,
+
+    //Settings
+    getSettingsEndpoint: `${mainPath}/v1/admin/settings`,
+    updateSettingEndpoint: `${mainPath}/v1/admin/settings/update`
 };

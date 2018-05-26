@@ -1,0 +1,55 @@
+<div class="main-сontainer__content">
+    <button class="create-button" mat-raised-button (click)="createOrder()">{{createOrderMessage}}</button>
+    <orders-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+            (onDelete)="openDelete($event)"
+    ></orders-table-component>
+    <router-outlet></router-outlet>
+</div>
+
+<app-modal-window class="modal-window">
+    <div class="content" #deleteModal>
+        <div class="delete-message">{{deleteMessage}}</div>
+        <div class="buttons">
+            <button color="primary" class="delete-button" mat-raised-button (click)="applyDelete(id)">Yes</button>
+            <button mat-raised-button (click)="cancel()">No</button>
+        </div>
+    </div>
+
+    <div class="content" #createModal>
+        <div class="modal-header">
+            <span>{{createOrderMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputCreateForm">
+                <mat-form-field>
+                    <mat-select placeholder="Presents" formControlName="presents">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Username" formControlName="username" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.username.invalid
+                 && inputCreateForm.controls.username.touched"
+                     class="error-message">Username can't be blank
+                </div>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</app-modal-window>
