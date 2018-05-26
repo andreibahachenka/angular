@@ -9,4 +9,5 @@ export const RoutesConfig = {
     adminSpecialQuizzes: 'admin/special-quizzes',
     adminGames: 'admin/games',
     adminOrders: 'admin/orders',
+    adminPresents: 'admin/presents',
 };
