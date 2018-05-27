@@ -35,8 +35,8 @@ export class OrdersPageService {
                 `${PathConfig.createOrderEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
-                    this.notificationService.error(errorMessage);
-                    console.error(err);
+                    let errorMessageCoins = "You don't have enough coins";
+                    this.notificationService.error(errorMessageCoins);
                 }
             ).first()
                 .subscribe((res) => {

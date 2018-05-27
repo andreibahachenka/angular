@@ -18,28 +18,49 @@
     </div>
 
     <div class="content" #createModal>
-        <div class="modal-header">
+        <div class="modal-header modal-orders-width">
             <span>{{createOrderMessage}}</span>
             <hr>
         </div>
         <div class="report-block">
             <form [formGroup]="inputCreateForm">
-                <mat-form-field>
-                    <mat-select placeholder="Presents" formControlName="presents">
-                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
-                            {{ statuses[status] }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <br>
-                <mat-form-field>
-                    <input matInput placeholder="Username" formControlName="username" [maxlength]="20"/>
-                </mat-form-field>
-                <br>
-                <div *ngIf="inputCreateForm.controls.username.invalid
-                 && inputCreateForm.controls.username.touched"
-                     class="error-message">Username can't be blank
+                <ng-select [items]="presentList"
+                           bindLabel="name"
+                           bindValue="id"
+                           placeholder="Presents"
+                           formControlName="present"
+                           [(ngModel)]="present"
+                           >
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label">{{item.name}} (price: {{item.price}}, count: {{item.count}})</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <span>{{item.name}} (price: {{item.price}}, count: {{item.count}})</span>
+                    </ng-template>
+                </ng-select>
+
+                <ng-select [items]="userList"
+                           bindLabel="id"
+                           bindValue="id"
+                           placeholder="Users"
+                           formControlName="user"
+                           [(ngModel)]="user"
+                           (change)="handleUserSelect($event)"
+                >
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label">{{item.id}}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <span>{{item.id}}</span>
+                    </ng-template>
+                </ng-select>
+
+                <div *ngIf="isUserSelected;else other_content">
+                    <span>{{name}} {{surname}}, Coins: {{coins}}</span>
                 </div>
+                <ng-template></ng-template>
             </form>
         </div>
         <div class="buttons">
