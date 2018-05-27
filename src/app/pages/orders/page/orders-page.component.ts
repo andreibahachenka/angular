@@ -163,6 +163,7 @@ export class OrdersPageComponent implements OnInit {
 
     public cancel(): void {
         this.inputCreateForm.reset();
+        this.isUserSelected = false;
         this.modalWindowService.closeModalWindow();
     }
 
