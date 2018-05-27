@@ -48,8 +48,8 @@ export const PathConfig = {
 
     //Presents
     getPresentsEndpoint: `${mainPath}/v1/admin/products`,
-    createPresentEndpoint: `${mainPath}/v1/admin/product/create`,
-    updatePresentEndpoint: `${mainPath}/v1/admin/product/update`,
+    createPresentEndpoint: `${mainPath}/v1/admin/products/create`,
+    updatePresentEndpoint: `${mainPath}/v1/admin/products/update`,
 
     //Settings
     getSettingsEndpoint: `${mainPath}/v1/admin/settings`,
