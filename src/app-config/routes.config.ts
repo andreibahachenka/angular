@@ -10,4 +10,5 @@ export const RoutesConfig = {
     adminGames: 'admin/games',
     adminOrders: 'admin/orders',
     adminPresents: 'admin/presents',
+    adminSettings: 'admin/settings',
 };

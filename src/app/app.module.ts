@@ -30,7 +30,8 @@ import {
     SpecialQuizzesPageComponent,
     GamesPageComponent,
     OrdersPageComponent,
-    PresentsPageComponent
+    PresentsPageComponent,
+    SettingsPageComponent
 } from './pages';
 
 //COMPONENTS
@@ -70,6 +71,7 @@ import { SpecialQuizzesPageService } from './pages/special-quizzes/page/services
 import { GamesPageService } from './pages/games/page/services/games-page.service';
 import { OrdersPageService } from './pages/orders/page/services/orders-page.service';
 import { PresentsPageService } from './pages/presents/page/services/presents-page.service';
+import { SettingsPageService } from './pages/settings/page/services/settings-page.service';
 
 //styles
 import '../styles/styles.scss';
@@ -114,7 +116,8 @@ interface StoreType {
       OrdersPageComponent,
       OrdersTableComponent,
       PresentsPageComponent,
-      PresentsTableComponent
+      PresentsTableComponent,
+      SettingsPageComponent
   ],
   /**
    * Import Angular's modules.
@@ -161,6 +164,7 @@ interface StoreType {
       SpecialQuizzesPageService,
       OrdersPageService,
       PresentsPageService,
+      SettingsPageService,
       AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
