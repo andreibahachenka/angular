@@ -28,5 +28,20 @@
 		"title": "Games",
 		"url": "/games",
 		"image": "play_circle_outline"
+	},
+	{
+		"title": "Orders",
+		"url": "/orders",
+		"image": "shopping_basket"
+	},
+	{
+		"title": "Presents",
+		"url": "/presents",
+		"image": "toys"
+	},
+	{
+		"title": "Settings",
+		"url": "/settings",
+		"image": "settings"
 	}
 ]

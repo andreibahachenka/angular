@@ -7,17 +7,17 @@ import { PathConfig } from './../../../../../app-config/path.config';
 const errorMessage = 'Erorr loading data';
 
 @Injectable()
-export class SpecialQuizzesPageService {
+export class PresentsPageService {
     constructor(
         private restApiService: RestApiService,
         private notificationService: NotificationService
     ) {
     }
 
-    public getQuizzes(data?: any): Observable<any> {
+    public getPresents(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.getItems(
-                `${PathConfig.getSpecialQuizzesEndpoint}`, data,
+                `${PathConfig.getPresentsEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);
@@ -29,10 +29,10 @@ export class SpecialQuizzesPageService {
         })
     }
 
-    public setQuiz(data): Observable<any> {
+    public setPresent(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.createSpecialQuizEndpoint}`,
+                `${PathConfig.createPresentEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
                     this.notificationService.error(errorMessage);
@@ -45,10 +45,10 @@ export class SpecialQuizzesPageService {
         })
     }
 
-    public updateQuiz(data): Observable<any> {
+    public updatePresent(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.updateSpecialQuizEndpoint}`,
+                `${PathConfig.updatePresentEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
                     this.notificationService.error(errorMessage);
@@ -60,24 +60,4 @@ export class SpecialQuizzesPageService {
                 });
         })
     }
-
-    public sendToAll(data): Observable<any> {
-        let id = {
-            id: data
-        };
-        return new Observable((observer) => {
-            this.restApiService.postItem(
-                `${PathConfig.sendSpecialQuizEndpoint}`,
-                JSON.stringify(id),
-                (err) => {
-                    this.notificationService.error(errorMessage);
-                    console.log(err);
-                }
-            ).first()
-                .subscribe((res) => {
-                    observer.next(res);
-                });
-        })
-    }
-
 }

@@ -12,7 +12,10 @@ import {
     AdministratorsPageComponent,
     QuizzesPageComponent,
     SpecialQuizzesPageComponent,
-    GamesPageComponent
+    GamesPageComponent,
+    OrdersPageComponent,
+    PresentsPageComponent,
+    SettingsPageComponent
 } from './pages';
 
 export const ROUTES: Routes = [
@@ -33,6 +36,12 @@ export const ROUTES: Routes = [
         { path: RoutesConfig.adminSpecialQuizzes, component: SpecialQuizzesPageComponent, canActivate: [AuthGuard] },
 
         { path: RoutesConfig.adminGames, component: GamesPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminOrders, component: OrdersPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminPresents, component: PresentsPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminSettings, component: SettingsPageComponent, canActivate: [AuthGuard] },
         ]
     },
 

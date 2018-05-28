@@ -1,0 +1,76 @@
+<div class="main-сontainer__content">
+    <button class="create-button" mat-raised-button (click)="createOrder()">{{createOrderMessage}}</button>
+    <orders-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+            (onDelete)="openDelete($event)"
+    ></orders-table-component>
+    <router-outlet></router-outlet>
+</div>
+
+<app-modal-window class="modal-window">
+    <div class="content" #deleteModal>
+        <div class="delete-message">{{deleteMessage}}</div>
+        <div class="buttons">
+            <button color="primary" class="delete-button" mat-raised-button (click)="applyDelete(id)">Yes</button>
+            <button mat-raised-button (click)="cancel()">No</button>
+        </div>
+    </div>
+
+    <div class="content" #createModal>
+        <div class="modal-header modal-orders-width">
+            <span>{{createOrderMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputCreateForm">
+                <ng-select [items]="presentList"
+                           bindLabel="name"
+                           bindValue="id"
+                           placeholder="Presents"
+                           formControlName="present"
+                           [(ngModel)]="present"
+                           >
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label">{{item.name}} (price: {{item.price}}, count: {{item.count}})</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <span>{{item.name}} (price: {{item.price}}, count: {{item.count}})</span>
+                    </ng-template>
+                </ng-select>
+
+                <ng-select [items]="userList"
+                           bindLabel="id"
+                           bindValue="id"
+                           placeholder="Users"
+                           formControlName="user"
+                           [(ngModel)]="user"
+                           (change)="handleUserSelect($event)"
+                >
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label">{{item.id}}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item">
+                        <span>{{item.id}}</span>
+                    </ng-template>
+                </ng-select>
+
+                <div *ngIf="isUserSelected;else other_content">
+                    <span>{{name}} {{surname}}, Coins: {{coins}}</span>
+                </div>
+                <ng-template></ng-template>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</app-modal-window>

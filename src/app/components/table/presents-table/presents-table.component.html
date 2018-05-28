@@ -9,7 +9,7 @@
         [limit]="10"
         [loadingIndicator]="loadingIndicator">
 
-    <ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="40">
+    <ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="10">
         <ng-template let-row="row" ngx-datatable-cell-template>
             <span>{{row.id}}</span>
         </ng-template>
@@ -21,9 +21,11 @@
         </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Topic" [cellClass]="'action-btn-cell'" [width]="100">
+    <ngx-datatable-column name="Photo" [cellClass]="'action-btn-cell'" [width]="100">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{row.brand.name}}</span>
+            <a href="{{row.photo}}" target="_blank">
+                <img src="{{row.photo}}" alt="photo" class="presents-image">
+            </a>
         </ng-template>
     </ngx-datatable-column>
 
@@ -34,12 +36,8 @@
 
     <ngx-datatable-column name="Action" [cellClass]="'action-btn-cell'" [width]="100">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            <button class="button-edit" mat-icon-button (click)="openEdit(row)" title="Edit">
+            <button class="button-edit" mat-icon-button (click)="openEdit(row)">
                 <mat-icon>edit</mat-icon>
-            </button>
-
-            <button *ngIf="specialQuiz" class="button-send" mat-icon-button title="Send to all" (click)="openSendToAll(row)">
-                <mat-icon>send</mat-icon>
             </button>
         </ng-template>
     </ngx-datatable-column>

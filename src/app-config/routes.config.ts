@@ -7,5 +7,8 @@ export const RoutesConfig = {
     adminLotteries: 'admin/lotteries',
     adminQuizzes: 'admin/quizzes',
     adminSpecialQuizzes: 'admin/special-quizzes',
-    adminGames: 'admin/games'
+    adminGames: 'admin/games',
+    adminOrders: 'admin/orders',
+    adminPresents: 'admin/presents',
+    adminSettings: 'admin/settings',
 };

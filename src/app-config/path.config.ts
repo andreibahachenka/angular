@@ -1,41 +1,57 @@
+const mainPath = 'http://jticonnect.pr3.eu:8066';
 export const PathConfig = {
-    mainPath: 'http://jticonnect.pr3.eu:8066/v1/admin',
+    mainPath: `${mainPath}/v1/admin`,
 
     //users
-    authEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/auth',
-    getUsersEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/users',
-    createUserEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/users/create',
-    updateUserEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/users/update',
-    removeUserEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/users/remove',
+    authEndpoint: `${mainPath}/v1/admin/auth`,
+    getUsersEndpoint: `${mainPath}/v1/admin/users`,
+    createUserEndpoint: `${mainPath}/v1/admin/users/create`,
+    updateUserEndpoint: `${mainPath}/v1/admin/users/update`,
+    removeUserEndpoint: `${mainPath}/v1/admin/users/remove`,
 
     //Administrators
-    getAdministratorsEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/',
-    createAdministratorEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/create',
-    updateAdministratorEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/update',
-    removeAdministratorEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/remove',
+    getAdministratorsEndpoint: `${mainPath}/v1/admin/`,
+    createAdministratorEndpoint: `${mainPath}/v1/admin/create`,
+    updateAdministratorEndpoint: `${mainPath}/v1/admin/update`,
+    removeAdministratorEndpoint: `${mainPath}/v1/admin/remove`,
 
     //Lotteries
-    getLotteriesEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/lotteries',
-    createLotteryEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/lotteries/create',
-    updateLotteryEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/lotteries/update',
-    removeLotteryEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/lotteries/remove',
+    getLotteriesEndpoint: `${mainPath}/v1/admin/lotteries`,
+    createLotteryEndpoint: `${mainPath}/v1/admin/lotteries/create`,
+    updateLotteryEndpoint: `${mainPath}/v1/admin/lotteries/update`,
+    removeLotteryEndpoint: `${mainPath}/v1/admin/lotteries/remove`,
 
     //Image converter
-    uploadImageEndpoint:'http://jticonnect.pr3.eu:8066/v1/services/photo/upload',
+    uploadImageEndpoint: `${mainPath}/v1/services/photo/upload`,
 
     //Get cities
-    getCityEndpoint: 'http://jticonnect.pr3.eu:8066/v1/services/cities',
+    getCityEndpoint: `${mainPath}/v1/services/cities`,
 
     //Quizzes
-    getQuizzesEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/quizzes',
-    createQuizEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/quizzes/create',
-    updateQuizEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/quizzes/update',
+    getQuizzesEndpoint: `${mainPath}/v1/admin/quizzes`,
+    createQuizEndpoint: `${mainPath}/v1/admin/quizzes/create`,
+    updateQuizEndpoint: `${mainPath}/v1/admin/quizzes/update`,
 
     //Special quizzes
-    getSpecialQuizzesEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/quizzes/special',
-    createSpecialQuizEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/quizzes/special/create',
-    updateSpecialQuizEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/quizzes/special/update',
+    getSpecialQuizzesEndpoint: `${mainPath}/v1/admin/quizzes/special`,
+    createSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/create`,
+    updateSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/update`,
+    sendSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/send`,
 
     //Games
-    getGamesEndpoint: 'http://jticonnect.pr3.eu:8066/v1/admin/games',
+    getGamesEndpoint: `${mainPath}/v1/admin/games`,
+
+    //Orders
+    getOrdersEndpoint: `${mainPath}/v1/admin/orders`,
+    createOrderEndpoint: `${mainPath}/v1/admin/orders/create`,
+    removeOrderEndpoint: `${mainPath}/v1/admin/orders/remove`,
+
+    //Presents
+    getPresentsEndpoint: `${mainPath}/v1/admin/products`,
+    createPresentEndpoint: `${mainPath}/v1/admin/products/create`,
+    updatePresentEndpoint: `${mainPath}/v1/admin/products/update`,
+
+    //Settings
+    getSettingsEndpoint: `${mainPath}/v1/admin/settings`,
+    updateSettingEndpoint: `${mainPath}/v1/admin/settings/update`
 };

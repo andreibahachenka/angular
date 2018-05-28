@@ -1,0 +1,31 @@
+<div class="main-сontainer__content">
+    <h1>Settings</h1>
+
+    <form [formGroup]="inputSettingForm" class="filter-form">
+        <mat-form-field>
+            <mat-select [(ngModel)]="topic" placeholder="Topics" formControlName="topic">
+                <mat-option *ngFor="let topic of objectKeys(topics)" [value]="topic">
+                    {{ topics[topic] }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br>
+        <mat-form-field>
+            <input matInput placeholder="Win coins" [(ngModel)]="winCoins" formControlName="winCoins"/>
+        </mat-form-field><br>
+        <mat-form-field>
+            <input matInput placeholder="Lose coins" [(ngModel)]="loseCoins" formControlName="loseCoins"/>
+        </mat-form-field><br>
+        <mat-form-field>
+            <input matInput placeholder="Special coins" [(ngModel)]="specialCoins" formControlName="specialCoins"/>
+        </mat-form-field><br>
+        <mat-form-field>
+            <input matInput placeholder="Draw coins" [(ngModel)]="drawCoins" formControlName="drawCoins"/>
+        </mat-form-field>
+    </form>
+
+    <button class="filter-button" color="primary"
+            mat-raised-button
+            (click)="saveSettings(inputSettingForm.value)">
+        Save
+    </button>
+</div>

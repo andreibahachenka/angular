@@ -4,12 +4,21 @@
             [rows]="modifiedTableData"
             [columns]="columns"
             (onEdit)="openEdit($event)"
+            (onSendToAll)="openSend($event)"
             [specialQuiz]="specialQuiz"
     ></quizzes-table-component>
     <router-outlet></router-outlet>
 </div>
 
 <app-modal-window class="modal-window">
+    <div class="content" #sendToAll>
+        <div class="delete-message">{{sendToAllMessage}}</div>
+        <div class="buttons">
+            <button color="primary" class="delete-button" mat-raised-button (click)="applySend(id)">Yes</button>
+            <button mat-raised-button (click)="cancel()">No</button>
+        </div>
+    </div>
+
     <div class="content" #editModal>
         <div class="modal-header">
             <span>{{editQuizMessage}}</span>
