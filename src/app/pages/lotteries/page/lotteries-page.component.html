@@ -38,7 +38,7 @@
                      class="error-message">Name can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description" [maxlength]="50"/>
+                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description" [maxlength]="1000"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputEditForm.controls.description.invalid
@@ -62,7 +62,7 @@
                      class="error-message">Cost can't be blank
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize" [maxlength]="20"/>
+                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize" [maxlength]="50"/>
                 </mat-form-field>
                 <br>
                 <div *ngIf="inputEditForm.controls.prize.invalid
