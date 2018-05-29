@@ -62,7 +62,7 @@
                 <img *ngIf="backgroundImage" class="upload-text" src={{backgroundImage}} alt="preview-image">
 
                 <!--Questions-->
-                <fieldset formGroupName="questions">
+                <fieldset formGroupName="questions" class="fieldset">
                     <mat-form-field>
                         <input matInput [(ngModel)]="text" placeholder="Question 1" formControlName="text" readonly/>
                     </mat-form-field>
@@ -303,7 +303,7 @@
                 <img *ngIf="isBackgroundImageUploaded" class="upload-text" src={{backgroundImage}} alt="preview-image">
 
                 <!--Questions-->
-                <fieldset *ngFor="let questionElement of questionArray; let i = index" formGroupName={{questionElement}}>
+                <fieldset *ngFor="let questionElement of questionArray; let i = index" formGroupName={{questionElement}} class="fieldset">
                     <mat-form-field>
                         <input matInput placeholder="Question {{i+1}}" formControlName="text"/>
                     </mat-form-field>
