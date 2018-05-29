@@ -40,6 +40,8 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public id: string = '';
     public topic: any;
     public questions: any;
+    public backgroundImage: string = '';
+    public isBackgroundImageUploaded: boolean = false;
 
     public text: string = '';
     public text1: string = '';
@@ -120,6 +122,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
         topic: new FormControl(this.topic, Validators.required),
         status: new FormControl(this.status, Validators.required),
         id: new FormControl(this.id),
+        backgroundImage: new FormControl(this.backgroundImage),
         questions: new FormGroup({
             number: new FormControl(1),
             text: new FormControl(this.text),
@@ -176,6 +179,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
         name: new FormControl('', Validators.required),
         topic: new FormControl('', Validators.required),
         status: new FormControl('', Validators.required),
+        backgroundImage: new FormControl(''),
         questions: new FormGroup({
             number: new FormControl(1),
             text: new FormControl(''),
@@ -265,15 +269,18 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public createQuiz(): void {
         this.inputCreateForm.reset();
         this.questionArray.map((item, i) => this.isImageUploaded[i] = false);
+        this.isBackgroundImageUploaded = false;
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }
 
     public openEdit(item: any): void {
         item.questions.map((item, i) => this.isImageUploaded[i] = true);
+        this.isBackgroundImageUploaded = true;
         this.name = item.name;
         this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
         this.id = item.id;
         this.topic = this.utilsService.getKeyByValue(this.topics, item.brand.name);
+        this.backgroundImage = item.image;
 
         this.image1 = item.questions[0].image;
         this.image2 = item.questions[1].image;
@@ -339,6 +346,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
                 id: data.topic,
                 name: this.topics[data.topic]
             },
+            image: this.backgroundImage,
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
         this.specialQuizzesPageService.updateQuiz(quizForm)
@@ -370,6 +378,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
                 id: data.topic,
                 name: this.topics[data.topic]
             },
+            image: this.backgroundImage,
             questions: [data.questions, data.questions1, data.questions2, data.questions3, data.questions4]
         };
 
@@ -401,6 +410,19 @@ export class SpecialQuizzesPageComponent implements OnInit{
                 console.log(err);
                 this.isImageUploaded[index] = false;
             })
+    }
+
+    public handleFileInputForBackground(files: FileList, index): void {
+        let photo = files.item(0);
+        this.fileUploadService.uploadFile(photo)
+            .subscribe((result: any) => {
+                    this.backgroundImage = result.url;
+                    this.isBackgroundImageUploaded = true;
+                },
+                (err) => {
+                    console.log(err);
+                    this.isBackgroundImageUploaded = false;
+                })
     }
 
     public openSend(item) {

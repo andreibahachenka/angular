@@ -54,6 +54,13 @@
                     </mat-select>
                 </mat-form-field>
 
+                <br>
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="Background Image" class="upload-btn__input" formControlName="backgroundImage" (change)="handleFileInputForBackground($event.target.files, 0)">
+                </button>
+                <img *ngIf="backgroundImage" class="upload-text" src={{backgroundImage}} alt="preview-image">
+
                 <!--Questions-->
                 <fieldset formGroupName="questions">
                     <mat-form-field>
@@ -287,7 +294,13 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+
                 <br>
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="Background Image" class="upload-btn__input" formControlName="backgroundImage" (change)="handleFileInputForBackground($event.target.files, 0)">
+                </button>
+                <img *ngIf="isBackgroundImageUploaded" class="upload-text" src={{backgroundImage}} alt="preview-image">
 
                 <!--Questions-->
                 <fieldset *ngFor="let questionElement of questionArray; let i = index" formGroupName={{questionElement}}>
