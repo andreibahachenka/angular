@@ -43,5 +43,10 @@
 		"title": "Settings",
 		"url": "/settings",
 		"image": "settings"
-	}
+	},
+    {
+      "title": "Chats",
+      "url": "/chats",
+      "image": "chats"
+    }
 ]
