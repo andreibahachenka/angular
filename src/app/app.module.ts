@@ -31,7 +31,8 @@ import {
     GamesPageComponent,
     OrdersPageComponent,
     PresentsPageComponent,
-    SettingsPageComponent
+    SettingsPageComponent,
+    ChatsPageComponent
 } from './pages';
 
 //COMPONENTS
@@ -72,6 +73,7 @@ import { GamesPageService } from './pages/games/page/services/games-page.service
 import { OrdersPageService } from './pages/orders/page/services/orders-page.service';
 import { PresentsPageService } from './pages/presents/page/services/presents-page.service';
 import { SettingsPageService } from './pages/settings/page/services/settings-page.service';
+import { ChatsPageService } from './pages/chats/page/services/chats-page.service';
 
 //styles
 import '../styles/styles.scss';
@@ -117,7 +119,8 @@ interface StoreType {
       OrdersTableComponent,
       PresentsPageComponent,
       PresentsTableComponent,
-      SettingsPageComponent
+      SettingsPageComponent,
+      ChatsPageComponent
   ],
   /**
    * Import Angular's modules.
@@ -165,6 +168,7 @@ interface StoreType {
       OrdersPageService,
       PresentsPageService,
       SettingsPageService,
+      ChatsPageService,
       AuthGuard,
       environment.ENV_PROVIDERS,
       APP_PROVIDERS
