@@ -46,25 +46,6 @@ export class ChatsPageService {
         })
     }
 
-
-    public getUsers() : Observable<string[]> {
-        return this._http.get('/v1/users/all', { headers: this.getHeaders() })
-            .map(res => res.json())
-            .catch();
-    }
-
-    public getSenderUsers(request: any) : Observable<Response> {
-        return this._http.post('admin/senders/get', request)
-            .map(res => res.json())
-            .catch();
-    }
-
-    public sendAllUsers(request: any) : Observable<Response> {
-        return this._http.post('admin/senders/sendAll', request)
-            .map(res => res.json())
-            .catch();
-    }
-
     public getChatById(request: any) : Observable<Response> {
         return this._http.get('/v1/chats/' + request.chatId + '?offset=' + request.offset + '&limit=' + request.limit, {headers: this.getHeaders()}).map(res => res.json());
     }
