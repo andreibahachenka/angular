@@ -4,11 +4,19 @@
             [rows]="modifiedTableData"
             [columns]="columns"
             (onEdit)="openEdit($event)"
+            (onDelete)="openDelete($event)"
     ></presents-table-component>
     <router-outlet></router-outlet>
 </div>
 
 <app-modal-window class="modal-window">
+    <div class="content" #deleteModal>
+        <div class="delete-message">{{deleteMessage}}</div>
+        <div class="buttons">
+            <button color="primary" class="delete-button" mat-raised-button (click)="applyDelete(id)">Yes</button>
+            <button mat-raised-button (click)="cancel()">No</button>
+        </div>
+    </div>
 
     <div class="content" #editModal>
         <div class="modal-header">

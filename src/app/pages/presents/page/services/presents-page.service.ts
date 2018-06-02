@@ -60,4 +60,23 @@ export class PresentsPageService {
                 });
         })
     }
+
+    public deletePresent(data): Observable<any> {
+        let dataToDelete = {
+            id: data
+        };
+        return new Observable((observer) => {
+            this.restApiService.deleteItem(
+                `${PathConfig.removePresentEndpoint}`,
+                JSON.stringify(dataToDelete),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
 }

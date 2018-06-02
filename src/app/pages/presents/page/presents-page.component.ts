@@ -32,6 +32,7 @@ export class PresentsPageComponent implements OnInit{
     public editPresentMessage: string = 'Edit Present';
     public createPresentMessage: string = 'Create Present';
     public upload: string = 'Upload image';
+    public deleteMessage: string = 'Are you sure you want to delete this present?';
 
     public name: string = '';
     public status: any;
@@ -46,6 +47,7 @@ export class PresentsPageComponent implements OnInit{
 
     @ViewChild('createModal') public createModal: ElementRef;
     @ViewChild('editModal') public editModal: ElementRef;
+    @ViewChild('deleteModal') public deleteModal: ElementRef;
 
     public statuses = {
         1: 'Active',
@@ -174,6 +176,22 @@ export class PresentsPageComponent implements OnInit{
             description: data.description
         };
         this.presentsPageService.setPresent(presentForm)
+            .subscribe((res) => {
+                    this.getPresents();
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
+    }
+
+    public openDelete(item: any): void {
+        this.id = item.id;
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
+    }
+
+    public applyDelete(id): void {
+        this.presentsPageService.deletePresent(id)
             .subscribe((res) => {
                     this.getPresents();
                     this.modalWindowService.closeModalWindow();

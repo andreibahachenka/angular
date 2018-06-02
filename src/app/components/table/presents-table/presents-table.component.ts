@@ -9,6 +9,7 @@ export class PresentsTableComponent {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
     @Output() public onEdit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onDelete: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
     ){
@@ -16,5 +17,9 @@ export class PresentsTableComponent {
 
     public openEdit(item: any): void {
         this.onEdit.emit(item);
+    }
+
+    public openDelete(item: any): void {
+        this.onDelete.emit(item);
     }
 }
