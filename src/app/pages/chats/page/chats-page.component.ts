@@ -52,7 +52,8 @@ export class ChatsPageComponent implements OnInit {
     timeCorrect: number;
     defaultDate: any;
 
-    private socketUrl = 'https://push.scopeapp.co';
+    // private socketUrl = 'http://localhost:8041';
+    private socketUrl = 'http://jticonnect.pr3.eu:8041';
     socket: any = null;
 
     currentChat: any = null;
@@ -118,7 +119,7 @@ export class ChatsPageComponent implements OnInit {
         script.onload = () => {
             self.socket = io.connect(self.socketUrl, {
                 secure: true,
-                query: 'token=' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInBob25lIjoiMzc1MDAwMDAwMDAwIiwiaWF0IjoxNTEwMzg0NjY2fQ.D9jtUj0il43eDqDtbMT8AhbVeCBjJP2oeC8i3tuWOEA',
+                query: 'token=' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTUyMzYyNzQ2MH0.yJg0i_SnnfeRNupVPD620x8Yy3nVSXZx_j_RiswdNOI',
                 transports: ['polling', 'websocket', 'flashsocket']
             });
             self.socket.heartbeatTimeout = 10000;
@@ -128,17 +129,15 @@ export class ChatsPageComponent implements OnInit {
                 console.log('Socket connected');
 
                 // self.socket.emit('connectchat', self.userId, self.currentChat.id);
+
+                self.socket.on('sentmessage', (data) => {
+
+                    // let message = JSON.parse(data);
+                    self.getMessageFromSocket(data);
+                    console.log('New message: ', data);
+
+                });
             });
-
-            self.socket.on('message', (data) => {
-
-                let message = JSON.parse(data);
-                // self.getMessageFromSocket(message.data);
-                console.log('New message: ', message);
-
-            });
-
-
         };
     }
 
@@ -153,7 +152,7 @@ export class ChatsPageComponent implements OnInit {
 
         this.chatList = this.getChats();
 
-        // this.initSockets();
+        this.initSockets();
 
     }
 
@@ -260,16 +259,18 @@ export class ChatsPageComponent implements OnInit {
 
                 response.forEach((chat) => {
                     if (chat['last_message']) {
-                        chat['last_message_ts'] = chat['last_message_date'];
+                        chat['last_message_ts'] = chat['last_message_date'] ? new Date(chat['last_message_date']).getTime() : 0;
                         chat['last_message_date'] = new Date(chat['last_message_date']);
                         chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
                         chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
                         chat['last_message'] = chat['last_message'] ? JSON.parse(chat['last_message']).text : '';
                         // chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']})`;
                     } else {
-                        chat['last_message_date'] = '';
+                        chat['last_message_date'] = new Date(chat['last_message_date']);
+                        chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
+                        chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
                         chat['last_message'] = '';
-                        chat['last_message_ts'] = 0;
+                        chat['last_message_ts'] = chat['last_message_date'] ? new Date(chat['last_message_date']).getTime() : 0;
                     }
 
                     chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']})`;
@@ -336,58 +337,42 @@ export class ChatsPageComponent implements OnInit {
             this.loadingMessages = false;
         });
     }
-    //
-    // public getMessageFromSocket(message) {
-    //
-    //     console.log(message);
-    //
-    //     message['created_at'] = new Date(message['ts']);
-    //     message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-    //     message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
-    //
-    //     message['text'] = message['scope'] && message['scope']['text'] ? message['scope']['text'] : 'Error.';
-    //
-    //     /* Add message to message list */
-    //
-    //     if (this.currentChat && this.currentChat.conversationId === message.conversationId) {
-    //         this.messageList.push(message);
-    //         this.scrollToBottom();
-    //     }
-    //
-    //
-    //     /* Update and sort conversations */
-    //     let chatIndex = 0;
-    //     this.chatList.forEach((chat) => {
-    //         if (chat.conversationId === message.conversationId) {
-    //             chat['last_message_ts'] = message['ts'];
-    //             chat['last_message_date'] = message['created_at'];
-    //             chat['last_message'] = message['text'];
-    //             if (this.currentChat.conversationId !== message.conversationId) {
-    //                 chat['newMessages'] = true;
-    //             }
-    //             this.conversationsSort();
-    //         }
-    //         chatIndex++;
-    //     });
-    // }
-    //
-    // public seenNewMessages() {
-    //
-    //     let request = {
-    //         id: this.lastMessageId,
-    //     };
-    //
-    //     this._chatServices.seenNewMessages(request).subscribe((response) => {
-    //
-    //         if (response['status'] === 1) {
-    //             this.messageList.forEach((message) => {
-    //                 message['status'] = 1;
-    //             });
-    //         }
-    //
-    //     });
-    // }
-    //
+
+    public getMessageFromSocket(chatId) {
+
+        console.log(chatId);
+
+        // message['created_at'] = new Date(message['ts']);
+        // message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
+        // message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
+        //
+        // message['text'] = message['scope'] && message['scope']['text'] ? message['scope']['text'] : 'Error.';
+
+        /* Add message to message list */
+
+        // if (this.currentChat && this.currentChat.conversationId === message.conversationId) {
+        //     this.messageList.push(message);
+        //     this.scrollToBottom();
+        // }
+
+        /* Update and sort conversations */
+        let chatIndex = 0;
+        this.chatList.forEach((chat) => {
+            if (chat.id === chatId) {
+                chat['last_message_ts'] = Date.now();
+                // chat['last_message_date'] = message['created_at'];
+                // chat['last_message'] = message['text'];
+                if (this.currentChat.id !== chatId) {
+                    chat['newMessages'] = true;
+                } else {
+                    this.getMessages(chatId);
+                }
+                this.conversationsSort();
+            }
+            chatIndex++;
+        });
+    }
+
     public sendMessage() {
 
         if (this.messageForm.invalid) {
