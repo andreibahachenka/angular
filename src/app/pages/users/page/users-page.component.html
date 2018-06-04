@@ -85,11 +85,11 @@
                      class="error-message">Incorrect phone
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Shop ID" [(ngModel)]="shop_id" formControlName="shop_id" [maxlength]="25"/>
+                    <input matInput placeholder="Shop ID" [(ngModel)]="shop_id" formControlName="shop_id" [maxlength]="255"/>
                 </mat-form-field><br>
                 <div *ngIf="inputEditForm.controls.shop_id.invalid
                  && inputEditForm.controls.shop_id.touched"
-                     class="error-message">Shop ID must be a number
+                     class="error-message">Shop ID can't be blank
                 </div>
                 <ng-select [items]="cities"
                            bindLabel="name"
@@ -161,7 +161,7 @@
                      class="error-message">Incorrect phone
                 </div>
                 <mat-form-field>
-                    <input matInput placeholder="Shop ID" formControlName="shop_id" [maxlength]="25"/>
+                    <input matInput placeholder="Shop ID" formControlName="shop_id" [maxlength]="255"/>
                 </mat-form-field><br>
                 <div *ngIf="inputCreateForm.controls.shop_id.invalid
                  && inputCreateForm.controls.shop_id.touched"
