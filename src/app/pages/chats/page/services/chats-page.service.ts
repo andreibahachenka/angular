@@ -15,10 +15,10 @@ export class ChatsPageService {
     ) {
     }
 
-    public getSettings(data?: any): Observable<any> {
+    public getChats(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.getItems(
-                `${PathConfig.getSettingsEndpoint}`, data,
+                `${PathConfig.getChatsEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);
@@ -30,10 +30,25 @@ export class ChatsPageService {
         })
     }
 
-    public updateSettings(data): Observable<any> {
+    public getMessages(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.getItems(
+                `${PathConfig.getMessagesEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public sendMessage(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.updateSettingEndpoint}`,
+                `${PathConfig.sendMessageEndpoint}`,
                 JSON.stringify(data),
                 (err) => {
                     this.notificationService.error(errorMessage);
@@ -46,27 +61,22 @@ export class ChatsPageService {
         })
     }
 
-    public getChatById(request: any) : Observable<Response> {
-        return this._http.get('/v1/chats/' + request.chatId + '?offset=' + request.offset + '&limit=' + request.limit, {headers: this.getHeaders()}).map(res => res.json());
-    }
-
-    public getChats(request: any) {
-        return this._http.post('/conversations/all', {}, {headers: this.getHeaders()}).map(res => res.json());
-    }
-
-    public getMessages(request: any) {
-        return this._http.post('/messages', request, {headers: this.getHeaders()}).map(res => res.json());
-    }
-
-    public sendMessage(request: any) : Observable<Response> {
-        return this._http.post('/messages/send', request, {headers: this.getHeaders()}).map(res => res.json());
-    }
-
-    public getNewMessages(request: any) : Observable<Response> {
-        // return this._http.get('/v1/chats/'+ request.chatId + '/new?id=' + request.id, {headers: this.getHeaders()}).map(res => res.json());
-    }
-
-    public seenNewMessages(request: any) : Observable<Response> {
-        // return this._http.post('/v1/messages/seen/all', request, {headers: this.getHeaders()}).map(res => res.json());
-    }
+    // public getChatById(request: any) : Observable<Response> {
+    //     return this._http.get('/v1/chats/' + request.chatId + '?offset=' + request.offset + '&limit=' + request.limit, {headers: this.getHeaders()}).map(res => res.json());
+    // }
+    // public getMessages(request: any) {
+    //     return this._http.post('/messages', request, {headers: this.getHeaders()}).map(res => res.json());
+    // }
+    //
+    // public sendMessage(request: any) : Observable<Response> {
+    //     return this._http.post('/messages/send', request, {headers: this.getHeaders()}).map(res => res.json());
+    // }
+    //
+    // public getNewMessages(request: any) : Observable<Response> {
+    //     // return this._http.get('/v1/chats/'+ request.chatId + '/new?id=' + request.id, {headers: this.getHeaders()}).map(res => res.json());
+    // }
+    //
+    // public seenNewMessages(request: any) : Observable<Response> {
+    //     // return this._http.post('/v1/messages/seen/all', request, {headers: this.getHeaders()}).map(res => res.json());
+    // }
 }

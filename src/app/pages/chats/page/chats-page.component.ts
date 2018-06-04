@@ -52,7 +52,6 @@ export class ChatsPageComponent implements OnInit {
     timeCorrect: number;
     defaultDate: any;
 
-    //private socketUrl = 'http://cobooms.app:8130';
     private socketUrl = 'https://push.scopeapp.co';
     socket: any = null;
 
@@ -65,10 +64,10 @@ export class ChatsPageComponent implements OnInit {
     myPhotoUrl = localStorage.getItem('photo');
     userId: number = 1;
 
-    private chatLimit = 30;
+    private chatLimit = 1000;
     private chatOffset = 0;
 
-    private messageLimit = 10;
+    private messageLimit = 1000;
     private messageOffset = 0;
     public user_id = null;
 
@@ -134,7 +133,7 @@ export class ChatsPageComponent implements OnInit {
             self.socket.on('message', (data) => {
 
                 let message = JSON.parse(data);
-                self.getMessageFromSocket(message.data);
+                // self.getMessageFromSocket(message.data);
                 console.log('New message: ', message);
 
             });
@@ -154,93 +153,93 @@ export class ChatsPageComponent implements OnInit {
 
         this.chatList = this.getChats();
 
-        this.initSockets();
+        // this.initSockets();
 
     }
 
-    public getChatByUser(userId) {
-
-        if (userId === this.userId) {
-            return false;
-        }
-
-        let chatId;
-        if (this.userId < parseInt(userId)) {
-            chatId = this.userId + '-' + userId;
-        } else {
-            chatId = userId + '-' + this.userId;
-        }
-
-        console.log(chatId);
-
-        let request = {
-            offset: this.messageOffset,
-            limit: this.messageLimit,
-            chatId: chatId
-        };
-
-        this.loadingMessages = true;
-
-        this._chatServices.getChatById(request).subscribe((response) => {
-
-            if (response['status'] === 1) {
-
-                this.messageList = [];
-
-                response['data'].messages.forEach((message) => {
-
-                    message['created_at'] = new Date(message['created_at'].replace(/-/g, '/'));
-                    message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-                    message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
-
-
-                    this.messageList.push(message);
-
-                    this.messageOffset++;
-                });
-
-                this.scrollToBottom();
-
-                if (this.messageList.length > 0) {
-                    this.lastMessageId = this.messageList[this.messageList.length - 1].id;
-                }
-
-                if (response['data'].messages.length < this.messageLimit) {
-                    this.messageLoadMoreVisible = false;
-                }
-
-                let exist = false;
-                this.chatList.forEach(chat => {
-                    console.log(chat);
-                    if (chat.id == chatId) {
-                        this.currentChat = chat;
-                        exist = true;
-                    }
-                });
-
-                if (!exist) {
-                    let chat = response['data'].chat;
-                    if (chat['last_message_date'] != null) {
-                        chat['last_message_date'] = new Date(chat['last_message_date'].replace(/-/g, '/'));
-                        chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
-                        chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
-                    }
-
-                    this.chatList.unshift(chat);
-
-                    this.currentChat = chat;
-                    this.chatOffset++;
-                }
-
-                this.initSockets();
-            }
-
-            this.loadingMessages = false;
-
-            console.log(this.currentChat);
-        });
-        return true;
-    }
+    // public getChatByUser(userId) {
+    //
+    //     if (userId === this.userId) {
+    //         return false;
+    //     }
+    //
+    //     let chatId;
+    //     if (this.userId < parseInt(userId)) {
+    //         chatId = this.userId + '-' + userId;
+    //     } else {
+    //         chatId = userId + '-' + this.userId;
+    //     }
+    //
+    //     console.log(chatId);
+    //
+    //     let request = {
+    //         offset: this.messageOffset,
+    //         limit: this.messageLimit,
+    //         chatId: chatId
+    //     };
+    //
+    //     this.loadingMessages = true;
+    //
+    //     this._chatServices.getChatById(request).subscribe((response) => {
+    //
+    //         if (response['status'] === 1) {
+    //
+    //             this.messageList = [];
+    //
+    //             response['data'].messages.forEach((message) => {
+    //
+    //                 message['created_at'] = new Date(message['created_at'].replace(/-/g, '/'));
+    //                 message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
+    //                 message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
+    //
+    //
+    //                 this.messageList.push(message);
+    //
+    //                 this.messageOffset++;
+    //             });
+    //
+    //             this.scrollToBottom();
+    //
+    //             if (this.messageList.length > 0) {
+    //                 this.lastMessageId = this.messageList[this.messageList.length - 1].id;
+    //             }
+    //
+    //             if (response['data'].messages.length < this.messageLimit) {
+    //                 this.messageLoadMoreVisible = false;
+    //             }
+    //
+    //             let exist = false;
+    //             this.chatList.forEach(chat => {
+    //                 console.log(chat);
+    //                 if (chat.id == chatId) {
+    //                     this.currentChat = chat;
+    //                     exist = true;
+    //                 }
+    //             });
+    //
+    //             if (!exist) {
+    //                 let chat = response['data'].chat;
+    //                 if (chat['last_message_date'] != null) {
+    //                     chat['last_message_date'] = new Date(chat['last_message_date'].replace(/-/g, '/'));
+    //                     chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
+    //                     chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
+    //                 }
+    //
+    //                 this.chatList.unshift(chat);
+    //
+    //                 this.currentChat = chat;
+    //                 this.chatOffset++;
+    //             }
+    //
+    //             this.initSockets();
+    //         }
+    //
+    //         this.loadingMessages = false;
+    //
+    //         console.log(this.currentChat);
+    //     });
+    //     return true;
+    // }
 
     public getChats(inc = false) {
 
@@ -260,18 +259,20 @@ export class ChatsPageComponent implements OnInit {
                 }
 
                 response.forEach((chat) => {
-                    if (chat['lastMessage']) {
-                        chat['last_message_ts'] = chat['lastMessage']['ts'];
-                        chat['last_message_date'] = new Date(chat['lastMessage']['ts']);
+                    if (chat['last_message']) {
+                        chat['last_message_ts'] = chat['last_message_date'];
+                        chat['last_message_date'] = new Date(chat['last_message_date']);
                         chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
                         chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
-                        chat['last_message'] = chat.lastMessage.scope.text ? chat.lastMessage.scope.text : '';
+                        chat['last_message'] = chat['last_message'] ? JSON.parse(chat['last_message']).text : '';
+                        // chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']})`;
                     } else {
                         chat['last_message_date'] = '';
                         chat['last_message'] = '';
                         chat['last_message_ts'] = 0;
                     }
 
+                    chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']})`;
                     chat['newMessages'] = false;
 
                     this.chatList.push(chat);
@@ -295,10 +296,10 @@ export class ChatsPageComponent implements OnInit {
         });
     }
 
-    public getMessages(conversationId) {
+    public getMessages(chatId) {
 
         this.chatList.forEach((chat) => {
-            if (chat.conversationId === conversationId) {
+            if (chat.id === chatId) {
                 chat['newMessages'] = false;
                 this.currentChat = chat;
             }
@@ -307,22 +308,24 @@ export class ChatsPageComponent implements OnInit {
         this.loadingMessages = true;
 
         let request = {
-            conversationId: conversationId
+            chat_id: chatId
         };
 
         this._chatServices.getMessages(request).subscribe((response) => {
 
-            if (response['status'] === 'ok') {
+            if (response['messages']) {
 
                 this.messageList = [];
-                response['data']['data'].reverse();
+                response['messages'].reverse();
 
-                response['data']['data'].forEach((message) => {
-                    message['created_at'] = new Date(message['ts']);
+                response['messages'].forEach((message) => {
+                    message['created_at'] = new Date(message['created_at']);
                     message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
                     message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
 
-                    message['text'] = message['scope'] && message['scope']['text'] ? message['scope']['text'] : 'Error.';
+                    message['text'] = message['message'] ? message['message']['text'] : 'Error.';
+
+                    // console.log(message);
 
                     this.messageList.push(message);
 
@@ -333,89 +336,94 @@ export class ChatsPageComponent implements OnInit {
             this.loadingMessages = false;
         });
     }
-
-    public getMessageFromSocket(message) {
-
-        console.log(message);
-
-        message['created_at'] = new Date(message['ts']);
-        message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-        message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
-
-        message['text'] = message['scope'] && message['scope']['text'] ? message['scope']['text'] : 'Error.';
-
-        /* Add message to message list */
-
-        if (this.currentChat && this.currentChat.conversationId === message.conversationId) {
-            this.messageList.push(message);
-            this.scrollToBottom();
-        }
-
-
-        /* Update and sort conversations */
-        let chatIndex = 0;
-        this.chatList.forEach((chat) => {
-            if (chat.conversationId === message.conversationId) {
-                chat['last_message_ts'] = message['ts'];
-                chat['last_message_date'] = message['created_at'];
-                chat['last_message'] = message['text'];
-                if (this.currentChat.conversationId !== message.conversationId) {
-                    chat['newMessages'] = true;
-                }
-                this.conversationsSort();
-            }
-            chatIndex++;
-        });
-    }
-
-    public seenNewMessages() {
-
-        let request = {
-            id: this.lastMessageId,
-        };
-
-        this._chatServices.seenNewMessages(request).subscribe((response) => {
-
-            if (response['status'] === 1) {
-                this.messageList.forEach((message) => {
-                    message['status'] = 1;
-                });
-            }
-
-        });
-    }
-
+    //
+    // public getMessageFromSocket(message) {
+    //
+    //     console.log(message);
+    //
+    //     message['created_at'] = new Date(message['ts']);
+    //     message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
+    //     message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
+    //
+    //     message['text'] = message['scope'] && message['scope']['text'] ? message['scope']['text'] : 'Error.';
+    //
+    //     /* Add message to message list */
+    //
+    //     if (this.currentChat && this.currentChat.conversationId === message.conversationId) {
+    //         this.messageList.push(message);
+    //         this.scrollToBottom();
+    //     }
+    //
+    //
+    //     /* Update and sort conversations */
+    //     let chatIndex = 0;
+    //     this.chatList.forEach((chat) => {
+    //         if (chat.conversationId === message.conversationId) {
+    //             chat['last_message_ts'] = message['ts'];
+    //             chat['last_message_date'] = message['created_at'];
+    //             chat['last_message'] = message['text'];
+    //             if (this.currentChat.conversationId !== message.conversationId) {
+    //                 chat['newMessages'] = true;
+    //             }
+    //             this.conversationsSort();
+    //         }
+    //         chatIndex++;
+    //     });
+    // }
+    //
+    // public seenNewMessages() {
+    //
+    //     let request = {
+    //         id: this.lastMessageId,
+    //     };
+    //
+    //     this._chatServices.seenNewMessages(request).subscribe((response) => {
+    //
+    //         if (response['status'] === 1) {
+    //             this.messageList.forEach((message) => {
+    //                 message['status'] = 1;
+    //             });
+    //         }
+    //
+    //     });
+    // }
+    //
     public sendMessage() {
 
         if (this.messageForm.invalid) {
             return false;
         }
 
-        let request = {
-            conversationId: this.currentChat.conversationId,
-            text: this.messageForm.get('message').value,
-        };
+        const request =  {
+                message: {
+                    text: this.messageForm.get('message').value,
+                    image: null,
+                    link: '',
+                    bottom_text: '',
+                    brand_id: 0
+                },
+                type: 4,
+                user_id: this.currentChat.companion.id
+            };
 
         this.loadingMessages = true;
 
         this._chatServices.sendMessage(request).subscribe((response) => {
 
-            // if (response['status'] == 'ok') {
+            let message = response;
 
-            let message = response['data'];
-
-            message['created_at'] = new Date(message['ts']);
+            message['created_at'] = new Date(message['created_at']);
             message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
             message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
 
-            message['text'] = message['scope'] && message['scope']['text'] ? message['scope']['text'] : 'Error.';
+            message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
             this.messageList.push(message);
 
             let chatIndex = 0;
             this.chatList.forEach((chat) => {
-                if (chat.conversationId === this.currentChat.conversationId) {
-                    chat['last_message_ts'] = message['ts'];
+                if (chat.id === this.currentChat.id) {
+                    chat['last_message_ts'] = message['created_at'];
                     chat['last_message_date'] = message['created_at'];
                     chat['last_message'] = this.messageForm.get('message').value;
                     // chat['count_unread'] = 0;
@@ -428,7 +436,6 @@ export class ChatsPageComponent implements OnInit {
 
             this.messageForm.get('message').setValue('');
 
-            // }
             this.loadingMessages = false;
 
             this.scrollToBottom();
@@ -437,35 +444,19 @@ export class ChatsPageComponent implements OnInit {
         return true;
     }
 
-    private generateUUID() {
-        let d = new Date().getTime();
-
-        if (window.performance && typeof window.performance.now === 'function') {
-            d += performance.now();
-        }
-
-        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            const r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
-
-        return uuid;
-    };
-
     public mouseEnter() {
         let body = document.getElementsByTagName('body')[0];
-        body.classList.add("chat-overflow");
+        body.classList.add('chat-overflow');
     }
 
     public mouseLeave() {
         let body = document.getElementsByTagName('body')[0];
-        body.classList.remove("chat-overflow");
+        body.classList.remove('chat-overflow');
     }
 
     public scrollToBottom() {
-        setTimeout(function () {
-            $("#bottom-area")[0].scrollIntoView(false);
+        setTimeout(() => {
+            $('#bottom-area')[0].scrollIntoView(false);
         });
     }
 
