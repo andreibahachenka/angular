@@ -1,4 +1,5 @@
-const mainPath = 'http://jticonnect.pr3.eu:8066';
+const mainPath = 'http://localhost:8066';
+// const mainPath = 'http://jticonnect.pr3.eu:8066';
 export const PathConfig = {
     mainPath: `${mainPath}/v1/admin`,
 
@@ -54,5 +55,10 @@ export const PathConfig = {
 
     //Settings
     getSettingsEndpoint: `${mainPath}/v1/admin/settings`,
-    updateSettingEndpoint: `${mainPath}/v1/admin/settings/update`
+    updateSettingEndpoint: `${mainPath}/v1/admin/settings/update`,
+
+    //Chat
+    getChatsEndpoint: `${mainPath}/v1/admin/chats`,
+    getMessagesEndpoint: `${mainPath}/v1/admin/messages`,
+    sendMessageEndpoint: `${mainPath}/v1/admin/messages/send`
 };
