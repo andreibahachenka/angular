@@ -32,6 +32,8 @@ import {
     OrdersPageComponent,
     PresentsPageComponent,
     SettingsPageComponent,
+    ChatsPageComponent
+    SettingsPageComponent,
     ReportsPageComponent
 } from './pages';
 
@@ -75,6 +77,7 @@ import { OrdersPageService } from './pages/orders/page/services/orders-page.serv
 import { PresentsPageService } from './pages/presents/page/services/presents-page.service';
 import { SettingsPageService } from './pages/settings/page/services/settings-page.service';
 import { ReportsPageService } from './pages/reports/page/services/reports-page.service';
+import { ChatsPageService } from './pages/chats/page/services/chats-page.service';
 
 //styles
 import '../styles/styles.scss';
@@ -120,6 +123,8 @@ interface StoreType {
       OrdersTableComponent,
       PresentsPageComponent,
       PresentsTableComponent,
+      SettingsPageComponent,
+      ChatsPageComponent
       SettingsPageComponent,
       ReportsTableComponent,
       ReportsPageComponent
@@ -170,6 +175,7 @@ interface StoreType {
       OrdersPageService,
       PresentsPageService,
       SettingsPageService,
+      ChatsPageService,
       ReportsPageService,
       AuthGuard,
       environment.ENV_PROVIDERS,
