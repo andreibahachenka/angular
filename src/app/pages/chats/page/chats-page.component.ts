@@ -65,10 +65,10 @@ export class ChatsPageComponent implements OnInit {
     myPhotoUrl = localStorage.getItem('photo');
     userId: number = 1;
 
-    private chatLimit = 1000;
+    private chatLimit = 5000;
     private chatOffset = 0;
 
-    private messageLimit = 1000;
+    private messageLimit = 2000;
     private messageOffset = 0;
     public user_id = null;
 
@@ -259,22 +259,17 @@ export class ChatsPageComponent implements OnInit {
 
                 response.forEach((chat) => {
                     if (chat['last_message']) {
-                        chat['last_message_ts'] = chat['last_message_date'] ? new Date(chat['last_message_date']).getTime() : 0;
-                        chat['last_message_date'] = new Date(chat['last_message_date']);
-                        chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
-                        chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
                         chat['last_message'] = chat['last_message'] ? JSON.parse(chat['last_message']).text : '';
-                        // chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']})`;
                     } else {
-                        chat['last_message_date'] = new Date(chat['last_message_date']);
-                        chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
-                        chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
                         chat['last_message'] = '';
-                        chat['last_message_ts'] = chat['last_message_date'] ? new Date(chat['last_message_date']).getTime() : 0;
                     }
 
-                    chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']})`;
-                    chat['newMessages'] = false;
+                    chat['last_message_ts'] = chat['last_message_date'] ? new Date(chat['last_message_date']).getTime() : 0;
+                    chat['last_message_date'] = (new Date(chat['last_message_date']));
+                    chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: false});
+
+                    chat['nameToDisplay'] = `${chat['companion']['name']} ${chat['companion']['surname']}(${chat['companion']['id']}) ${chat['companion']['phone']}`;
+                    chat['newMessages'] = chat['friend_unread'] > 0;
 
                     this.chatList.push(chat);
 
@@ -297,19 +292,23 @@ export class ChatsPageComponent implements OnInit {
         });
     }
 
-    public getMessages(chatId) {
+    public getMessages(chatId, socket = false) {
 
         this.chatList.forEach((chat) => {
             if (chat.id === chatId) {
                 chat['newMessages'] = false;
+                chat['last_message'] = '';
                 this.currentChat = chat;
             }
         });
 
+        let messageText = ``;
+
         this.loadingMessages = true;
 
         let request = {
-            chat_id: chatId
+            chat_id: chatId,
+            socket: socket
         };
 
         this._chatServices.getMessages(request).subscribe((response) => {
@@ -320,18 +319,26 @@ export class ChatsPageComponent implements OnInit {
                 response['messages'].reverse();
 
                 response['messages'].forEach((message) => {
-                    message['created_at'] = new Date(message['created_at']);
-                    message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-                    message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
+                    message['created_at'] = (new Date(message['created_at']));
+                    // message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
+                    message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: false});
 
                     message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
-                    // console.log(message);
+                    messageText = message['text'];
 
                     this.messageList.push(message);
 
                 });
             }
+
+            this.chatList.forEach((chat) => {
+                if (chat.id === chatId) {
+                    chat['newMessages'] = false;
+                    chat['last_message'] = messageText;
+                    this.currentChat = chat;
+                }
+            });
 
             this.scrollToBottom();
             this.loadingMessages = false;
@@ -360,12 +367,14 @@ export class ChatsPageComponent implements OnInit {
         this.chatList.forEach((chat) => {
             if (chat.id === chatId) {
                 chat['last_message_ts'] = Date.now();
-                // chat['last_message_date'] = message['created_at'];
+                chat['last_message_date'] = ( new Date(chat['last_message_ts']));
+                chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: false});
                 // chat['last_message'] = message['text'];
                 if (this.currentChat.id !== chatId) {
                     chat['newMessages'] = true;
+                    chat['last_message'] = 'New message!';
                 } else {
-                    this.getMessages(chatId);
+                    this.getMessages(chatId, true);
                 }
                 this.conversationsSort();
             }
@@ -397,9 +406,10 @@ export class ChatsPageComponent implements OnInit {
 
             let message = response;
 
-            message['created_at'] = new Date(message['created_at']);
-            message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-            message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
+            message['time'] = new Date(message['created_at']);
+            message['created_at'] = (new Date(message['created_at']));
+            // message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
+            message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: false});
 
             message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
@@ -408,8 +418,9 @@ export class ChatsPageComponent implements OnInit {
             let chatIndex = 0;
             this.chatList.forEach((chat) => {
                 if (chat.id === this.currentChat.id) {
-                    chat['last_message_ts'] = message['created_at'];
-                    chat['last_message_date'] = message['created_at'];
+                    chat['last_message_ts'] = message['time'].getTime();
+                    chat['last_message_date'] =  message['created_at'];
+                    chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: false});
                     chat['last_message'] = this.messageForm.get('message').value;
                     // chat['count_unread'] = 0;
                     // this.moveInArray(this.chatList, chatIndex, 0);

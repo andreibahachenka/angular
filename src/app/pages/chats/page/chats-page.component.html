@@ -32,7 +32,7 @@
                                                     </div>
                                                     <div class="contact_sec">
                                                         <span class="primary-font">{{ chat?.last_message }} <div *ngIf="chat?.newMessages" class="waiting-point"></div></span>
-                                                        <span *ngIf="chat?.count_unread > 0" class="badge pull-right">{{ chat?.count_unread }}</span>
+                                                        <!--<span *ngIf="chat?.count_unread > 0" class="badge pull-right">{{ chat?.count_unread }}</span>-->
                                                     </div>
                                                     <div class="contact_sec">
                                                         <p class="pull-right">{{ chat?.last_message_date }}</p>
@@ -69,8 +69,8 @@
 
                                             <li class="left clearfix"
                                                 *ngFor="let message of messageList; let i = index;"
-                                                [class.admin_chat]="message?.user_id !== 1">
-                                                 <span *ngIf="message?.user_id === 1"
+                                                [class.admin_chat]="message?.user_id === 1">
+                                                 <span *ngIf="message?.user_id == 1"
                                                        class="chat-img1 pull-left">
                                                      <!--<img src="{{ currentChat?.companion?.photo_url }}"
                                                           class="img-circle">-->
