@@ -54,5 +54,10 @@ export const PathConfig = {
 
     //Settings
     getSettingsEndpoint: `${mainPath}/v1/admin/settings`,
-    updateSettingEndpoint: `${mainPath}/v1/admin/settings/update`
+    updateSettingEndpoint: `${mainPath}/v1/admin/settings/update`,
+
+    //Reports
+    getSpecialQuizzesReportEndpoint: `${mainPath}/v1/admin/reports/special`,
+    getGamesReportEndpoint: `${mainPath}/v1/admin/reports/games`,
+    getLotteriesReportEndpoint: `${mainPath}/v1/admin/reports/lotteries`,
 };

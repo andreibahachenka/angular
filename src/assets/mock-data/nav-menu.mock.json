@@ -40,6 +40,11 @@
 		"image": "toys"
 	},
 	{
+		"title": "Reports",
+		"url": "/reports",
+		"image": "date_range"
+	},
+	{
 		"title": "Settings",
 		"url": "/settings",
 		"image": "settings"

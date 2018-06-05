@@ -1,0 +1,10 @@
+.main-сontainer {
+	flex: 1;
+	&__content {
+		min-width: 1200px;
+	}
+
+	&__content-tabs {
+		margin: 20px 0 0 40px;
+	}
+}

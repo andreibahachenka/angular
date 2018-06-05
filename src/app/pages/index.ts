@@ -8,3 +8,4 @@ export * from './games/page/games-page.component';
 export * from './orders/page/orders-page.component';
 export * from './presents/page/presents-page.component';
 export * from './settings/page/settings-page.component';
+export * from './reports/page/reports-page.component';
