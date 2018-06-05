@@ -32,7 +32,7 @@ import {
     OrdersPageComponent,
     PresentsPageComponent,
     SettingsPageComponent,
-    ChatsPageComponent
+    ChatsPageComponent,
     SettingsPageComponent,
     ReportsPageComponent
 } from './pages';
@@ -124,7 +124,7 @@ interface StoreType {
       PresentsPageComponent,
       PresentsTableComponent,
       SettingsPageComponent,
-      ChatsPageComponent
+      ChatsPageComponent,
       SettingsPageComponent,
       ReportsTableComponent,
       ReportsPageComponent
