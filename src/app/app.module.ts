@@ -31,7 +31,6 @@ import {
     GamesPageComponent,
     OrdersPageComponent,
     PresentsPageComponent,
-    SettingsPageComponent,
     ChatsPageComponent,
     SettingsPageComponent,
     ReportsPageComponent

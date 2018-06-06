@@ -318,11 +318,11 @@ export class QuizzesPageComponent implements OnInit{
     }
 
     public saveChanges(data): void {
-        data.questions.image = this.image1;
-        data.questions1.image = this.image2;
-        data.questions2.image = this.image3;
-        data.questions3.image = this.image4;
-        data.questions4.image = this.image5;
+        data.questions.image = this.images[0] ? this.images[0] : this.image1;
+        data.questions1.image = this.images[1] ? this.images[1] :  this.image2;
+        data.questions2.image = this.images[2] ? this.images[2] :  this.image3;
+        data.questions3.image = this.images[3] ? this.images[3] :  this.image4;
+        data.questions4.image = this.images[4] ? this.images[4] :  this.image5;
         data.questions.number = 1;
         data.questions1.number = 2;
         data.questions2.number = 3;
@@ -341,6 +341,7 @@ export class QuizzesPageComponent implements OnInit{
         this.quizzesPageService.updateQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();
+                    this.images = [];
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
@@ -374,6 +375,7 @@ export class QuizzesPageComponent implements OnInit{
             .subscribe((res) => {
                     this.getQuizzes();
                     this.inputCreateForm.reset();
+                    this.images = [];
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
@@ -384,6 +386,7 @@ export class QuizzesPageComponent implements OnInit{
     public cancel(): void {
         this.inputCreateForm.reset();
         this.inputEditForm.reset();
+        this.images = [];
         this.modalWindowService.closeModalWindow();
     }
 

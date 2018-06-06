@@ -16,8 +16,7 @@ import {
     OrdersPageComponent,
     PresentsPageComponent,
     SettingsPageComponent,
-    ChatsPageComponent
-    SettingsPageComponent,
+    ChatsPageComponent,
     ReportsPageComponent
 } from './pages';
 
