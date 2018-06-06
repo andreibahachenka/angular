@@ -53,7 +53,7 @@ export class ChatsPageComponent implements OnInit {
     defaultDate: any;
 
     // private socketUrl = 'http://localhost:8041';
-    private socketUrl = 'http://jticonnect.pr3.eu:8041';
+    private socketUrl = 'https://jticonnect.pr3.eu:8042';
     socket: any = null;
 
     currentChat: any = null;

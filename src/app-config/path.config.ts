@@ -1,5 +1,5 @@
-const mainPath = 'http://jticonnect.pr3.eu:8066';
-// const mainPath = 'http://localhost:8066';
+const mainPath = 'https://jticonnect.pr3.eu:8067';
+// const mainPath = 'https://localhost:8067';
 export const PathConfig = {
     mainPath: `${mainPath}/v1/admin`,
 
