@@ -38,7 +38,7 @@ export class UsersPageComponent implements OnInit {
         1: 'Active',
         0: 'Not Active',
         2: 'Waiting moderation',
-        3: 'Waiting for deletion'
+        3: 'Delete request'
     };
 
     public name: string = '';
@@ -55,6 +55,7 @@ export class UsersPageComponent implements OnInit {
     public filterSurname: string = '';
     public filterEmail: string = '';
     public filterPhone: string = '';
+    public filterStatus: any;
 
     @ViewChild('editModal') public editModal: ElementRef;
     @ViewChild('deleteModal') public deleteModal: ElementRef;
@@ -117,7 +118,8 @@ export class UsersPageComponent implements OnInit {
         name: new FormControl(''),
         surname: new FormControl(''),
         email: new FormControl(''),
-        phone: new FormControl('')
+        phone: new FormControl(''),
+        status: new FormControl(this.filterStatus)
     });
 
     constructor(
@@ -152,7 +154,7 @@ export class UsersPageComponent implements OnInit {
                     } else if (obj.status === 0) {
                         obj.status = 'Not Active';
                     } else if (obj.status === 3) {
-                        obj.status = 'Waiting for deletion';
+                        obj.status = 'Delete request';
                 }
 
                     if (obj.is_bot === 1) {
@@ -224,6 +226,7 @@ export class UsersPageComponent implements OnInit {
         searchParameters.surname = this.inputFilterForm.value.surname;
         searchParameters.email = this.inputFilterForm.value.email;
         searchParameters.phone = this.inputFilterForm.value.phone;
+        searchParameters.status = this.inputFilterForm.value.status;
 
         this.usersPageService.getUser(searchParameters)
             .subscribe(() => {

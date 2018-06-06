@@ -45,6 +45,12 @@
         </ng-template>
     </ngx-datatable-column>
 
+    <ngx-datatable-column name="Date created" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.created_at | date:"HH:mm:ss, dd.MM.yyyy"}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
     <ngx-datatable-column name="Action" [cellClass]="'action-btn-cell'" [width]="100">
         <ng-template let-row="row" ngx-datatable-cell-template>
             <button class="button-edit" mat-icon-button (click)="openEdit(row)">
