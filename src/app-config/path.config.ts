@@ -6,6 +6,7 @@ export const PathConfig = {
     //users
     authEndpoint: `${mainPath}/v1/admin/auth`,
     getUsersEndpoint: `${mainPath}/v1/admin/users`,
+    getUsersXLSXEndpoint: `${mainPath}/v1/admin/users/xlsx`,
     createUserEndpoint: `${mainPath}/v1/admin/users/create`,
     updateUserEndpoint: `${mainPath}/v1/admin/users/update`,
     removeUserEndpoint: `${mainPath}/v1/admin/users/remove`,

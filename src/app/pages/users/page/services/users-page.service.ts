@@ -29,6 +29,21 @@ export class UsersPageService {
         })
     }
 
+    public getXLSX(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.getItems(
+                `${PathConfig.getUsersXLSXEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public setUser(data): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
@@ -79,5 +94,7 @@ export class UsersPageService {
                 });
         })
     }
+
+
 
 }

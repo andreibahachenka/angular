@@ -221,20 +221,33 @@ export class UsersPageComponent implements OnInit {
                 })
     }
 
-    public filterData(searchParameters): void {
+    public filterData(searchParameters, download = false): void {
         searchParameters.name = this.inputFilterForm.value.name;
         searchParameters.surname = this.inputFilterForm.value.surname;
         searchParameters.email = this.inputFilterForm.value.email;
         searchParameters.phone = this.inputFilterForm.value.phone;
         searchParameters.status = this.inputFilterForm.value.status;
 
-        this.usersPageService.getUser(searchParameters)
-            .subscribe(() => {
-                this.getUsers(searchParameters);
-            },
-            (err) => {
-                console.error(err);
-            })
+
+        if (!download) {
+            this.usersPageService.getUser(searchParameters)
+                .subscribe(() => {
+                        this.getUsers(searchParameters);
+                    },
+                    (err) => {
+                        console.error(err);
+                    })
+        } else {
+            this.usersPageService.getXLSX(searchParameters)
+                .subscribe((res) => {
+                    if(res.url) {
+                        console.log(res.url);
+
+                        window.location.href = res.url;
+                    }
+
+                });
+        }
     }
 
     public cancel(): void {
@@ -246,4 +259,6 @@ export class UsersPageComponent implements OnInit {
     public clearForm(): void {
         this.inputFilterForm.reset();
     }
+
+
 }

@@ -29,6 +29,12 @@
         Search
     </button>
     <button class="clear-button" mat-raised-button (click)="clearForm()">Clear</button>
+
+    <button class="filter-button" color="primary"
+            mat-raised-button
+            (click)="filterData(inputFilterForm.value, true)">
+        Download
+    </button>
     <br>
 
     <button class="create-button" mat-raised-button (click)="createUser()">Create user</button>
