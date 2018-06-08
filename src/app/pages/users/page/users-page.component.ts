@@ -12,6 +12,7 @@ import { NavMenuService, GettingCityService, UtilsService } from '../../../servi
 import { UsersPageService } from './services/users-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from './../../../components/modal-window/services/modal-window.service';
+import { FileUploadService } from '../../../services';
 
 @Component({
     selector: 'app-users',
@@ -33,6 +34,10 @@ export class UsersPageComponent implements OnInit {
     public objectKeys = Object.keys;
 
     public cities = [];
+
+    public upload: string = 'Upload photo';
+    public userImage: string = null;
+    public isUserImageUploaded: boolean = false;
 
     public statuses = {
         1: 'Active',
@@ -90,6 +95,7 @@ export class UsersPageComponent implements OnInit {
             Validators.required,
             Validators.pattern(this.phoneValidationExp)
         ]),
+        userImage: new FormControl(this.userImage),
     });
 
     public inputCreateForm: FormGroup = new FormGroup({
@@ -112,6 +118,7 @@ export class UsersPageComponent implements OnInit {
             Validators.pattern(this.phoneValidationExp)
         ]),
         status: new FormControl('', Validators.required),
+        userImage: new FormControl(null),
     });
 
     public inputFilterForm: FormGroup = new FormGroup({
@@ -128,6 +135,7 @@ export class UsersPageComponent implements OnInit {
         private modalWindowService: ModalWindowService,
         private gettingCityService: GettingCityService,
         private utilsService: UtilsService,
+        private fileUploadService: FileUploadService,
     ) {
     }
 
@@ -174,6 +182,8 @@ export class UsersPageComponent implements OnInit {
         this.id = item.id;
         this.shop_id = item.shop_id;
         this.city_id = item.city_id;
+        this.isUserImageUploaded = !!item.photo;
+        this.userImage = item.photo ? item.photo : null;
 
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
@@ -186,9 +196,12 @@ export class UsersPageComponent implements OnInit {
     public createUser(): void {
         this.inputCreateForm.reset();
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
+        this.isUserImageUploaded = false;
+        this.userImage = null;
     }
 
-    public saveChanges(data: NgForm): void {
+    public saveChanges(data): void {
+        data.photo = this.userImage;
         this.usersPageService.updateUser(data)
             .subscribe((res) => {
                     this.getUsers();
@@ -211,6 +224,7 @@ export class UsersPageComponent implements OnInit {
     }
 
     public sendCreateForm(data): void {
+        data.photo = this.userImage;
         this.usersPageService.setUser(data)
             .subscribe((res) => {
                     this.getUsers();
@@ -248,6 +262,19 @@ export class UsersPageComponent implements OnInit {
 
                 });
         }
+    }
+
+    public handleFileInputForUser(files: FileList, index): void {
+        const photo = files.item(0);
+        this.fileUploadService.uploadFile(photo)
+            .subscribe((result: any) => {
+                    this.userImage = result.url;
+                    this.isUserImageUploaded = true;
+                },
+                (err) => {
+                    console.log(err);
+                    this.isUserImageUploaded = false;
+                })
     }
 
     public cancel(): void {

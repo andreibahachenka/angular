@@ -122,6 +122,14 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <br>
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="User photo" class="upload-btn__input" formControlName="userImage" (change)="handleFileInputForUser($event.target.files, 0)">
+                </button>
+                <img *ngIf="userImage" class="upload-text" src={{userImage}} alt="preview-image">
+                <br>
+                <br>
             </form>
         </div>
         <div class="buttons">
@@ -197,6 +205,14 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <br>
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="User photo" class="upload-btn__input" formControlName="userImage" (change)="handleFileInputForUser($event.target.files, 0)">
+                </button>
+                <img *ngIf="userImage" class="upload-text" src={{userImage}} alt="preview-image">
+                <br>
+                <br>
             </form>
         </div>
         <div class="buttons">
