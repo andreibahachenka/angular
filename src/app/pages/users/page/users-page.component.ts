@@ -35,6 +35,8 @@ export class UsersPageComponent implements OnInit {
 
     public cities = [];
 
+    public timeCorrect: number;
+    public defaultDate: any;
     public upload: string = 'Upload photo';
     public userImage: string = null;
     public isUserImageUploaded: boolean = false;
@@ -140,6 +142,11 @@ export class UsersPageComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.defaultDate = new Date();
+        this.defaultDate.setHours(12);
+        this.defaultDate.setMinutes(0);
+        this.defaultDate.setSeconds(0);
+        this.timeCorrect = this.defaultDate.getTimezoneOffset() / -60;
         this.navMenuService.getMainNavMenu()
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
 
@@ -241,7 +248,7 @@ export class UsersPageComponent implements OnInit {
         searchParameters.email = this.inputFilterForm.value.email;
         searchParameters.phone = this.inputFilterForm.value.phone;
         searchParameters.status = this.inputFilterForm.value.status;
-
+        searchParameters.time = this.timeCorrect;
 
         if (!download) {
             this.usersPageService.getUser(searchParameters)
