@@ -33,6 +33,7 @@ export const PathConfig = {
     getQuizzesEndpoint: `${mainPath}/v1/admin/quizzes`,
     createQuizEndpoint: `${mainPath}/v1/admin/quizzes/create`,
     updateQuizEndpoint: `${mainPath}/v1/admin/quizzes/update`,
+    removeQuizEndpoint: `${mainPath}/v1/admin/quizzes/remove`,
 
     //Special quizzes
     getSpecialQuizzesEndpoint: `${mainPath}/v1/admin/quizzes/special`,

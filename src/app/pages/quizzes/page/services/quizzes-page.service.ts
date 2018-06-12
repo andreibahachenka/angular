@@ -61,4 +61,23 @@ export class QuizzesPageService {
         })
     }
 
+    public deleteQuiz(data): Observable<any> {
+        const dataToDelete = {
+            id: data
+        };
+        return new Observable((observer) => {
+            this.restApiService.deleteItem(
+                `${PathConfig.removeQuizEndpoint}`,
+                JSON.stringify(dataToDelete),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
 }
