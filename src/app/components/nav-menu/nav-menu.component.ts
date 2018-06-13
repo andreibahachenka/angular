@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AssociationOfItemDisplayModel, NavItemModel } from './models';
 import { RoutesConfig } from '../../../app-config';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
     selector: 'app-nav-menu',
@@ -20,7 +21,8 @@ export class NavMenuComponent implements OnChanges {
     public navItems: NavItemModel[];
 
     constructor(
-        private router: Router
+        private router: Router,
+        private utilsService: UtilsService
     ) {
     }
 
@@ -41,7 +43,8 @@ export class NavMenuComponent implements OnChanges {
         }
     }
 
-    public routeTo(url): void {
+    public routeTo(url, title): void {
+        this.utilsService.addLog({action: 'open_section', info: title}).subscribe();
         this.router.navigate([RoutesConfig.adminUrl + url]);
         this.hideNavMenu();
     }

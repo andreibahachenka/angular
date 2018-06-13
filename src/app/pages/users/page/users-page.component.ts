@@ -192,6 +192,8 @@ export class UsersPageComponent implements OnInit {
         this.isUserImageUploaded = !!item.photo;
         this.userImage = item.photo ? item.photo : null;
 
+        this.utilsService.addLog({action: 'view_user_profile', info: `User id = ${item.id}`}).subscribe();
+
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
 
@@ -211,6 +213,7 @@ export class UsersPageComponent implements OnInit {
         data.photo = this.userImage;
         this.usersPageService.updateUser(data)
             .subscribe((res) => {
+                    this.utilsService.addLog({action: 'edit_user_profile', info: `User id = ${data.id}`}).subscribe();
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
                 },
@@ -222,6 +225,7 @@ export class UsersPageComponent implements OnInit {
     public applyDelete(id): void {
         this.usersPageService.deleteUser(id)
             .subscribe((res) => {
+                    this.utilsService.addLog({action: 'delete_user_profile', info: `User id = ${id}`}).subscribe();
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
                 },

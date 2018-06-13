@@ -33,7 +33,8 @@ import {
     PresentsPageComponent,
     ChatsPageComponent,
     SettingsPageComponent,
-    ReportsPageComponent
+    ReportsPageComponent,
+    LogsPageComponent
 } from './pages';
 
 //COMPONENTS
@@ -50,7 +51,8 @@ import {
     OrdersTableComponent,
     AdminComponent,
     PresentsTableComponent,
-    ReportsTableComponent
+    ReportsTableComponent,
+    LogsTableComponent
 } from './components';
 
 //GLOBAL SERVICES
@@ -77,6 +79,7 @@ import { PresentsPageService } from './pages/presents/page/services/presents-pag
 import { SettingsPageService } from './pages/settings/page/services/settings-page.service';
 import { ReportsPageService } from './pages/reports/page/services/reports-page.service';
 import { ChatsPageService } from './pages/chats/page/services/chats-page.service';
+import { LogsPageService } from './pages/logs/page/services/logs-page.service';
 
 //styles
 import '../styles/styles.scss';
@@ -126,7 +129,9 @@ interface StoreType {
       ChatsPageComponent,
       SettingsPageComponent,
       ReportsTableComponent,
-      ReportsPageComponent
+      ReportsPageComponent,
+      LogsPageComponent,
+      LogsTableComponent
   ],
   /**
    * Import Angular's modules.
@@ -175,6 +180,7 @@ interface StoreType {
       PresentsPageService,
       SettingsPageService,
       ChatsPageService,
+      LogsPageService,
       ReportsPageService,
       AuthGuard,
       environment.ENV_PROVIDERS,
