@@ -34,9 +34,19 @@ export class ChatsPageComponent implements OnInit {
     countriesOptions: any[] = [];
     statesOptions: any[] = [];
     senderUsers: any[] = [];
+    filter: number = 0;
+    sendToAll: boolean = false;
+
+
+    filterList: any[] = [
+        {id: 0, name: `All`},
+        {id: 1, name: `New`},
+        {id: 2, name: `Marked`},
+    ];
 
     error: any[];
     chatList: any = [];
+    filteredChatList: any = [];
     messageList: any[] = [];
     createLoading: boolean = false;
     connection: any;
@@ -83,6 +93,7 @@ export class ChatsPageComponent implements OnInit {
 
         this.messageForm = fb.group({
             message: ['', Validators.required],
+            sendToAll: [false],
         });
     }
 
@@ -147,13 +158,9 @@ export class ChatsPageComponent implements OnInit {
         this.defaultDate.setHours(12);
         this.defaultDate.setMinutes(0);
         this.defaultDate.setSeconds(0);
-
         this.timeCorrect = this.defaultDate.getTimezoneOffset() / -60;
-
-        this.chatList = this.getChats();
-
+        this.getChats();
         this.initSockets();
-
     }
 
     // public getChatByUser(userId) {
@@ -245,7 +252,7 @@ export class ChatsPageComponent implements OnInit {
         this.loadingChats = true;
 
         let request = {
-            offset: this.chatOffset,
+            // offset: this.chatOffset,
             limit: this.chatLimit,
         };
 
@@ -292,6 +299,7 @@ export class ChatsPageComponent implements OnInit {
         });
     }
 
+
     public getMessages(chatId, socket = false) {
 
         this.chatList.forEach((chat) => {
@@ -324,6 +332,10 @@ export class ChatsPageComponent implements OnInit {
                     message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: false});
 
                     message['text'] = message['message'] ? message['message']['text'] : 'Error.';
+
+                    if (message['message']['image']) {
+                        message['text'] = `${message['message']['image']['url']}`;
+                    }
 
                     messageText = message['text'];
 
@@ -402,42 +414,73 @@ export class ChatsPageComponent implements OnInit {
 
         this.loadingMessages = true;
 
-        this._chatServices.sendMessage(request).subscribe((response) => {
+        if (this.sendToAll) {
 
-            let message = response;
+            this._chatServices.sendMessageAll(request).subscribe((response) => {
 
-            message['time'] = new Date(message['created_at']);
-            message['created_at'] = (new Date(message['created_at']));
-            // message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-            message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: false});
+                this.getMessages(this.currentChat.id);
 
-            message['text'] = message['message'] ? message['message']['text'] : 'Error.';
+                this.messageForm.get('message').setValue('');
 
-            this.messageList.push(message);
+                this.loadingMessages = false;
 
-            let chatIndex = 0;
-            this.chatList.forEach((chat) => {
-                if (chat.id === this.currentChat.id) {
-                    chat['last_message_ts'] = message['time'].getTime();
-                    chat['last_message_date'] =  message['created_at'];
-                    chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: false});
-                    chat['last_message'] = this.messageForm.get('message').value;
-                    // chat['count_unread'] = 0;
-                    // this.moveInArray(this.chatList, chatIndex, 0);
-                    this.conversationsSort();
-                    this.currentChat = chat;
-                }
-                chatIndex++;
+                this.sendToAll = false;
+
+                this.scrollToBottom();
             });
 
-            this.messageForm.get('message').setValue('');
 
-            this.loadingMessages = false;
+        } else {
+            this._chatServices.sendMessage(request).subscribe((response) => {
 
-            this.scrollToBottom();
-        });
+                let message = response;
+
+                message['time'] = new Date(message['created_at']);
+                message['created_at'] = (new Date(message['created_at']));
+                // message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
+                message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: false});
+
+                message['text'] = message['message'] ? message['message']['text'] : 'Error.';
+
+                this.messageList.push(message);
+
+                let chatIndex = 0;
+                this.chatList.forEach((chat) => {
+                    if (chat.id === this.currentChat.id) {
+                        chat['last_message_ts'] = message['time'].getTime();
+                        chat['last_message_date'] =  message['created_at'];
+                        chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: false});
+                        chat['last_message'] = this.messageForm.get('message').value;
+                        // chat['count_unread'] = 0;
+                        // this.moveInArray(this.chatList, chatIndex, 0);
+                        this.conversationsSort();
+                        this.currentChat = chat;
+                    }
+                    chatIndex++;
+                });
+
+                this.messageForm.get('message').setValue('');
+
+                this.loadingMessages = false;
+
+                this.scrollToBottom();
+            });
+        }
+
 
         return true;
+    }
+
+    public markChat() {
+        if (this.currentChat) {
+            this.currentChat.marked = this.currentChat.marked === 1 ? 0 : 1;
+
+            this._chatServices.markChat({
+                    chat_id: this.currentChat.id,
+                    marked: this.currentChat.marked
+                }
+            ).subscribe();
+        }
     }
 
     public mouseEnter() {

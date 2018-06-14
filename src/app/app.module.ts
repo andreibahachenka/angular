@@ -81,6 +81,8 @@ import { ReportsPageService } from './pages/reports/page/services/reports-page.s
 import { ChatsPageService } from './pages/chats/page/services/chats-page.service';
 import { LogsPageService } from './pages/logs/page/services/logs-page.service';
 
+import { ChatFilterPipe } from './pages/chats/page/filter.pipe';
+
 //styles
 import '../styles/styles.scss';
 import '../styles/table.scss';
@@ -131,7 +133,8 @@ interface StoreType {
       ReportsTableComponent,
       ReportsPageComponent,
       LogsPageComponent,
-      LogsTableComponent
+      LogsTableComponent,
+      ChatFilterPipe
   ],
   /**
    * Import Angular's modules.

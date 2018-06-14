@@ -404,6 +404,19 @@ button:focus {
 	border-radius: 50%;
 }
 
+.chat-filter {
+	width: 100%;
+}
+
+.marked-flag {
+	color: #c60000;
+	cursor: pointer;
+}
+
+.flag {
+	cursor: pointer;
+}
+
 /*!
  * Bootstrap 4.0.0-alpha.6 (grid and responsive utilities)
  * GitHub: https://github.com/dmhendricks/bootstrap-grid-css

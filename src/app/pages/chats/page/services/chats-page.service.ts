@@ -61,22 +61,35 @@ export class ChatsPageService {
         })
     }
 
-    // public getChatById(request: any) : Observable<Response> {
-    //     return this._http.get('/v1/chats/' + request.chatId + '?offset=' + request.offset + '&limit=' + request.limit, {headers: this.getHeaders()}).map(res => res.json());
-    // }
-    // public getMessages(request: any) {
-    //     return this._http.post('/messages', request, {headers: this.getHeaders()}).map(res => res.json());
-    // }
-    //
-    // public sendMessage(request: any) : Observable<Response> {
-    //     return this._http.post('/messages/send', request, {headers: this.getHeaders()}).map(res => res.json());
-    // }
-    //
-    // public getNewMessages(request: any) : Observable<Response> {
-    //     // return this._http.get('/v1/chats/'+ request.chatId + '/new?id=' + request.id, {headers: this.getHeaders()}).map(res => res.json());
-    // }
-    //
-    // public seenNewMessages(request: any) : Observable<Response> {
-    //     // return this._http.post('/v1/messages/seen/all', request, {headers: this.getHeaders()}).map(res => res.json());
-    // }
+    public sendMessageAll(data): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.sendMessageAllEndpoint}`,
+                JSON.stringify(data),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public markChat(data): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.markChatEndpoint}`,
+                JSON.stringify(data),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
 }

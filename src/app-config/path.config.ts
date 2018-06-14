@@ -68,6 +68,8 @@ export const PathConfig = {
     getChatsEndpoint: `${mainPath}/v1/admin/chats`,
     getMessagesEndpoint: `${mainPath}/v1/admin/messages`,
     sendMessageEndpoint: `${mainPath}/v1/admin/messages/send`,
+    sendMessageAllEndpoint: `${mainPath}/v1/admin/messages/send/all`,
+    markChatEndpoint: `${mainPath}/v1/admin/chats/mark`,
 
     //Logs
     getLogsEndpoint: `${mainPath}/v1/admin/logs`,
