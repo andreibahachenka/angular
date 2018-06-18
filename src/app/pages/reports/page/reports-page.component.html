@@ -1,15 +1,46 @@
 <div class="main-сontainer__content">
-    <mat-tab-group class="main-сontainer__content-tabs" (selectedTabChange)="getSpecialQuizzesReport($event)">>
+    <mat-tab-group class="main-сontainer__content-tabs" (selectedTabChange)="getReports($event)">>
         <mat-tab label="Report for special quizzes">
-            Content 1
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerStart" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerFinish" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFinish></mat-datepicker>
+            </mat-form-field>
+
+            <br>
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterData(pickerFinish._validSelected, pickerStart._validSelected)">
+                Apply
+            </button>
+            <reports-table-component
+                    [rows]="specialQuizTableData"
+                    [columns]="columns"
+                    [specialquizzes]="specialquizzes"
+            ></reports-table-component>
         </mat-tab>
 
         <mat-tab label="Report for games">
-            Content 2
+            <reports-table-component
+                    [rows]="gamesTableData"
+                    [columns]="columns"
+                    [games]="games"
+            ></reports-table-component>
         </mat-tab>
 
         <mat-tab label="Report for lotteries">
-            Content 3
+            <reports-table-component
+                    [rows]="lotteriesTableData"
+                    [columns]="columns"
+                    [lotteries]="lotteries"
+            ></reports-table-component>
         </mat-tab>
     </mat-tab-group>
 </div>

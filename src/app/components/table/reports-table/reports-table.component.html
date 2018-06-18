@@ -9,51 +9,120 @@
         [limit]="10"
         [loadingIndicator]="loadingIndicator">
 
-    <!--<ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="40">-->
-        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
-            <!--<span>{{row.id}}</span>-->
-        <!--</ng-template>-->
-    <!--</ngx-datatable-column>-->
-
-
     <ng-container *ngFor="let column of columns">
-        <ngx-datatable-column name="{{column.name}}" prop="{{column.prop}}" [width]="100">
+        <ngx-datatable-column name="{{column.name}}" prop="{{column.prop}}">
         </ngx-datatable-column>
     </ng-container>
 
-    <!--<ngx-datatable-column name="Shop ID" [cellClass]="'action-btn-cell'" [width]="100">-->
-        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
-            <!--<span>{{row.shop_id}}</span>-->
-        <!--</ng-template>-->
-    <!--</ngx-datatable-column>-->
+    <ngx-datatable-column *ngIf="specialquizzes" name="Quiz" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.quiz}}</span>
+        </ng-template>
+    </ngx-datatable-column>
 
-    <!--<ngx-datatable-column name="City ID" [cellClass]="'action-btn-cell'" [width]="100">-->
-        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
-            <!--<span>{{row.city_id}}</span>-->
-        <!--</ng-template>-->
-    <!--</ngx-datatable-column>-->
+    <ngx-datatable-column *ngIf="specialquizzes" name="User ID" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
 
-    <!--<ngx-datatable-column name="Phone" [cellClass]="'action-btn-cell'" [width]="150">-->
-        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
-            <!--<span>{{row.phone}}</span>-->
-        <!--</ng-template>-->
-    <!--</ngx-datatable-column>-->
+    <ngx-datatable-column *ngIf="specialquizzes" name="Shop ID" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.shop_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
 
-    <!--<ngx-datatable-column name="Email" [cellClass]="'action-btn-cell'" [width]="180">-->
-        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
-            <!--<span>{{row.email}}</span>-->
-        <!--</ng-template>-->
-    <!--</ngx-datatable-column>-->
+    <ngx-datatable-column *ngIf="specialquizzes" name="Username" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_name}}</span>
+        </ng-template>
+    </ngx-datatable-column>
 
-    <!--<ngx-datatable-column name="Action" [cellClass]="'action-btn-cell'" [width]="100">-->
-        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
-            <!--<button class="button-edit" mat-icon-button (click)="openEdit(row)">-->
-                <!--<mat-icon>edit</mat-icon>-->
-            <!--</button>-->
-            <!--<button color="warn" mat-icon-button mat-color (click)="openDelete(row)">-->
-                <!--<mat-icon>delete</mat-icon>-->
-            <!--</button>-->
-        <!--</ng-template>-->
-    <!--</ngx-datatable-column>-->
+    <ngx-datatable-column *ngIf="specialquizzes" name="Surname" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_surname}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="specialquizzes" name="Date" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.date | date:"HH:mm:ss, dd.MM.yyyy"}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="specialquizzes" name="Coins" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.coins}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+
+    <!--games-->
+    <ngx-datatable-column *ngIf="games" name="Game ID" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.game_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="games" name="User" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="games" name="User" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="games" name="User Points" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_points}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="games" name="Opponent" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.opponent}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="games" name="Winner" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.winner}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="games" name="Date" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.date | date:"HH:mm:ss, dd.MM.yyyy"}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <!--lotteries-->
+    <ngx-datatable-column *ngIf="lotteries" name="Name" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.name}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="lotteries" name="User" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="lotteries" name="Status" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.status}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="lotteries" name="Date" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.date | date:"HH:mm:ss, dd.MM.yyyy"}}</span>
+        </ng-template>
+    </ngx-datatable-column>
 
 </ngx-datatable>
