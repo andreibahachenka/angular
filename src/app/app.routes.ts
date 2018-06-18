@@ -17,7 +17,8 @@ import {
     PresentsPageComponent,
     SettingsPageComponent,
     ChatsPageComponent,
-    ReportsPageComponent
+    ReportsPageComponent,
+    LogsPageComponent
 } from './pages';
 
 export const ROUTES: Routes = [
@@ -48,6 +49,8 @@ export const ROUTES: Routes = [
         { path: RoutesConfig.adminReports, component: ReportsPageComponent, canActivate: [AuthGuard] },
 
         { path: RoutesConfig.adminChats, component: ChatsPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminLogs, component: LogsPageComponent, canActivate: [AuthGuard] },
         ]
     },
 

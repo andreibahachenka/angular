@@ -159,6 +159,7 @@ export class AdministratorsPageComponent implements OnInit {
         };
         this.administratorsPageService.updateAdministrator(adminForm)
             .subscribe((res) => {
+                    this.utilsService.addLog({action: 'edit_admin_profile', info: `Admin id = ${data.id}`}).subscribe();
                     this.getAdministrators();
                     this.modalWindowService.closeModalWindow();
                 },
@@ -170,6 +171,7 @@ export class AdministratorsPageComponent implements OnInit {
     public applyDelete(id): void {
         this.administratorsPageService.deleteAdministrator(id)
             .subscribe((res) => {
+                    this.utilsService.addLog({action: 'delete_admin_profile', info: `Admin id = ${id}`}).subscribe();
                     this.getAdministrators();
                     this.modalWindowService.closeModalWindow();
                 },

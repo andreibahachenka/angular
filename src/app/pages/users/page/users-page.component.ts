@@ -35,6 +35,8 @@ export class UsersPageComponent implements OnInit {
 
     public cities = [];
 
+    public timeCorrect: number;
+    public defaultDate: any;
     public upload: string = 'Upload photo';
     public userImage: string = null;
     public isUserImageUploaded: boolean = false;
@@ -140,6 +142,11 @@ export class UsersPageComponent implements OnInit {
     }
 
     public ngOnInit() {
+        this.defaultDate = new Date();
+        this.defaultDate.setHours(12);
+        this.defaultDate.setMinutes(0);
+        this.defaultDate.setSeconds(0);
+        this.timeCorrect = this.defaultDate.getTimezoneOffset() / -60;
         this.navMenuService.getMainNavMenu()
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
 
@@ -185,6 +192,8 @@ export class UsersPageComponent implements OnInit {
         this.isUserImageUploaded = !!item.photo;
         this.userImage = item.photo ? item.photo : null;
 
+        this.utilsService.addLog({action: 'view_user_profile', info: `User id = ${item.id}`}).subscribe();
+
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
     }
 
@@ -204,6 +213,7 @@ export class UsersPageComponent implements OnInit {
         data.photo = this.userImage;
         this.usersPageService.updateUser(data)
             .subscribe((res) => {
+                    this.utilsService.addLog({action: 'edit_user_profile', info: `User id = ${data.id}`}).subscribe();
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
                 },
@@ -215,6 +225,7 @@ export class UsersPageComponent implements OnInit {
     public applyDelete(id): void {
         this.usersPageService.deleteUser(id)
             .subscribe((res) => {
+                    this.utilsService.addLog({action: 'delete_user_profile', info: `User id = ${id}`}).subscribe();
                     this.getUsers();
                     this.modalWindowService.closeModalWindow();
                 },
@@ -241,7 +252,7 @@ export class UsersPageComponent implements OnInit {
         searchParameters.email = this.inputFilterForm.value.email;
         searchParameters.phone = this.inputFilterForm.value.phone;
         searchParameters.status = this.inputFilterForm.value.status;
-
+        searchParameters.time = this.timeCorrect;
 
         if (!download) {
             this.usersPageService.getUser(searchParameters)

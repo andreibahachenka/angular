@@ -53,5 +53,10 @@
       "title": "Chats",
       "url": "/chats",
       "image": "chats"
-    }
+    },
+	{
+		"title": "Logs",
+		"url": "/logs",
+		"image": "dvr"
+	}
 ]

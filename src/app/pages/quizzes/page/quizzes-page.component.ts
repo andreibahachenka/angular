@@ -30,6 +30,7 @@ export class QuizzesPageComponent implements OnInit{
     public editQuizMessage: string = 'Edit Quiz';
     public createQuizMessage: string = 'Create Quiz';
     public upload: string = 'Upload image';
+    public deleteMessage: string = 'Are you sure you want to delete this quiz?';
     public isImageUploaded = [];
 
     public name: string = '';
@@ -89,6 +90,7 @@ export class QuizzesPageComponent implements OnInit{
 
     @ViewChild('createModal') public createModal: ElementRef;
     @ViewChild('editModal') public editModal: ElementRef;
+    @ViewChild('deleteModal') public deleteModal: ElementRef;
 
     public statuses = {
         1: 'Active',
@@ -401,5 +403,21 @@ export class QuizzesPageComponent implements OnInit{
                  console.log(err);
                  this.isImageUploaded[index] = false;
             })
+    }
+
+    public openDelete(item: any): void {
+        this.id = item.id;
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
+    }
+
+    public applyDelete(id): void {
+        this.quizzesPageService.deleteQuiz(id)
+            .subscribe((res) => {
+                    this.getQuizzes();
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
     }
 }

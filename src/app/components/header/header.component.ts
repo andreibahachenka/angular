@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { LocalStorageConfig } from '../../../app-config/locastorage.config';
 import { RoutesConfig } from '../../../app-config/routes.config';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
     selector: 'app-header',
@@ -17,11 +18,13 @@ export class HeaderComponent {
     public logoutName: string = 'Logout';
 
     constructor(
-        private router: Router
+        private router: Router,
+        private utilsService: UtilsService
     ){
     }
 
     public logout(): void {
+        this.utilsService.addLog({action: 'logout'}).subscribe();
         localStorage.removeItem(LocalStorageConfig.token);
         this.router.navigate([RoutesConfig.login]);
     }

@@ -5,6 +5,7 @@ import { RestApiService } from './../../services';
 import { LocalStorageConfig } from '../../../app-config/locastorage.config';
 import { RoutesConfig } from '../../../app-config/routes.config';
 import { LoginService } from './services/login.service';
+import { UtilsService } from '../../services/utils.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class LoginComponent {
         private restApiService: RestApiService,
         private router: Router,
         private loginService: LoginService,
+        private utilsService: UtilsService
     ){
     }
 
@@ -30,6 +32,9 @@ export class LoginComponent {
         this.loginService.loginTo(login, password)
             .subscribe((res) => {
                     localStorage.setItem(LocalStorageConfig.token, res.token);
+                    console.log('login');
+                    this.utilsService.addLog({action: 'login'}).subscribe();
+                    this.utilsService.addLog({action: 'open_section', info: `Users`}).subscribe();
                     this.router.navigate([RoutesConfig.adminUsers]);
                 },
                 (err) => {

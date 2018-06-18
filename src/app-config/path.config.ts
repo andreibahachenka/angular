@@ -33,12 +33,15 @@ export const PathConfig = {
     getQuizzesEndpoint: `${mainPath}/v1/admin/quizzes`,
     createQuizEndpoint: `${mainPath}/v1/admin/quizzes/create`,
     updateQuizEndpoint: `${mainPath}/v1/admin/quizzes/update`,
+    removeQuizEndpoint: `${mainPath}/v1/admin/quizzes/remove`,
 
     //Special quizzes
     getSpecialQuizzesEndpoint: `${mainPath}/v1/admin/quizzes/special`,
+    getSpecialQuizzesListEndpoint: `${mainPath}/v1/admin/quizzes/special/list`,
     createSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/create`,
     updateSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/update`,
-    sendSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/send`,
+    sendSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/send/all`,
+    sendSpecialQuizUserEndpoint: `${mainPath}/v1/admin/quizzes/special/send/user`,
 
     //Games
     getGamesEndpoint: `${mainPath}/v1/admin/games`,
@@ -66,5 +69,11 @@ export const PathConfig = {
     //Chat
     getChatsEndpoint: `${mainPath}/v1/admin/chats`,
     getMessagesEndpoint: `${mainPath}/v1/admin/messages`,
-    sendMessageEndpoint: `${mainPath}/v1/admin/messages/send`
+    sendMessageEndpoint: `${mainPath}/v1/admin/messages/send`,
+    sendMessageAllEndpoint: `${mainPath}/v1/admin/messages/send/all`,
+    markChatEndpoint: `${mainPath}/v1/admin/chats/mark`,
+
+    //Logs
+    getLogsEndpoint: `${mainPath}/v1/admin/logs`,
+    addLogEndpoint: `${mainPath}/v1/admin/logs/create`
 };
