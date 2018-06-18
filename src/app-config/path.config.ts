@@ -37,9 +37,11 @@ export const PathConfig = {
 
     //Special quizzes
     getSpecialQuizzesEndpoint: `${mainPath}/v1/admin/quizzes/special`,
+    getSpecialQuizzesListEndpoint: `${mainPath}/v1/admin/quizzes/special/list`,
     createSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/create`,
     updateSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/update`,
-    sendSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/send`,
+    sendSpecialQuizEndpoint: `${mainPath}/v1/admin/quizzes/special/send/all`,
+    sendSpecialQuizUserEndpoint: `${mainPath}/v1/admin/quizzes/special/send/user`,
 
     //Games
     getGamesEndpoint: `${mainPath}/v1/admin/games`,

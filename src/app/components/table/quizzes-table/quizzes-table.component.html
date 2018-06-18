@@ -44,6 +44,10 @@
             <button *ngIf="specialQuiz" class="button-send" mat-icon-button title="Send to all" (click)="openSendToAll(row)">
                 <mat-icon>send</mat-icon>
             </button>
+
+            <button *ngIf="specialQuiz" class="button-send" mat-icon-button title="Send to user" (click)="openSendToUser(row)">
+                <mat-icon>person_outline</mat-icon>
+            </button>
         </ng-template>
     </ngx-datatable-column>
 

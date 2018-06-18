@@ -5,6 +5,7 @@
             [columns]="columns"
             (onEdit)="openEdit($event)"
             (onSendToAll)="openSend($event)"
+            (onSendToUser)="openSendToUser($event)"
             [specialQuiz]="specialQuiz"
     ></quizzes-table-component>
     <router-outlet></router-outlet>
@@ -337,6 +338,33 @@
                     (click)="sendCreateForm(inputCreateForm.value)"
                     [disabled]="inputCreateForm.invalid">
                 Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="content" #sendSQuizModal>
+        <div class="modal-header modal-orders-width">
+            <span>Send to user</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputSQuizForm">
+                <ng-select [items]="userList"
+                           bindLabel="id"
+                           bindValue="id"
+                           placeholder="Users"
+                           formControlName="user"
+                           [(ngModel)]="user">
+                </ng-select>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="applySendToUser(inputSQuizForm.value)"
+                    [disabled]="inputSQuizForm.invalid">
+                Send
             </button>
             <button mat-raised-button (click)="cancel()">Cancel</button>
         </div>

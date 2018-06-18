@@ -15,6 +15,7 @@ import { NavMenuService, FileUploadService, UtilsService } from '../../../servic
 import { SpecialQuizzesPageService } from './services/special-quizzes-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
+import { UsersPageService } from '../../users/page/services/users-page.service';
 
 @Component({
     selector: 'app-special-quizzes',
@@ -26,6 +27,8 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public tableData: any[] = [];
     public modifiedTableData: any[] = [];
     public navItems: NavItemModel[];
+    public userList: any[] = [];
+    public currentQuiz: any = null;
 
     public editQuizMessage: string = 'Edit Special Quiz';
     public createQuizMessage: string = 'Create Special Quiz';
@@ -39,6 +42,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public status: any;
     public id: string = '';
     public topic: any;
+    public user: any;
     public questions: any;
     public backgroundImage: string = '';
     public isBackgroundImageUploaded: boolean = false;
@@ -94,6 +98,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
     @ViewChild('createModal') public createModal: ElementRef;
     @ViewChild('editModal') public editModal: ElementRef;
     @ViewChild('sendToAll') public sendToAll: ElementRef;
+    @ViewChild('sendSQuizModal') public sendSQuizModal: ElementRef;
 
     public statuses = {
         1: 'Active',
@@ -116,6 +121,10 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public questionArray = ['questions', 'questions1', 'questions2', 'questions3', 'questions4'];
     public rightAnswers = [1, 2, 3 ,4];
     public answers = ['answer1', 'answer2', 'answer3', 'answer4'];
+
+    public inputSQuizForm: FormGroup = new FormGroup({
+        user: new FormControl('', Validators.required),
+    });
 
     public inputEditForm: FormGroup = new FormGroup({
         name: new FormControl(this.name, Validators.required),
@@ -237,6 +246,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
         private modalWindowService: ModalWindowService,
         private specialQuizzesPageService: SpecialQuizzesPageService,
         private fileUploadService: FileUploadService,
+        private usersPageService: UsersPageService,
         private utilsService: UtilsService
     ) {
     }
@@ -246,6 +256,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
 
         this.getQuizzes();
+        this.getUsers();
     }
 
     public getQuizzes(searchParameters?: any): void {
@@ -396,6 +407,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public cancel(): void {
         this.inputCreateForm.reset();
         this.inputEditForm.reset();
+        this.inputSQuizForm.reset();
         this.modalWindowService.closeModalWindow();
     }
 
@@ -433,6 +445,33 @@ export class SpecialQuizzesPageComponent implements OnInit{
     public applySend(id) {
         console.log(id);
         this.specialQuizzesPageService.sendToAll(id)
+            .subscribe((res) => {
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
+    }
+
+    public getUsers(searchParameters?: any): void {
+        this.usersPageService.getUser(searchParameters)
+            .subscribe((res) => {
+                this.userList = res.users;
+            });
+    }
+
+    public openSendToUser(item) {
+        this.currentQuiz = item;
+        this.inputSQuizForm.reset();
+        // this.getUsers();
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.sendSQuizModal });
+    }
+
+    public applySendToUser(data) {
+        console.log(data);
+        console.log(this.currentQuiz);
+
+        this.specialQuizzesPageService.sendToUser({user_id: data.user, pack_id: this.currentQuiz.id})
             .subscribe((res) => {
                     this.modalWindowService.closeModalWindow();
                 },

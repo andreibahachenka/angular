@@ -11,6 +11,7 @@ export class QuizzesTableComponent {
     @Input() public specialQuiz: string;
     @Output() public onEdit: EventEmitter<any> = new EventEmitter<any>();
     @Output() public onSendToAll: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onSendToUser: EventEmitter<any> = new EventEmitter<any>();
     @Output() public onDelete: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
@@ -23,6 +24,10 @@ export class QuizzesTableComponent {
 
     public openSendToAll(id: any): void {
         this.onSendToAll.emit(id);
+    }
+
+    public openSendToUser(item: any): void {
+        this.onSendToUser.emit(item);
     }
 
     public openDelete(item: any): void {

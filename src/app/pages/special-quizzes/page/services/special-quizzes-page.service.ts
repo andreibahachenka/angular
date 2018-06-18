@@ -80,4 +80,35 @@ export class SpecialQuizzesPageService {
         })
     }
 
+    public sendToUser(data): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.sendSpecialQuizUserEndpoint}`,
+                JSON.stringify(data),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.log(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public getQuizzesList(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.getItems(
+                `${PathConfig.getSpecialQuizzesListEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
 }

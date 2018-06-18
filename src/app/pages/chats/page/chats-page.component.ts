@@ -2,7 +2,9 @@
 /// <reference path="../../../../../typings/globals/socket.io-client/index.d.ts" />
 import {
     Component,
-    OnInit
+    OnInit,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
 
 import {
@@ -16,8 +18,8 @@ import { NavMenuService, UtilsService, NotificationService } from '../../../serv
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 import { ChatsPageService } from './services/chats-page.service';
+import { SpecialQuizzesPageService } from '../../special-quizzes/page/services/special-quizzes-page.service';
 
-import { Input, Output, ViewChild, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -36,7 +38,8 @@ export class ChatsPageComponent implements OnInit {
     senderUsers: any[] = [];
     filter: number = 0;
     sendToAll: boolean = false;
-
+    squizzes: any[] = [];
+    squiz: any;
 
     filterList: any[] = [
         {id: 0, name: `All`},
@@ -54,50 +57,55 @@ export class ChatsPageComponent implements OnInit {
     loadingChats: boolean = false;
     loadingMessages: boolean = false;
 
-    messageLoadMoreVisible: boolean = true;
+    public messageLoadMoreVisible: boolean = true;
 
     public messageForm: FormGroup;
     public searchForm: FormGroup;
+    public sQuizForm: FormGroup;
 
-    timeCorrect: number;
-    defaultDate: any;
+    public timeCorrect: number;
+    public defaultDate: any;
 
     // private socketUrl = 'http://localhost:8041';
-    private socketUrl = 'https://jticonnect.pr3.eu:8042';
-    socket: any = null;
+    public socketUrl = 'https://jticonnect.pr3.eu:8042';
+    public socket: any = null;
 
-    currentChat: any = null;
-    lastMessageId = null;
-    visibleChatsMore = true;
+    public currentChat: any = null;
+    public lastMessageId = null;
+    public visibleChatsMore = true;
 
-    message: any;
+    public message: any;
 
-    myPhotoUrl = localStorage.getItem('photo');
-    userId: number = 1;
+    public myPhotoUrl = localStorage.getItem('photo');
+    public userId: number = 1;
 
-    private chatLimit = 5000;
-    private chatOffset = 0;
+    public chatLimit = 5000;
+    public chatOffset = 0;
 
-    private messageLimit = 2000;
-    private messageOffset = 0;
     public user_id = null;
 
     public uId = null;
 
     public userOptions: any = [];
 
-    constructor(fb: FormBuilder, private _chatServices: ChatsPageService) {
+    @ViewChild('sendSQuizModal') public sendSQuizModal: ElementRef;
+
+    public inputSQuizForm: FormGroup = new FormGroup({
+        squiz: new FormControl('', Validators.required),
+    });
+
+    constructor(fb: FormBuilder,
+                private _chatServices: ChatsPageService,
+                private specialQuizzesPageService: SpecialQuizzesPageService,
+                private modalWindowService: ModalWindowService) {
         this.searchForm = fb.group({
             user: ['', Validators.required],
         });
-
         this.messageForm = fb.group({
             message: ['', Validators.required],
             sendToAll: [false],
         });
     }
-
-
 
     public moveInArray(arr, fromIndex, toIndex) {
         let element = arr[fromIndex];
@@ -163,89 +171,12 @@ export class ChatsPageComponent implements OnInit {
         this.initSockets();
     }
 
-    // public getChatByUser(userId) {
-    //
-    //     if (userId === this.userId) {
-    //         return false;
-    //     }
-    //
-    //     let chatId;
-    //     if (this.userId < parseInt(userId)) {
-    //         chatId = this.userId + '-' + userId;
-    //     } else {
-    //         chatId = userId + '-' + this.userId;
-    //     }
-    //
-    //     console.log(chatId);
-    //
-    //     let request = {
-    //         offset: this.messageOffset,
-    //         limit: this.messageLimit,
-    //         chatId: chatId
-    //     };
-    //
-    //     this.loadingMessages = true;
-    //
-    //     this._chatServices.getChatById(request).subscribe((response) => {
-    //
-    //         if (response['status'] === 1) {
-    //
-    //             this.messageList = [];
-    //
-    //             response['data'].messages.forEach((message) => {
-    //
-    //                 message['created_at'] = new Date(message['created_at'].replace(/-/g, '/'));
-    //                 message['created_at'].setHours(message['created_at'].getHours() + this.timeCorrect);
-    //                 message['created_at'] = message['created_at'].toLocaleString('en-US', {hour12: true});
-    //
-    //
-    //                 this.messageList.push(message);
-    //
-    //                 this.messageOffset++;
-    //             });
-    //
-    //             this.scrollToBottom();
-    //
-    //             if (this.messageList.length > 0) {
-    //                 this.lastMessageId = this.messageList[this.messageList.length - 1].id;
-    //             }
-    //
-    //             if (response['data'].messages.length < this.messageLimit) {
-    //                 this.messageLoadMoreVisible = false;
-    //             }
-    //
-    //             let exist = false;
-    //             this.chatList.forEach(chat => {
-    //                 console.log(chat);
-    //                 if (chat.id == chatId) {
-    //                     this.currentChat = chat;
-    //                     exist = true;
-    //                 }
-    //             });
-    //
-    //             if (!exist) {
-    //                 let chat = response['data'].chat;
-    //                 if (chat['last_message_date'] != null) {
-    //                     chat['last_message_date'] = new Date(chat['last_message_date'].replace(/-/g, '/'));
-    //                     chat['last_message_date'].setHours(chat['last_message_date'].getHours() + this.timeCorrect);
-    //                     chat['last_message_date'] = chat['last_message_date'].toLocaleString('en-US', {hour12: true});
-    //                 }
-    //
-    //                 this.chatList.unshift(chat);
-    //
-    //                 this.currentChat = chat;
-    //                 this.chatOffset++;
-    //             }
-    //
-    //             this.initSockets();
-    //         }
-    //
-    //         this.loadingMessages = false;
-    //
-    //         console.log(this.currentChat);
-    //     });
-    //     return true;
-    // }
+    public getQuizzes(searchParameters?: any): void {
+        this.specialQuizzesPageService.getQuizzesList(searchParameters)
+            .subscribe((res) => {
+                this.squizzes = res.quizzes;
+            });
+    }
 
     public getChats(inc = false) {
 
@@ -481,6 +412,12 @@ export class ChatsPageComponent implements OnInit {
                 }
             ).subscribe();
         }
+    }
+
+    public openSpecial() {
+        this.inputSQuizForm.reset();
+        this.getQuizzes();
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.sendSQuizModal });
     }
 
     public mouseEnter() {
