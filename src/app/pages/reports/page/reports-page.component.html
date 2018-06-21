@@ -1,7 +1,15 @@
 <div class="main-сontainer__content">
     <mat-tab-group class="main-сontainer__content-tabs" (selectedTabChange)="getReports($event)">>
         <mat-tab label="Report for special quizzes">
-            <br>
+            <div class="select-block">
+                <ng-select [items]="quizzes"
+                           bindLabel="name"
+                           bindValue="id"
+                           placeholder="Quizzes"
+                           [(ngModel)]="quiz_id">
+                </ng-select>
+            </div>
+
             <mat-form-field>
                 <input matInput [matDatepicker]="pickerStart" placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
@@ -17,7 +25,7 @@
             <br>
             <button class="filter-button" color="primary"
                     mat-raised-button
-                    (click)="filterData(pickerFinish._validSelected, pickerStart._validSelected)">
+                    (click)="filterData(pickerStart._validSelected, pickerFinish._validSelected)">
                 Apply
             </button>
             <reports-table-component

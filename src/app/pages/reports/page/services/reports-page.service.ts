@@ -14,11 +14,11 @@ export class ReportsPageService {
     ) {
     }
 
-    public getSpecialQuizzesForReport(data?: any): Observable<any> {
-        console.log('data',data);
+    public getSpecialQuizzesForReport(params?: any): Observable<any> {
+        console.log('params', params);
         return new Observable((observer) => {
             this.restApiService.postItem(
-                `${PathConfig.getSpecialQuizzesReportEndpoint}`, data,
+                `${PathConfig.getSpecialQuizzesReportEndpoint}`, params,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);
