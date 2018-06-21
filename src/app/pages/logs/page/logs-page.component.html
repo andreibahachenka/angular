@@ -1,0 +1,21 @@
+<div class="main-сontainer__content">
+    <form [formGroup]="inputFilterForm" class="filter-form">
+        <mat-form-field>
+            <input matInput placeholder="Id" [(ngModel)]="filterId" formControlName="id"/>
+        </mat-form-field>
+    </form>
+
+    <button class="filter-button" color="primary"
+            mat-raised-button
+            (click)="filterData(inputFilterForm.value)">
+        Search
+    </button>
+    <button class="clear-button" mat-raised-button (click)="clearForm()">Clear</button>
+    <br>
+
+    <logs-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+    ></logs-table-component>
+    <router-outlet></router-outlet>
+</div>
