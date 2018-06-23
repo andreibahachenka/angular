@@ -15,7 +15,6 @@ export class ReportsPageService {
     }
 
     public getSpecialQuizzesForReport(params?: any): Observable<any> {
-        console.log('params', params);
         return new Observable((observer) => {
             this.restApiService.postItem(
                 `${PathConfig.getSpecialQuizzesReportEndpoint}`, params,

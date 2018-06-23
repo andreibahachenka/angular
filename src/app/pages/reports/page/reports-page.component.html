@@ -1,6 +1,7 @@
 <div class="main-сontainer__content">
     <mat-tab-group class="main-сontainer__content-tabs" (selectedTabChange)="getReports($event)">>
         <mat-tab label="Report for special quizzes">
+            <br>
             <div class="select-block">
                 <ng-select [items]="quizzes"
                            bindLabel="name"
@@ -64,6 +65,22 @@
         </mat-tab>
 
         <mat-tab label="Report for lotteries">
+            <br>
+            <div class="select-block">
+                <ng-select [items]="lotteriesArray"
+                           bindLabel="name"
+                           bindValue="id"
+                           placeholder="Lotteries"
+                           [(ngModel)]="lottery_id">
+                </ng-select>
+            </div>
+
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForLottery()">
+                Apply
+            </button>
+
             <reports-table-component
                     [rows]="lotteriesTableData"
                     [columns]="columns"
