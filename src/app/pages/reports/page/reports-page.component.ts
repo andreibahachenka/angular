@@ -97,4 +97,25 @@ export class ReportsPageComponent implements OnInit {
                 this.specialQuizTableData = res.rows;
             })
     }
+
+    public filterDataForGame(from, to) {
+        let startDate = new Date(from);
+        let finishDate = new Date(to);
+        let start_date = '';
+        let end_date = '';
+        if (from != null) {
+            start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
+        }
+        if (to != null) {
+            end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
+        }
+        let params = {
+            start_date,
+            end_date
+        };
+        this.reportsPageService.getGamesForReport(params)
+            .subscribe((res) => {
+                this.gamesTableData = res.rows;
+            })
+    }
 }

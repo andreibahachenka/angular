@@ -36,6 +36,26 @@
         </mat-tab>
 
         <mat-tab label="Report for games">
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerStartGame" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerStartGame"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartGame></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerFinishGame" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerFinishGame"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFinishGame></mat-datepicker>
+            </mat-form-field>
+
+            <br>
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected)">
+                Apply
+            </button>
+
             <reports-table-component
                     [rows]="gamesTableData"
                     [columns]="columns"
