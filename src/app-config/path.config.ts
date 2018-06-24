@@ -65,6 +65,8 @@ export const PathConfig = {
     getSpecialQuizzesReportEndpoint: `${mainPath}/v1/admin/reports/special`,
     getGamesReportEndpoint: `${mainPath}/v1/admin/reports/games`,
     getLotteriesReportEndpoint: `${mainPath}/v1/admin/reports/lotteries`,
+    getOrdersReportEndpoint: `${mainPath}/v1/admin/reports/orders`,
+    getRatingsReportEndpoint: `${mainPath}/v1/admin/reports/ratings`,
 
     //Chat
     getChatsEndpoint: `${mainPath}/v1/admin/chats`,

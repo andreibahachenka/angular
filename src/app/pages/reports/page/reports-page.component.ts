@@ -30,14 +30,22 @@ export class ReportsPageComponent implements OnInit {
     public specialQuizTableData = [];
     public gamesTableData = [];
     public lotteriesTableData = [];
+    public ordersTableData = [];
+    public ratingsTableData = [];
     public quizzes: any[] = [];
     public lotteriesArray: any[] = [];
 
+    public objectKeys = Object.keys;
     public quiz_id: string;
+    public intervalFilter: any;
+    public interval: any;
+    public intervals: any = ['All', 'Week'];
     public lottery_id: string;
     public games: string = 'games';
     public lotteries: string = 'lotteries';
     public specialquizzes: string = 'specialquizzes';
+    public orders: string = 'orders';
+    public ratings: string = 'ratings';
 
     public columns: any = [
     ];
@@ -80,6 +88,16 @@ export class ReportsPageComponent implements OnInit {
             case 2 : this.reportsPageService.getLotteriesForReport(data)
                 .subscribe((res) => {
                     this.lotteriesTableData = res.rows;
+                });
+                break;
+            case 3 : this.reportsPageService.getOrdersForReport(data)
+                .subscribe((res) => {
+                    this.ordersTableData = res.rows;
+                });
+                break;
+            case 4 : this.reportsPageService.getRatingsForReport(data)
+                .subscribe((res) => {
+                    this.ratingsTableData = res.rows;
                 });
                 break;
         }
@@ -135,6 +153,17 @@ export class ReportsPageComponent implements OnInit {
             lottery_id
         };
         this.reportsPageService.getLotteriesForReport(params)
+            .subscribe((res) => {
+                this.lotteriesTableData = res.rows;
+            })
+    }
+
+    public filterDataForRating(intervalFilter) {
+        let type = intervalFilter || '';
+        let params = {
+            type
+        };
+        this.reportsPageService.getRatingsForReport(params)
             .subscribe((res) => {
                 this.lotteriesTableData = res.rows;
             })

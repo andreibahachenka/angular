@@ -11,6 +11,8 @@ export class ReportsTableComponent {
     @Input() public games: string;
     @Input() public lotteries: string;
     @Input() public specialquizzes: string;
+    @Input() public orders: string;
+    @Input() public ratings: string;
 
     constructor(
     ){

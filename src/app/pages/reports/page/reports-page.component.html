@@ -87,5 +87,54 @@
                     [lotteries]="lotteries"
             ></reports-table-component>
         </mat-tab>
+
+        <mat-tab label="Report for orders">
+            <!--<br>-->
+            <!--<div class="select-block">-->
+                <!--<ng-select [items]="lotteriesArray"-->
+                           <!--bindLabel="name"-->
+                           <!--bindValue="id"-->
+                           <!--placeholder="Lotteries"-->
+                           <!--[(ngModel)]="lottery_id">-->
+                <!--</ng-select>-->
+            <!--</div>-->
+
+            <!--<button class="filter-button" color="primary"-->
+                    <!--mat-raised-button-->
+                    <!--(click)="filterDataForLottery()">-->
+                <!--Apply-->
+            <!--</button>-->
+
+            <reports-table-component
+                    [rows]="ordersTableData"
+                    [columns]="columns"
+                    [orders]="orders"
+            ></reports-table-component>
+        </mat-tab>
+
+        <mat-tab label="Report for ratings">
+            <br>
+            <div class="select-bloc">
+                <mat-form-field>
+                    <mat-select [(ngModel)]="intervalFilter" placeholder="Interval">
+                        <mat-option *ngFor="let interval of intervals" [value]="interval">
+                            {{ interval }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForRating(intervalFilter)">
+                Apply
+            </button>
+
+            <reports-table-component
+                    [rows]="ratingsTableData"
+                    [columns]="columns"
+                    [ratings]="ratings"
+            ></reports-table-component>
+        </mat-tab>
     </mat-tab-group>
 </div>

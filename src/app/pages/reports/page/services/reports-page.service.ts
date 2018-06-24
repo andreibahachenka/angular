@@ -58,4 +58,34 @@ export class ReportsPageService {
                 });
         })
     }
+
+    public getOrdersForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.getOrdersReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public getRatingsForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.getRatingsReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
 }
