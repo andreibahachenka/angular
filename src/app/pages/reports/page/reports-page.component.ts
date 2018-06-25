@@ -11,7 +11,6 @@ import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 import { MatTabChangeEvent } from "@angular/material";
 import { QuizzesPageService } from './../../quizzes/page/services/quizzes-page.service';
-import { LotteriesPageService } from './../../lotteries/page/services/lotteries-page.service';
 
 @Component({
     selector: 'app-reports',
@@ -35,6 +34,9 @@ export class ReportsPageComponent implements OnInit {
     public quizzes: any[] = [];
     public lotteriesArray: any[] = [];
 
+    public timeCorrect: number;
+    public defaultDate: any;
+
     public objectKeys = Object.keys;
     public quiz_id: string;
     public intervalFilter: any;
@@ -52,6 +54,12 @@ export class ReportsPageComponent implements OnInit {
 
 
     public ngOnInit() {
+        this.defaultDate = new Date();
+        this.defaultDate.setHours(12);
+        this.defaultDate.setMinutes(0);
+        this.defaultDate.setSeconds(0);
+        this.timeCorrect = this.defaultDate.getTimezoneOffset() / -60;
+
         this.navMenuService.getMainNavMenu()
             .subscribe((navListData: NavItemModel[]) => this.navItems = navListData);
 
@@ -103,7 +111,7 @@ export class ReportsPageComponent implements OnInit {
         }
     }
 
-    public filterData(from, to) {
+    public filterData(from, to, download = false) {
         let quiz_id= this.quiz_id || '';
         let startDate = new Date(from);
         let finishDate = new Date(to);
@@ -118,12 +126,23 @@ export class ReportsPageComponent implements OnInit {
         let params = {
             start_date,
             end_date,
-            quiz_id
+            quiz_id,
+            time: this.timeCorrect
         };
-        this.reportsPageService.getSpecialQuizzesForReport(params)
-            .subscribe((res) => {
-                this.specialQuizTableData = res.rows;
-            })
+
+        if (!download) {
+            this.reportsPageService.getSpecialQuizzesForReport(params)
+                .subscribe((res) => {
+                    this.specialQuizTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadSpecialQuizzesForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
     }
 
     public filterDataForGame(from, to) {

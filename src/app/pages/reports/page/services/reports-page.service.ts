@@ -29,6 +29,22 @@ export class ReportsPageService {
         })
     }
 
+    public downloadSpecialQuizzesForReport(params?: any): Observable<any> {
+        console.log('params', params);
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadSpecialQuizzesReportEndpoint}`, params,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public getGamesForReport(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(

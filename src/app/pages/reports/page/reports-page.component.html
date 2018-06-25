@@ -29,6 +29,12 @@
                     (click)="filterData(pickerStart._validSelected, pickerFinish._validSelected)">
                 Apply
             </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterData(pickerStart._validSelected, pickerFinish._validSelected, true)">
+                Download
+            </button>
             <reports-table-component
                     [rows]="specialQuizTableData"
                     [columns]="columns"
