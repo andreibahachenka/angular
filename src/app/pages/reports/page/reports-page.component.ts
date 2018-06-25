@@ -9,8 +9,9 @@ import { NavMenuService } from '../../../services';
 import { ReportsPageService } from './services/reports-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
-import { MatTabChangeEvent } from "@angular/material";
+import { MatTabChangeEvent } from '@angular/material';
 import { QuizzesPageService } from './../../quizzes/page/services/quizzes-page.service';
+import { LotteriesPageService } from './../../lotteries/page/services/lotteries-page.service';
 
 @Component({
     selector: 'app-reports',
@@ -41,7 +42,7 @@ export class ReportsPageComponent implements OnInit {
     public quiz_id: string;
     public intervalFilter: any;
     public interval: any;
-    public intervals: any = ['All', 'Week'];
+    public intervals: any = ['All', 'week'];
     public lottery_id: string;
     public games: string = 'games';
     public lotteries: string = 'lotteries';
@@ -93,17 +94,17 @@ export class ReportsPageComponent implements OnInit {
                     this.gamesTableData = res.rows;
                 });
                 break;
-            case 2 : this.reportsPageService.getLotteriesForReport(data)
-                .subscribe((res) => {
-                    this.lotteriesTableData = res.rows;
-                });
-                break;
-            case 3 : this.reportsPageService.getOrdersForReport(data)
+            // case 2 : this.reportsPageService.getLotteriesForReport(data)
+            //     .subscribe((res) => {
+            //         this.lotteriesTableData = res.rows;
+            //     });
+            //     break;
+            case 2 : this.reportsPageService.getOrdersForReport(data)
                 .subscribe((res) => {
                     this.ordersTableData = res.rows;
                 });
                 break;
-            case 4 : this.reportsPageService.getRatingsForReport(data)
+            case 3 : this.reportsPageService.getRatingsForReport(data)
                 .subscribe((res) => {
                     this.ratingsTableData = res.rows;
                 });
@@ -145,7 +146,7 @@ export class ReportsPageComponent implements OnInit {
         }
     }
 
-    public filterDataForGame(from, to) {
+    public filterDataForGame(from, to, download = false) {
         let startDate = new Date(from);
         let finishDate = new Date(to);
         let start_date = '';
@@ -158,33 +159,86 @@ export class ReportsPageComponent implements OnInit {
         }
         let params = {
             start_date,
-            end_date
+            end_date,
+            time: this.timeCorrect
         };
-        this.reportsPageService.getGamesForReport(params)
-            .subscribe((res) => {
-                this.gamesTableData = res.rows;
-            })
+
+        if (!download) {
+            this.reportsPageService.getGamesForReport(params)
+                .subscribe((res) => {
+                    this.gamesTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadGamesForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
     }
 
-    public filterDataForLottery() {
-        let lottery_id= this.lottery_id || '';
+    public filterDataForOrders(from, to, download = false) {
+        let startDate = new Date(from);
+        let finishDate = new Date(to);
+        let start_date = '';
+        let end_date = '';
+        if (from != null) {
+            start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
+        }
+        if (to != null) {
+            end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
+        }
         let params = {
-            lottery_id
+            start_date,
+            end_date,
+            time: this.timeCorrect
         };
-        this.reportsPageService.getLotteriesForReport(params)
-            .subscribe((res) => {
-                this.lotteriesTableData = res.rows;
-            })
+
+        if (!download) {
+            this.reportsPageService.getOrdersForReport(params)
+                .subscribe((res) => {
+                    this.ordersTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadOrdersForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
     }
 
-    public filterDataForRating(intervalFilter) {
+    // public filterDataForLottery() {
+    //     let lottery_id= this.lottery_id || '';
+    //     let params = {
+    //         lottery_id
+    //     };
+    //     this.reportsPageService.getLotteriesForReport(params)
+    //         .subscribe((res) => {
+    //             this.lotteriesTableData = res.rows;
+    //         })
+    // }
+
+    public filterDataForRating(intervalFilter, download = false) {
         let type = intervalFilter || '';
         let params = {
             type
         };
-        this.reportsPageService.getRatingsForReport(params)
-            .subscribe((res) => {
-                this.lotteriesTableData = res.rows;
-            })
+
+        if (!download) {
+            this.reportsPageService.getRatingsForReport(params)
+                .subscribe((res) => {
+                    this.ratingsTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadRatingsForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
     }
 }
