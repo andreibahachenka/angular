@@ -25,6 +25,11 @@
 		"image": "adb"
 	},
 	{
+		"title": "Quests",
+		"url": "/quests",
+		"image": "live_help"
+	},
+	{
 		"title": "Games",
 		"url": "/games",
 		"image": "play_circle_outline"
@@ -58,10 +63,5 @@
 		"title": "Logs",
 		"url": "/logs",
 		"image": "dvr"
-	},
-	{
-		"title": "Quests",
-		"url": "/quests",
-		"image": "live_help"
 	}
 ]
