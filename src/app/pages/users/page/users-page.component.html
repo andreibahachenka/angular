@@ -98,6 +98,12 @@
                      class="error-message">Incorrect phone
                 </div>
                 <mat-form-field>
+                    <input matInput placeholder="Index" [(ngModel)]="index" formControlName="index" [maxlength]="4"/>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <input matInput placeholder="TM" [(ngModel)]="tm" formControlName="tm" [maxlength]="255"/>
+                </mat-form-field><br>
+                <mat-form-field>
                     <input matInput placeholder="Shop ID" [(ngModel)]="shop_id" formControlName="shop_id" [maxlength]="255"/>
                 </mat-form-field><br>
                 <div *ngIf="inputEditForm.controls.shop_id.invalid
@@ -181,6 +187,12 @@
                  && inputCreateForm.controls.phone.touched"
                      class="error-message">Incorrect phone
                 </div>
+                <mat-form-field>
+                    <input matInput placeholder="Index" [(ngModel)]="index" formControlName="index" [maxlength]="4"/>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <input matInput placeholder="TM" [(ngModel)]="tm" formControlName="tm" [maxlength]="255"/>
+                </mat-form-field><br>
                 <mat-form-field>
                     <input matInput placeholder="Shop ID" formControlName="shop_id" [maxlength]="255"/>
                 </mat-form-field><br>

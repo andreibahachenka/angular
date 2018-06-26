@@ -50,6 +50,8 @@ export class UsersPageComponent implements OnInit {
 
     public name: string = '';
     public userName: string = '';
+    public index: any;
+    public tm: string = '';
     public surName: string = '';
     public phone: string = '';
     public email: string = '';
@@ -79,6 +81,8 @@ export class UsersPageComponent implements OnInit {
     public inputEditForm: FormGroup = new FormGroup({
         name: new FormControl(this.name, Validators.required),
         username: new FormControl(this.userName),
+        index: new FormControl(this.index),
+        tm: new FormControl(this.tm),
         surname: new FormControl(this.surName, Validators.required),
         email: new FormControl(this.email, [
             Validators.required,
@@ -103,6 +107,8 @@ export class UsersPageComponent implements OnInit {
     public inputCreateForm: FormGroup = new FormGroup({
         name: new FormControl('', Validators.required),
         username: new FormControl(''),
+        index: new FormControl(null),
+        tm: new FormControl(''),
         surname: new FormControl('', Validators.required),
         email: new FormControl('', [
             Validators.required,
@@ -182,6 +188,8 @@ export class UsersPageComponent implements OnInit {
     public openEdit(item: any): void {
         this.name = item.name;
         this.userName = item.username;
+        this.index = item.index;
+        this.tm = item.tm;
         this.surName = item.surname;
         this.phone = item.phone;
         this.email = item.email;
@@ -211,6 +219,7 @@ export class UsersPageComponent implements OnInit {
 
     public saveChanges(data): void {
         data.photo = this.userImage;
+        data.index = parseInt(data.index);
         this.usersPageService.updateUser(data)
             .subscribe((res) => {
                     this.utilsService.addLog({action: 'edit_user_profile', info: `User id = ${data.id}`}).subscribe();
@@ -236,6 +245,7 @@ export class UsersPageComponent implements OnInit {
 
     public sendCreateForm(data): void {
         data.photo = this.userImage;
+        data.index = parseInt(data.index);
         this.usersPageService.setUser(data)
             .subscribe((res) => {
                     this.getUsers();
