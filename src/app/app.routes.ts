@@ -18,7 +18,8 @@ import {
     SettingsPageComponent,
     ChatsPageComponent,
     ReportsPageComponent,
-    LogsPageComponent
+    LogsPageComponent,
+    QuestsPageComponent
 } from './pages';
 
 export const ROUTES: Routes = [
@@ -51,6 +52,8 @@ export const ROUTES: Routes = [
         { path: RoutesConfig.adminChats, component: ChatsPageComponent, canActivate: [AuthGuard] },
 
         { path: RoutesConfig.adminLogs, component: LogsPageComponent, canActivate: [AuthGuard] },
+
+        { path: RoutesConfig.adminQuests, component: QuestsPageComponent, canActivate: [AuthGuard] },
         ]
     },
 

@@ -14,4 +14,5 @@ export const RoutesConfig = {
     adminChats: 'admin/chats',
     adminReports: 'admin/reports',
     adminLogs: 'admin/logs',
+    adminQuests: 'admin/quests',
 };

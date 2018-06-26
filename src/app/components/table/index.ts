@@ -7,3 +7,4 @@ export * from './orders-table/orders-table.component';
 export * from './presents-table/presents-table.component';
 export * from './reports-table/reports-table.component';
 export * from './logs-table/logs-table.component';
+export * from './quests-table/quests-table.component';

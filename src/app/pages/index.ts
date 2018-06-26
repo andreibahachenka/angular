@@ -11,3 +11,4 @@ export * from './settings/page/settings-page.component';
 export * from './reports/page/reports-page.component';
 export * from './chats/page/chats-page.component';
 export * from './logs/page/logs-page.component';
+export * from './quests/page/quests-page.component';

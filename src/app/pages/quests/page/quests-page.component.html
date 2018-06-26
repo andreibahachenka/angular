@@ -1,0 +1,235 @@
+<div class="main-сontainer__content">
+    <button class="create-button" mat-raised-button (click)="createLottery()">Create quest</button>
+    <quests-table-component
+            [rows]="modifiedTableData"
+            [columns]="columns"
+            (onEdit)="openEdit($event)"
+    ></quests-table-component>
+    <router-outlet></router-outlet>
+</div>
+
+<app-modal-window class="modal-window">
+    <div class="content" #editModal>
+        <div class="modal-header">
+            <span>{{editLotteryMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputEditForm">
+                <mat-form-field>
+                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="Name" [(ngModel)]="name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.name.invalid
+                 && inputEditForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+
+                <mat-form-field>
+                    <input matInput placeholder="Description" [(ngModel)]="description" formControlName="description" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.description.invalid
+                 && inputCreateForm.controls.description.touched"
+                     class="error-message">Description can't be blank
+                </div>
+
+                <mat-form-field>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerStartEdit" placeholder="Choose a date" formControlName="startDate" [(ngModel)]="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStartEdit"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStartEdit></mat-datepicker>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerFinishEdit" placeholder="Choose a date" formControlName="finishDate" [(ngModel)]="finishDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFinishEdit"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFinishEdit></mat-datepicker>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Prize" [(ngModel)]="prize" formControlName="prize" [maxlength]="50"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputEditForm.controls.prize.invalid
+                 && inputEditForm.controls.prize.touched"
+                     class="error-message">Prize can't be blank
+                </div>
+
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
+                </button>
+                <img *ngIf="isImageUploaded" class="upload-text" src="{{photo}}" alt="preview-image">
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes for the period" [(ngModel)]="quiz_count" formControlName="quiz_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes on topic 1 for the period" [(ngModel)]="quiz_t1_count" formControlName="quiz_t1_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes on topic 2 for the period" [(ngModel)]="quiz_t2_count" formControlName="quiz_t2_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes on topic 3 for the period" [(ngModel)]="quiz_t3_count" formControlName="quiz_t3_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes won for the period" [(ngModel)]="win_quiz_count" formControlName="win_quiz_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of points for the period" [(ngModel)]="points_count" formControlName="points_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of gifts purchased for the period" [(ngModel)]="products_count" formControlName="products_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="saveChanges(inputEditForm.value)"
+                    [disabled]="inputEditForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="content" #createModal>
+        <div class="modal-header">
+            <span>{{createQuestMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputCreateForm">
+                <mat-form-field>
+                    <input matInput placeholder="Name" formControlName="name" [maxlength]="20"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.name.invalid
+                 && inputCreateForm.controls.name.touched"
+                     class="error-message">Name can't be blank
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="Description" formControlName="description" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.description.invalid
+                 && inputCreateForm.controls.description.touched"
+                     class="error-message">Description can't be blank
+                </div>
+                <mat-form-field>
+                    <mat-select placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerStart" placeholder="Choose a date" formControlName="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerFinish" placeholder="Choose a date" formControlName="finishDate">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFinish></mat-datepicker>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Prize" formControlName="prize" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+                <div *ngIf="inputCreateForm.controls.prize.invalid
+                 && inputCreateForm.controls.prize.touched"
+                     class="error-message">Prize can't be blank
+                </div>
+
+                <button mat-raised-button class="upload-btn">
+                    {{upload}}
+                    <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
+                </button>
+                <img *ngIf="isImageUploaded" class="upload-text" src="{{photo}}" alt="preview-image">
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes for the period" formControlName="quiz_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes on topic 1 for the period" formControlName="quiz_t1_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes on topic 2 for the period" formControlName="quiz_t2_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes on topic 3 for the period" formControlName="quiz_t3_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of quizzes won for the period" formControlName="win_quiz_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of points for the period" formControlName="points_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <input matInput placeholder="Number of gifts purchased for the period" formControlName="products_count" [maxlength]="255"/>
+                </mat-form-field>
+                <br>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="sendCreateForm(inputCreateForm.value)"
+                    [disabled]="inputCreateForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</app-modal-window>

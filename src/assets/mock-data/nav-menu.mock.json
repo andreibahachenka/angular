@@ -58,5 +58,10 @@
 		"title": "Logs",
 		"url": "/logs",
 		"image": "dvr"
+	},
+	{
+		"title": "Quests",
+		"url": "/quests",
+		"image": "live_help"
 	}
 ]
