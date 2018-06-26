@@ -29,6 +29,12 @@
                     (click)="filterData(pickerStart._validSelected, pickerFinish._validSelected)">
                 Apply
             </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterData(pickerStart._validSelected, pickerFinish._validSelected, true)">
+                Download
+            </button>
             <reports-table-component
                     [rows]="specialQuizTableData"
                     [columns]="columns"
@@ -57,6 +63,12 @@
                 Apply
             </button>
 
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, true)">
+                Download
+            </button>
+
             <reports-table-component
                     [rows]="gamesTableData"
                     [columns]="columns"
@@ -64,31 +76,7 @@
             ></reports-table-component>
         </mat-tab>
 
-        <mat-tab label="Report for lotteries">
-            <br>
-            <div class="select-block">
-                <ng-select [items]="lotteriesArray"
-                           bindLabel="name"
-                           bindValue="id"
-                           placeholder="Lotteries"
-                           [(ngModel)]="lottery_id">
-                </ng-select>
-            </div>
-
-            <button class="filter-button" color="primary"
-                    mat-raised-button
-                    (click)="filterDataForLottery()">
-                Apply
-            </button>
-
-            <reports-table-component
-                    [rows]="lotteriesTableData"
-                    [columns]="columns"
-                    [lotteries]="lotteries"
-            ></reports-table-component>
-        </mat-tab>
-
-        <mat-tab label="Report for orders">
+        <!--<mat-tab label="Report for lotteries">-->
             <!--<br>-->
             <!--<div class="select-block">-->
                 <!--<ng-select [items]="lotteriesArray"-->
@@ -104,6 +92,40 @@
                     <!--(click)="filterDataForLottery()">-->
                 <!--Apply-->
             <!--</button>-->
+
+            <!--<reports-table-component-->
+                    <!--[rows]="lotteriesTableData"-->
+                    <!--[columns]="columns"-->
+                    <!--[lotteries]="lotteries"-->
+            <!--&gt;</reports-table-component>-->
+        <!--</mat-tab>-->
+
+        <mat-tab label="Report for orders">
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerStartOrder" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerStartOrder"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartOrder></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerFinishOrder" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerFinishOrder"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFinishOrder></mat-datepicker>
+            </mat-form-field>
+
+            <br>
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForOrders(pickerStartOrder._validSelected, pickerFinishOrder._validSelected)">
+                Apply
+            </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForOrders(pickerStartOrder._validSelected, pickerFinishOrder._validSelected, true)">
+                Download
+            </button>
 
             <reports-table-component
                     [rows]="ordersTableData"
@@ -128,6 +150,12 @@
                     mat-raised-button
                     (click)="filterDataForRating(intervalFilter)">
                 Apply
+            </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForRating(intervalFilter, true)">
+                Download
             </button>
 
             <reports-table-component

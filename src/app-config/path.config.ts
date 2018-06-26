@@ -63,10 +63,14 @@ export const PathConfig = {
 
     //Reports
     getSpecialQuizzesReportEndpoint: `${mainPath}/v1/admin/reports/special`,
+    downloadSpecialQuizzesReportEndpoint: `${mainPath}/v1/admin/reports/special/xlsx`,
     getGamesReportEndpoint: `${mainPath}/v1/admin/reports/games`,
+    downloadGamesReportEndpoint: `${mainPath}/v1/admin/reports/games/xlsx`,
     getLotteriesReportEndpoint: `${mainPath}/v1/admin/reports/lotteries`,
     getOrdersReportEndpoint: `${mainPath}/v1/admin/reports/orders`,
+    downloadOrdersReportEndpoint: `${mainPath}/v1/admin/reports/orders/xlsx`,
     getRatingsReportEndpoint: `${mainPath}/v1/admin/reports/ratings`,
+    downloadRatingsReportEndpoint: `${mainPath}/v1/admin/reports/ratings/xlsx`,
 
     //Chat
     getChatsEndpoint: `${mainPath}/v1/admin/chats`,

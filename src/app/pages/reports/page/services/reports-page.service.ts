@@ -29,10 +29,41 @@ export class ReportsPageService {
         })
     }
 
+    public downloadSpecialQuizzesForReport(params?: any): Observable<any> {
+        console.log('params', params);
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadSpecialQuizzesReportEndpoint}`, params,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public getGamesForReport(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
                 `${PathConfig.getGamesReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public downloadGamesForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadGamesReportEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);
@@ -74,10 +105,40 @@ export class ReportsPageService {
         })
     }
 
+    public downloadOrdersForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadOrdersReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public getRatingsForReport(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
                 `${PathConfig.getRatingsReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public downloadRatingsForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadRatingsReportEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);
