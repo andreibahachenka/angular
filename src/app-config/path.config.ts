@@ -85,6 +85,6 @@ export const PathConfig = {
 
     //Quests
     getQuestsEndpoint: `${mainPath}/v1/admin/quests`,
-    createQuestEndpoint: `${mainPath}/v1/admin/quest/create`,
-    updateQuestEndpoint: `${mainPath}/v1/admin/lotteries/quest`,
+    createQuestEndpoint: `${mainPath}/v1/admin/quests/create`,
+    updateQuestEndpoint: `${mainPath}/v1/admin/quests/update`,
 };
