@@ -13,6 +13,7 @@ export class ReportsTableComponent {
     @Input() public specialquizzes: string;
     @Input() public orders: string;
     @Input() public ratings: string;
+    @Input() public users: string;
 
     constructor(
     ){

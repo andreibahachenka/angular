@@ -47,6 +47,11 @@ export class OrdersPageComponent implements OnInit {
     public id: string = '';
     public isUserSelected: boolean = false;
 
+    public filterUserPhone: string = '';
+    public filterProductId: string = '';
+    public filterStartDate: string = '';
+    public filterEndDate: string = '';
+
     public objectKeys = Object.keys;
 
     @ViewChild('deleteModal') public deleteModal: ElementRef;
@@ -61,6 +66,13 @@ export class OrdersPageComponent implements OnInit {
     public inputCreateForm: FormGroup = new FormGroup({
         present: new FormControl('', Validators.required),
         user: new FormControl('', Validators.required),
+    });
+
+    public inputFilterForm: FormGroup = new FormGroup({
+        user_phone: new FormControl(''),
+        product_id: new FormControl(''),
+        start_date: new FormControl(''),
+        end_date: new FormControl(''),
     });
 
     constructor(
@@ -123,6 +135,43 @@ export class OrdersPageComponent implements OnInit {
             });
     }
 
+    public filterData(searchParameters): void {
+        console.log(this.inputFilterForm.value);
+
+        let data = {
+            start_date: '',
+            end_date: '',
+            user_phone: this.inputFilterForm.value.user_phone,
+            product_id: this.inputFilterForm.value.product_id,
+        };
+
+        let startDate = new Date(this.inputFilterForm.value.start_date);
+        let finishDate = new Date(this.inputFilterForm.value.end_date);
+
+        if (this.filterStartDate !== '') {
+            data.start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
+        }
+        if (this.filterEndDate !== '') {
+            data.end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
+        }
+
+        this.ordersPageService.getOrders(data)
+            .subscribe((res) => {
+                this.tableData = res.orders;
+
+                this.modifiedTableData = this.tableData;
+                this.modifiedTableData.map((obj) => {
+                    if (obj.status === 1) {
+                        obj.status = 'Active';
+                    } else if (obj.status === 2) {
+                        obj.status = 'Waiting moderation';
+                    } else if (obj.status === 0) {
+                        obj.status = 'Not Active';
+                    }
+                });
+            });
+    }
+
     public createOrder(): void {
         this.inputCreateForm.reset();
         this.getPresents();
@@ -165,6 +214,12 @@ export class OrdersPageComponent implements OnInit {
         this.inputCreateForm.reset();
         this.isUserSelected = false;
         this.modalWindowService.closeModalWindow();
+    }
+
+    public clearForm(): void {
+        this.inputFilterForm.reset();
+        this.filterStartDate = '';
+        this.filterEndDate = '';
     }
 
 }

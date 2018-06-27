@@ -29,6 +29,7 @@ export class ReportsPageComponent implements OnInit {
     public navItems: NavItemModel[];
     public specialQuizTableData = [];
     public gamesTableData = [];
+    public usersTableData = [];
     public lotteriesTableData = [];
     public ordersTableData = [];
     public ratingsTableData = [];
@@ -45,6 +46,7 @@ export class ReportsPageComponent implements OnInit {
     public intervals: any = ['All', 'week'];
     public lottery_id: string;
     public games: string = 'games';
+    public users: string = 'users';
     public lotteries: string = 'lotteries';
     public specialquizzes: string = 'specialquizzes';
     public orders: string = 'orders';
@@ -76,7 +78,10 @@ export class ReportsPageComponent implements OnInit {
             });
         this.lotteriesPageService.getLotteries()
             .subscribe((res) => {
-                this.lotteriesArray = res.lotteries;
+                this.lotteriesArray = res.lotteries.map((lottery) => {
+                    lottery.name = `${lottery.name}(${lottery.id})`;
+                    return lottery;
+                });
                 let objectForAll = { name: 'All', id: 0 };
                 this.lotteriesArray.push(objectForAll);
             });
@@ -107,6 +112,11 @@ export class ReportsPageComponent implements OnInit {
             case 3 : this.reportsPageService.getRatingsForReport(data)
                 .subscribe((res) => {
                     this.ratingsTableData = res.rows;
+                });
+                break;
+            case 4 : this.reportsPageService.getUsersForReport(data)
+                .subscribe((res) => {
+                    this.usersTableData = res.rows;
                 });
                 break;
         }
@@ -210,16 +220,26 @@ export class ReportsPageComponent implements OnInit {
         }
     }
 
-    // public filterDataForLottery() {
-    //     let lottery_id= this.lottery_id || '';
-    //     let params = {
-    //         lottery_id
-    //     };
-    //     this.reportsPageService.getLotteriesForReport(params)
-    //         .subscribe((res) => {
-    //             this.lotteriesTableData = res.rows;
-    //         })
-    // }
+    public filterDataForLottery(download = false) {
+        let lottery_id= this.lottery_id || '';
+        let params = {
+            lottery_id
+        };
+
+        if (!download) {
+            this.reportsPageService.getLotteriesForReport(params)
+                .subscribe((res) => {
+                    this.lotteriesTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadLotteriesForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
+    }
 
     public filterDataForRating(intervalFilter, download = false) {
         let type = intervalFilter || '';
@@ -234,6 +254,38 @@ export class ReportsPageComponent implements OnInit {
                 })
         } else {
             this.reportsPageService.downloadRatingsForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
+    }
+
+    public filterDataForUser(from, to, download = false) {
+        let startDate = new Date(from);
+        let finishDate = new Date(to);
+        let start_date = '';
+        let end_date = '';
+        if (from != null) {
+            start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
+        }
+        if (to != null) {
+            end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
+        }
+        let params = {
+            start_date,
+            end_date,
+            time: this.timeCorrect
+        };
+
+        if (!download) {
+            this.reportsPageService.getUsersForReport(params)
+                .subscribe((res) => {
+                    this.usersTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadUsersForReport(params)
                 .subscribe((res) => {
                     if (res.url) {
                         window.location.href = res.url;

@@ -76,30 +76,6 @@
             ></reports-table-component>
         </mat-tab>
 
-        <!--<mat-tab label="Report for lotteries">-->
-            <!--<br>-->
-            <!--<div class="select-block">-->
-                <!--<ng-select [items]="lotteriesArray"-->
-                           <!--bindLabel="name"-->
-                           <!--bindValue="id"-->
-                           <!--placeholder="Lotteries"-->
-                           <!--[(ngModel)]="lottery_id">-->
-                <!--</ng-select>-->
-            <!--</div>-->
-
-            <!--<button class="filter-button" color="primary"-->
-                    <!--mat-raised-button-->
-                    <!--(click)="filterDataForLottery()">-->
-                <!--Apply-->
-            <!--</button>-->
-
-            <!--<reports-table-component-->
-                    <!--[rows]="lotteriesTableData"-->
-                    <!--[columns]="columns"-->
-                    <!--[lotteries]="lotteries"-->
-            <!--&gt;</reports-table-component>-->
-        <!--</mat-tab>-->
-
         <mat-tab label="Report for orders">
             <br>
             <mat-form-field>
@@ -162,6 +138,70 @@
                     [rows]="ratingsTableData"
                     [columns]="columns"
                     [ratings]="ratings"
+            ></reports-table-component>
+        </mat-tab>
+
+        <mat-tab label="Report for users">
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerStartUser" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerStartUser"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartUser></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="pickerFinishUser" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="pickerFinishUser"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFinishUser></mat-datepicker>
+            </mat-form-field>
+
+            <br>
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForUser(pickerStartUser._validSelected, pickerFinishUser._validSelected)">
+                Apply
+            </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForUser(pickerStartUser._validSelected, pickerFinishUser._validSelected, true)">
+                Download
+            </button>
+
+            <reports-table-component
+                    [rows]="usersTableData"
+                    [columns]="columns"
+                    [users]="users"
+            ></reports-table-component>
+        </mat-tab>
+
+        <mat-tab label="Report for lotteries">
+            <br>
+            <div class="select-block">
+                <ng-select [items]="lotteriesArray"
+                    bindLabel="name"
+                    bindValue="id"
+                    placeholder="Lotteries"
+                    [(ngModel)]="lottery_id">
+                </ng-select>
+            </div>
+
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForLottery()">
+                Apply
+            </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForLottery(true)">
+                Download
+            </button>
+
+            <reports-table-component
+                    [rows]="lotteriesTableData"
+                    [columns]="columns"
+                    [lotteries]="lotteries"
             ></reports-table-component>
         </mat-tab>
     </mat-tab-group>

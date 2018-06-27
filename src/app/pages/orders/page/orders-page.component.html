@@ -1,4 +1,35 @@
 <div class="main-сontainer__content">
+
+    <form [formGroup]="inputFilterForm" class="filter-form">
+        <mat-form-field>
+            <input matInput placeholder="User phone" [(ngModel)]="filterUserPhone" formControlName="user_phone"/>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Product id" [(ngModel)]="filterProductId" formControlName="product_id"/>
+        </mat-form-field>
+        <br>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="pickerStart" [(ngModel)]="filterStartDate" formControlName="start_date" placeholder="Choose start date">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="pickerFinish" [(ngModel)]="filterEndDate" formControlName="end_date" placeholder="Choose end date">
+            <mat-datepicker-toggle matSuffix [for]="pickerFinish"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFinish></mat-datepicker>
+        </mat-form-field>
+    </form>
+
+    <button class="filter-button" color="primary"
+            mat-raised-button
+            (click)="filterData(inputFilterForm.value)">
+        Search
+    </button>
+    <button class="clear-button" mat-raised-button (click)="clearForm()">Clear</button>
+    <br>
+
     <button class="create-button" mat-raised-button (click)="createOrder()">{{createOrderMessage}}</button>
     <orders-table-component
             [rows]="modifiedTableData"

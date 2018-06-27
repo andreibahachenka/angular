@@ -90,6 +90,21 @@ export class ReportsPageService {
         })
     }
 
+    public downloadLotteriesForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadLotteriesReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public getOrdersForReport(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.postItem(
@@ -139,6 +154,36 @@ export class ReportsPageService {
         return new Observable((observer) => {
             this.restApiService.postItem(
                 `${PathConfig.downloadRatingsReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public getUsersForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.getUsersReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public downloadUsersForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadUsersReportEndpoint}`, data,
                 (err) => {
                     this.notificationService.error(errorMessage);
                     console.error(err);

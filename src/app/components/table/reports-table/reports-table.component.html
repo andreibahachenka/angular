@@ -199,4 +199,89 @@
         </ng-template>
     </ngx-datatable-column>
 
+    <!--users-->
+    <ngx-datatable-column *ngIf="users" name="Id" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Name" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_name}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Surname" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_surname}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Username" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_username}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Phone" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_phone}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Email" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_email}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="City" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_city}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Date" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_created_at | date:"HH:mm:ss, dd.MM.yyyy"}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Shop id" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_shop_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Points" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.points}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Coins" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.coins}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Win" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_win}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Draw" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_draw}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="users" name="Lose" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_lose}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
 </ngx-datatable>
