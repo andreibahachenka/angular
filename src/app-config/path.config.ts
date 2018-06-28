@@ -74,6 +74,8 @@ export const PathConfig = {
     downloadRatingsReportEndpoint: `${mainPath}/v1/admin/reports/ratings/xlsx`,
     getUsersReportEndpoint: `${mainPath}/v1/admin/reports/users`,
     downloadUsersReportEndpoint: `${mainPath}/v1/admin/reports/users/xlsx`,
+    getQuestsReportEndpoint: `${mainPath}/v1/admin/reports/quests`,
+    downloadQuestsReportEndpoint: `${mainPath}/v1/admin/reports/quests/xlsx`,
 
     //Chat
     getChatsEndpoint: `${mainPath}/v1/admin/chats`,

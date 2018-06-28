@@ -59,8 +59,7 @@ export class QuestsPageComponent implements OnInit{
 
     public statuses = {
         1: 'Active',
-        0: 'Not Active',
-        2: 'Waiting moderation'
+        0: 'Not Active'
     };
 
     public inputEditForm: FormGroup = new FormGroup({
@@ -132,8 +131,9 @@ export class QuestsPageComponent implements OnInit{
             });
     }
 
-    public createLottery(): void {
+    public createQuest(): void {
         this.inputCreateForm.reset();
+        this.photo = null;
         this.isImageUploaded = false;
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.createModal });
     }

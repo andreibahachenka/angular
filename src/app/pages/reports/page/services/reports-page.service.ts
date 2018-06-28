@@ -194,4 +194,34 @@ export class ReportsPageService {
                 });
         })
     }
+
+    public getQuestsForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.getQuestsReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
+    public downloadQuestsForReport(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.downloadQuestsReportEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
 }

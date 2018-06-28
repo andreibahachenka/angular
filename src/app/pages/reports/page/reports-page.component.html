@@ -204,5 +204,35 @@
                     [lotteries]="lotteries"
             ></reports-table-component>
         </mat-tab>
+
+        <mat-tab label="Report for quests">
+            <br>
+            <div class="select-block">
+                <ng-select [items]="questsArray"
+                           bindLabel="name"
+                           bindValue="id"
+                           placeholder="Quests"
+                           [(ngModel)]="quest_id">
+                </ng-select>
+            </div>
+
+            <button class="filter-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForQuest()">
+                Apply
+            </button>
+
+            <button class="download-button" color="primary"
+                    mat-raised-button
+                    (click)="filterDataForQuest(true)">
+                Download
+            </button>
+
+            <reports-table-component
+                    [rows]="questsTableData"
+                    [columns]="columns"
+                    [quests]="quests"
+            ></reports-table-component>
+        </mat-tab>
     </mat-tab-group>
 </div>

@@ -284,4 +284,79 @@
         </ng-template>
     </ngx-datatable-column>
 
+    <!--quests-->
+    <ngx-datatable-column *ngIf="quests" name="User id" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_id}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Name" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_name}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Surname" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_surname}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Username" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_username}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Phone" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.user_phone}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Games" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_games}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Win" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_win}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Games T1" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_brand_1}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Games T2" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_brand_2}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Games T3" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_brand_3}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Points" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.points}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column *ngIf="quests" name="Orders" [cellClass]="'action-btn-cell'">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{row.count_orders}}</span>
+        </ng-template>
+    </ngx-datatable-column>
+
+
+
 </ngx-datatable>

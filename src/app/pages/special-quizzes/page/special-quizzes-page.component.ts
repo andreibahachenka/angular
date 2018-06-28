@@ -102,8 +102,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
 
     public statuses = {
         1: 'Active',
-        0: 'Not Active',
-        2: 'Waiting moderation'
+        0: 'Not Active'
     };
 
     public topics = {

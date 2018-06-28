@@ -12,6 +12,7 @@ import { ModalWindowService } from '../../../components/modal-window/services/mo
 import { MatTabChangeEvent } from '@angular/material';
 import { QuizzesPageService } from './../../quizzes/page/services/quizzes-page.service';
 import { LotteriesPageService } from './../../lotteries/page/services/lotteries-page.service';
+import { QuestsPageService } from './../../quests/page/services/quests-page.service';
 
 @Component({
     selector: 'app-reports',
@@ -23,7 +24,8 @@ export class ReportsPageComponent implements OnInit {
         private reportsPageService: ReportsPageService,
         private navMenuService: NavMenuService,
         private quizzesPageService: QuizzesPageService,
-        private lotteriesPageService: LotteriesPageService
+        private lotteriesPageService: LotteriesPageService,
+        private questsPageService: QuestsPageService
     ){}
 
     public navItems: NavItemModel[];
@@ -31,10 +33,12 @@ export class ReportsPageComponent implements OnInit {
     public gamesTableData = [];
     public usersTableData = [];
     public lotteriesTableData = [];
+    public questsTableData = [];
     public ordersTableData = [];
     public ratingsTableData = [];
     public quizzes: any[] = [];
     public lotteriesArray: any[] = [];
+    public questsArray: any[] = [];
 
     public timeCorrect: number;
     public defaultDate: any;
@@ -45,9 +49,11 @@ export class ReportsPageComponent implements OnInit {
     public interval: any;
     public intervals: any = ['All', 'week'];
     public lottery_id: string;
+    public quest_id: string;
     public games: string = 'games';
     public users: string = 'users';
     public lotteries: string = 'lotteries';
+    public quests: string = 'quests';
     public specialquizzes: string = 'specialquizzes';
     public orders: string = 'orders';
     public ratings: string = 'ratings';
@@ -84,6 +90,15 @@ export class ReportsPageComponent implements OnInit {
                 });
                 let objectForAll = { name: 'All', id: 0 };
                 this.lotteriesArray.push(objectForAll);
+            });
+        this.questsPageService.getQuests()
+            .subscribe((res) => {
+                this.questsArray = res.quests.map((quest) => {
+                    quest.name = `${quest.name}(${quest.id})`;
+                    return quest;
+                });
+                // let objectForAll = { name: 'All', id: 0 };
+                // this.lotteriesArray.push(objectForAll);
             });
     }
 
@@ -286,6 +301,27 @@ export class ReportsPageComponent implements OnInit {
                 })
         } else {
             this.reportsPageService.downloadUsersForReport(params)
+                .subscribe((res) => {
+                    if (res.url) {
+                        window.location.href = res.url;
+                    }
+                })
+        }
+    }
+
+    public filterDataForQuest(download = false) {
+        let quest_id= this.quest_id || '';
+        let params = {
+            quest_id
+        };
+
+        if (!download) {
+            this.reportsPageService.getQuestsForReport(params)
+                .subscribe((res) => {
+                    this.questsTableData = res.rows;
+                })
+        } else {
+            this.reportsPageService.downloadQuestsForReport(params)
                 .subscribe((res) => {
                     if (res.url) {
                         window.location.href = res.url;

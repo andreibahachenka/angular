@@ -10,6 +10,7 @@ export class ReportsTableComponent {
     @Input() public columns: any[] = [];
     @Input() public games: string;
     @Input() public lotteries: string;
+    @Input() public quests: string;
     @Input() public specialquizzes: string;
     @Input() public orders: string;
     @Input() public ratings: string;
