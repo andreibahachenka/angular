@@ -265,7 +265,7 @@ export class ChatsPageComponent implements OnInit {
                     message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
                     if (message['message']['image']) {
-                        message['text'] = `${message['message']['image']['url']}`;
+                        message['text'] = `${message['text']} (Image: ${message['message']['image']['url']})`;
                     }
 
                     messageText = message['text'];

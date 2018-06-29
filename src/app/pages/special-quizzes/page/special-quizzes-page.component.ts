@@ -362,6 +362,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
         this.specialQuizzesPageService.updateQuiz(quizForm)
             .subscribe((res) => {
                     this.getQuizzes();
+                    this.images = [];
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
@@ -396,6 +397,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
             .subscribe((res) => {
                     this.getQuizzes();
                     this.inputCreateForm.reset();
+                    this.images = [];
                     this.modalWindowService.closeModalWindow();
                 },
                 (err) => {
@@ -407,6 +409,7 @@ export class SpecialQuizzesPageComponent implements OnInit{
         this.inputCreateForm.reset();
         this.inputEditForm.reset();
         this.inputSQuizForm.reset();
+        this.images = []
         this.modalWindowService.closeModalWindow();
     }
 
