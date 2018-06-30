@@ -25,7 +25,7 @@
 
     <button class="filter-button" color="primary"
             mat-raised-button
-            (click)="filterData(inputFilterForm.value)">
+            (click)="filterData(inputFilterForm.value, false, true)">
         Search
     </button>
     <button class="clear-button" mat-raised-button (click)="clearForm()">Clear</button>
@@ -41,6 +41,9 @@
     <users-table-component
             [rows]="modifiedTableData"
             [columns]="columns"
+            [count]="count"
+            [offset]="offset"
+            (page)="filterData($event)"
             (onEdit)="openEdit($event)"
             (onDelete)="openDelete($event)"
     ></users-table-component>

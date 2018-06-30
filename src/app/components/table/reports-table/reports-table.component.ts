@@ -9,14 +9,21 @@ export class ReportsTableComponent {
     @Input() public rows: any[] = [];
     @Input() public columns: any[] = [];
     @Input() public games: string;
+    @Input() public count: any = 0;
+    @Input() public offset: any = 0;
     @Input() public lotteries: string;
     @Input() public quests: string;
     @Input() public specialquizzes: string;
     @Input() public orders: string;
     @Input() public ratings: string;
     @Input() public users: string;
+    @Output() public page: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
     ){
+    }
+
+    public getReports(item: any): void {
+        this.page.emit(item);
     }
 }

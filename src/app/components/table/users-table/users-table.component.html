@@ -6,10 +6,14 @@
         [headerHeight]="50"
         [footerHeight]="50"
         [rowHeight]="'auto'"
-        [limit]="10"
+        [limit]="20"
+        [offset]="offset"
+        [externalPaging]="true"
+        [count]="count"
+        (page)="getUsers($event)"
         [loadingIndicator]="loadingIndicator">
 
-    <ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="40">
+    <ngx-datatable-column name="ID" [cellClass]="'action-btn-cell'" [width]="50">
         <ng-template let-row="row" ngx-datatable-cell-template>
             <span>{{row.id}}</span>
         </ng-template>

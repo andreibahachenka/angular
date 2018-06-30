@@ -31,6 +31,8 @@ export class ReportsPageComponent implements OnInit {
     public navItems: NavItemModel[];
     public specialQuizTableData = [];
     public gamesTableData = [];
+    public gamesCount = 0;
+    public gamesOffset = 0;
     public usersTableData = [];
     public lotteriesTableData = [];
     public questsTableData = [];
@@ -112,6 +114,7 @@ export class ReportsPageComponent implements OnInit {
             case 1 : this.reportsPageService.getGamesForReport(data)
                 .subscribe((res) => {
                     this.gamesTableData = res.rows;
+                    this.gamesCount = res.count;
                 });
                 break;
             // case 2 : this.reportsPageService.getLotteriesForReport(data)
@@ -171,7 +174,12 @@ export class ReportsPageComponent implements OnInit {
         }
     }
 
-    public filterDataForGame(from, to, download = false) {
+    public filterDataForGame(from, to, download = false, event = null, filter = false) {
+
+        if (filter) {
+            this.gamesOffset = 0;
+        }
+
         let startDate = new Date(from);
         let finishDate = new Date(to);
         let start_date = '';
@@ -185,13 +193,16 @@ export class ReportsPageComponent implements OnInit {
         let params = {
             start_date,
             end_date,
+            offset: (event && event.offset) ? event.offset : 0,
             time: this.timeCorrect
         };
 
         if (!download) {
+            this.gamesOffset = event && event.offset ? event.offset : 0;
             this.reportsPageService.getGamesForReport(params)
                 .subscribe((res) => {
                     this.gamesTableData = res.rows;
+                    this.gamesCount = res.count;
                 })
         } else {
             this.reportsPageService.downloadGamesForReport(params)

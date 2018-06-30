@@ -34,6 +34,8 @@ export class UsersPageComponent implements OnInit {
     public objectKeys = Object.keys;
 
     public cities = [];
+    public count = 0;
+    public offset = 0;
 
     public timeCorrect: number;
     public defaultDate: any;
@@ -162,9 +164,11 @@ export class UsersPageComponent implements OnInit {
     }
 
     public getUsers(searchParameters?: any): void {
+        this.offset = (searchParameters && searchParameters.offset) ? searchParameters.offset : 0;
         this.usersPageService.getUser(searchParameters)
             .subscribe((res) => {
             this.tableData = res.users;
+            this.count = res.total;
 
                 this.modifiedTableData = this.tableData;
                 this.modifiedTableData.map((obj) => {
@@ -256,13 +260,18 @@ export class UsersPageComponent implements OnInit {
                 })
     }
 
-    public filterData(searchParameters, download = false): void {
+    public filterData(searchParameters, download = false, filter = false): void {
         searchParameters.name = this.inputFilterForm.value.name;
         searchParameters.surname = this.inputFilterForm.value.surname;
         searchParameters.email = this.inputFilterForm.value.email;
         searchParameters.phone = this.inputFilterForm.value.phone;
         searchParameters.status = this.inputFilterForm.value.status;
         searchParameters.time = this.timeCorrect;
+
+        if (filter) {
+            this.offset = 0;
+            console.log(searchParameters);
+        }
 
         if (!download) {
             this.usersPageService.getUser(searchParameters)

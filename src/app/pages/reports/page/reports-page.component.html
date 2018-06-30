@@ -59,7 +59,7 @@
             <br>
             <button class="filter-button" color="primary"
                     mat-raised-button
-                    (click)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected)">
+                    (click)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, false)">
                 Apply
             </button>
 
@@ -73,6 +73,9 @@
                     [rows]="gamesTableData"
                     [columns]="columns"
                     [games]="games"
+                    [count]="gamesCount"
+                    [offset]="gamesOffset"
+                    (page)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, false, $event, true)"
             ></reports-table-component>
         </mat-tab>
 
