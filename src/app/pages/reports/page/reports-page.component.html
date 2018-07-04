@@ -75,6 +75,7 @@
                     [games]="games"
                     [count]="gamesCount"
                     [offset]="gamesOffset"
+                    [paging]="true"
                     (page)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, false, $event, true)"
             ></reports-table-component>
         </mat-tab>

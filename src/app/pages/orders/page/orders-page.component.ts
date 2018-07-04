@@ -128,7 +128,7 @@ export class OrdersPageComponent implements OnInit {
     }
 
     public getUsers(searchParameters?: any): void {
-        this.usersPageService.getUser(searchParameters)
+        this.usersPageService.getUserList(searchParameters)
             .subscribe((res) => {
                 this.userList = res.users;
             });

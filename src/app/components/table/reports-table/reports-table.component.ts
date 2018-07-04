@@ -11,6 +11,7 @@ export class ReportsTableComponent {
     @Input() public games: string;
     @Input() public count: any = 0;
     @Input() public offset: any = 0;
+    @Input() public paging: boolean = false;
     @Input() public lotteries: string;
     @Input() public quests: string;
     @Input() public specialquizzes: string;

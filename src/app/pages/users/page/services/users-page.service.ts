@@ -29,6 +29,21 @@ export class UsersPageService {
         })
     }
 
+    public getUserList(data?: any): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.getItems(
+                `${PathConfig.getUsersListEndpoint}`, data,
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                    console.error(err);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public getXLSX(data?: any): Observable<any> {
         return new Observable((observer) => {
             this.restApiService.getItems(
