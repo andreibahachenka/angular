@@ -5,12 +5,19 @@ import {
     ElementRef
 } from '@angular/core';
 
+import {
+    NgForm,
+    FormGroup,
+    FormControl,
+    Validators
+} from '@angular/forms';
+
 import { NavMenuService } from '../../../services';
 import { ReportsPageService } from './services/reports-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 import { MatTabChangeEvent } from '@angular/material';
-import { QuizzesPageService } from './../../quizzes/page/services/quizzes-page.service';
+import { SpecialQuizzesPageService } from './../../special-quizzes/page/services/special-quizzes-page.service';
 import { LotteriesPageService } from './../../lotteries/page/services/lotteries-page.service';
 import { QuestsPageService } from './../../quests/page/services/quests-page.service';
 
@@ -23,7 +30,7 @@ export class ReportsPageComponent implements OnInit {
     constructor(
         private reportsPageService: ReportsPageService,
         private navMenuService: NavMenuService,
-        private quizzesPageService: QuizzesPageService,
+        private quizzesPageService: SpecialQuizzesPageService,
         private lotteriesPageService: LotteriesPageService,
         private questsPageService: QuestsPageService
     ){}
@@ -62,6 +69,18 @@ export class ReportsPageComponent implements OnInit {
 
     public columns: any = [
     ];
+
+    public filterUserPhone: string = '';
+    public filterUserId: string = '';
+    public filterStartDate: string = '';
+    public filterEndDate: string = '';
+
+    public gamesFilterForm: FormGroup = new FormGroup({
+        user_phone: new FormControl(''),
+        user_id: new FormControl(''),
+        start_date: new FormControl(''),
+        end_date: new FormControl(''),
+    });
 
 
     public ngOnInit() {
@@ -174,38 +193,59 @@ export class ReportsPageComponent implements OnInit {
         }
     }
 
-    public filterDataForGame(from, to, download = false, event = null, filter = false) {
+    public filterDataForGame(download = false, event = null, filter = false) {
 
         if (filter) {
             this.gamesOffset = 0;
         }
 
-        let startDate = new Date(from);
-        let finishDate = new Date(to);
-        let start_date = '';
-        let end_date = '';
-        if (from != null) {
-            start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
-        }
-        if (to != null) {
-            end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
-        }
-        let params = {
-            start_date,
-            end_date,
+        console.log(this.gamesFilterForm.value);
+
+        let data = {
+            start_date: '',
+            end_date: '',
+            user_phone: this.gamesFilterForm.value.user_phone,
+            user_id: this.gamesFilterForm.value.user_id,
             offset: (event && event.offset) ? event.offset : 0,
             time: this.timeCorrect
         };
 
+        let startDate = new Date(this.gamesFilterForm.value.start_date);
+        let finishDate = new Date(this.gamesFilterForm.value.end_date);
+
+        if (this.filterStartDate !== '') {
+            data.start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
+        }
+        if (this.filterEndDate !== '') {
+            data.end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
+        }
+
+        // let startDate = new Date(from);
+        // let finishDate = new Date(to);
+        // let start_date = '';
+        // let end_date = '';
+        // if (from != null) {
+        //     start_date = startDate.getFullYear() + '-' + Number(startDate.getMonth() + 1) + '-' + startDate.getDate();
+        // }
+        // if (to != null) {
+        //     end_date = finishDate.getFullYear() + '-' + Number(finishDate.getMonth() + 1) + '-' + finishDate.getDate();
+        // }
+        // let params = {
+        //     start_date,
+        //     end_date,
+        //     offset: (event && event.offset) ? event.offset : 0,
+        //     time: this.timeCorrect
+        // };
+
         if (!download) {
             this.gamesOffset = event && event.offset ? event.offset : 0;
-            this.reportsPageService.getGamesForReport(params)
+            this.reportsPageService.getGamesForReport(data)
                 .subscribe((res) => {
                     this.gamesTableData = res.rows;
                     this.gamesCount = res.count;
                 })
         } else {
-            this.reportsPageService.downloadGamesForReport(params)
+            this.reportsPageService.downloadGamesForReport(data)
                 .subscribe((res) => {
                     if (res.url) {
                         window.location.href = res.url;
@@ -249,7 +289,8 @@ export class ReportsPageComponent implements OnInit {
     public filterDataForLottery(download = false) {
         let lottery_id= this.lottery_id || '';
         let params = {
-            lottery_id
+            lottery_id,
+            time: this.timeCorrect
         };
 
         if (!download) {

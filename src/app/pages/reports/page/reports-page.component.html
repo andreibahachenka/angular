@@ -44,28 +44,38 @@
 
         <mat-tab label="Report for games">
             <br>
-            <mat-form-field>
-                <input matInput [matDatepicker]="pickerStartGame" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="pickerStartGame"></mat-datepicker-toggle>
-                <mat-datepicker #pickerStartGame></mat-datepicker>
-            </mat-form-field>
+            <form [formGroup]="gamesFilterForm" class="filter-form">
+                <mat-form-field>
+                    <input matInput placeholder="User phone" [(ngModel)]="filterUserPhone" formControlName="user_phone"/>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="User id" [(ngModel)]="filterUserId" formControlName="user_id"/>
+                </mat-form-field>
+                <br>
 
-            <mat-form-field>
-                <input matInput [matDatepicker]="pickerFinishGame" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="pickerFinishGame"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFinishGame></mat-datepicker>
-            </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerStartGame" [(ngModel)]="filterStartDate" formControlName="start_date" placeholder="Choose start date">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStartGame"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStartGame></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput [matDatepicker]="pickerFinishGame" [(ngModel)]="filterEndDate" formControlName="end_date" placeholder="Choose end date">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFinishGame"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFinishGame></mat-datepicker>
+                </mat-form-field>
+            </form>
 
             <br>
             <button class="filter-button" color="primary"
                     mat-raised-button
-                    (click)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, false)">
+                    (click)="filterDataForGame(false)">
                 Apply
             </button>
 
             <button class="download-button" color="primary"
                     mat-raised-button
-                    (click)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, true)">
+                    (click)="filterDataForGame(true)">
                 Download
             </button>
 
@@ -76,7 +86,7 @@
                     [count]="gamesCount"
                     [offset]="gamesOffset"
                     [paging]="true"
-                    (page)="filterDataForGame(pickerStartGame._validSelected, pickerFinishGame._validSelected, false, $event, true)"
+                    (page)="filterDataForGame(false, $event, true)"
             ></reports-table-component>
         </mat-tab>
 
