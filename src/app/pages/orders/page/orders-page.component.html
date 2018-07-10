@@ -35,6 +35,7 @@
             [rows]="modifiedTableData"
             [columns]="columns"
             (onDelete)="openDelete($event)"
+            (onEdit)="openEdit($event)"
     ></orders-table-component>
     <router-outlet></router-outlet>
 </div>
@@ -104,4 +105,39 @@
             <button mat-raised-button (click)="cancel()">Cancel</button>
         </div>
     </div>
+
+    <div class="content" #editModal>
+        <div class="modal-header">
+            <span>{{editOrderMessage}}</span>
+            <hr>
+        </div>
+        <div class="report-block">
+            <form [formGroup]="inputEditForm">
+                <mat-form-field>
+                    <input matInput placeholder="ID" [(ngModel)]="id" formControlName="id" readonly/>
+                </mat-form-field>
+                <br>
+
+                <mat-form-field>
+                    <mat-select [(ngModel)]="status" placeholder="Status" formControlName="status">
+                        <mat-option *ngFor="let status of objectKeys(statuses)" [value]="status">
+                            {{ statuses[status] }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+            </form>
+        </div>
+        <div class="buttons">
+            <button color="primary"
+                    mat-raised-button
+                    (click)="saveChanges(inputEditForm.value)"
+                    [disabled]="inputEditForm.invalid">
+                Save
+            </button>
+            <button mat-raised-button (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+
+
 </app-modal-window>

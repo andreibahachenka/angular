@@ -38,6 +38,8 @@ export class ChatsPageComponent implements OnInit {
     senderUsers: any[] = [];
     filter: number = 0;
     sendToAll: boolean = false;
+    addLink: boolean = false;
+    link: string = '';
     squizzes: any[] = [];
     squiz: any;
 
@@ -104,6 +106,8 @@ export class ChatsPageComponent implements OnInit {
         this.messageForm = fb.group({
             message: ['', Validators.required],
             sendToAll: [false],
+            addLink: [false],
+            link: [''],
         });
     }
 
@@ -264,8 +268,14 @@ export class ChatsPageComponent implements OnInit {
 
                     message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
+                    message['admin'] = !!(message['message'] && message['message']['admin']);
+
                     if (message['message']['image']) {
                         message['text'] = `${message['text']} (Image: ${message['message']['image']['url']})`;
+                    }
+
+                    if (message['message']['link']) {
+                        message['text'] = `${message['text']} (Link: ${message['message']['link']})`;
                     }
 
                     messageText = message['text'];
@@ -331,19 +341,25 @@ export class ChatsPageComponent implements OnInit {
             return false;
         }
 
-        const request =  {
+        let request =  {
                 message: {
                     text: this.messageForm.get('message').value,
                     image: null,
                     link: '',
                     bottom_text: '',
-                    brand_id: 0
+                    brand_id: 0,
+                    admin: 1
                 },
                 type: 4,
                 user_id: this.currentChat.companion.id
             };
 
         this.loadingMessages = true;
+
+        if (this.addLink && this.link.length > 0) {
+            request.message.link = this.link;
+        }
+
 
         if (this.sendToAll) {
 
@@ -373,6 +389,8 @@ export class ChatsPageComponent implements OnInit {
 
                 message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
+                message['admin'] = true;
+
                 this.messageList.push(message);
 
                 let chatIndex = 0;
@@ -398,6 +416,8 @@ export class ChatsPageComponent implements OnInit {
             });
         }
 
+        this.link = '';
+        this.addLink = false;
 
         return true;
     }

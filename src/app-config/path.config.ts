@@ -51,6 +51,7 @@ export const PathConfig = {
     getOrdersEndpoint: `${mainPath}/v1/admin/orders`,
     createOrderEndpoint: `${mainPath}/v1/admin/orders/create`,
     removeOrderEndpoint: `${mainPath}/v1/admin/orders/remove`,
+    updateOrderEndpoint: `${mainPath}/v1/admin/orders/update`,
 
     //Presents
     getPresentsEndpoint: `${mainPath}/v1/admin/products`,

@@ -45,6 +45,21 @@ export class OrdersPageService {
         })
     }
 
+    public updateOrder(data): Observable<any> {
+        return new Observable((observer) => {
+            this.restApiService.postItem(
+                `${PathConfig.updateOrderEndpoint}`,
+                JSON.stringify(data),
+                (err) => {
+                    this.notificationService.error(errorMessage);
+                }
+            ).first()
+                .subscribe((res) => {
+                    observer.next(res);
+                });
+        })
+    }
+
     public deleteOrder(data): Observable<any> {
         let dataToDelete = {
             id: data

@@ -12,7 +12,7 @@ import {
     Validators
 } from '@angular/forms';
 
-import { NavMenuService, NotificationService } from '../../../services';
+import { NavMenuService, NotificationService, UtilsService } from '../../../services';
 import { OrdersPageService } from './services/orders-page.service';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
@@ -32,7 +32,8 @@ export class OrdersPageComponent implements OnInit {
     public presentList: any[] = [];
     public userList: any[] = [];
 
-    public createOrderMessage: string = 'Create Order';
+    public createOrderMessage: string = 'Create order';
+    public editOrderMessage: string = 'Edit order status';
     public deleteMessage: string = 'Are you sure you want to delete this order?';
     public upload: string = 'Upload image';
 
@@ -40,6 +41,8 @@ export class OrdersPageComponent implements OnInit {
     public name: string = '';
     public surname: string = '';
     public coins: any = '';
+
+    public status: any;
 
     public username: string = '';
     public present: any;
@@ -56,11 +59,18 @@ export class OrdersPageComponent implements OnInit {
 
     @ViewChild('deleteModal') public deleteModal: ElementRef;
     @ViewChild('createModal') public createModal: ElementRef;
+    @ViewChild('editModal') public editModal: ElementRef;
 
     public statuses = {
-        1: 'Active',
-        0: 'Not Active'
+        1: 'New',
+        2: 'Delivered',
+        3: 'Sent'
     };
+
+    public inputEditForm: FormGroup = new FormGroup({
+        id: new FormControl(this.id),
+        status: new FormControl(this.status, Validators.required),
+    });
 
     public inputCreateForm: FormGroup = new FormGroup({
         present: new FormControl('', Validators.required),
@@ -81,6 +91,7 @@ export class OrdersPageComponent implements OnInit {
         private presentsPageService: PresentsPageService,
         private usersPageService: UsersPageService,
         private notificationService: NotificationService,
+        private utilsService: UtilsService
     ) {
     }
 
@@ -110,11 +121,11 @@ export class OrdersPageComponent implements OnInit {
                 this.modifiedTableData = this.tableData;
                 this.modifiedTableData.map((obj) => {
                     if (obj.status === 1) {
-                        obj.status = 'Active';
+                        obj.status = 'New';
                     } else if (obj.status === 2) {
-                        obj.status = 'Waiting moderation';
-                    } else if (obj.status === 0) {
-                        obj.status = 'Not Active';
+                        obj.status = 'Delivered';
+                    } else if (obj.status === 3) {
+                        obj.status = 'Sent';
                     }
                 });
             });
@@ -181,6 +192,27 @@ export class OrdersPageComponent implements OnInit {
     public openDelete(item: any): void {
         this.id = item.id;
         this.modalWindowService.showModalWindow({ outsideClose: true, content: this.deleteModal });
+    }
+
+    public openEdit(item: any): void {
+        this.status = this.utilsService.getKeyByValue(this.statuses, item.status);
+        this.id = item.id;
+        this.modalWindowService.showModalWindow({ outsideClose: true, content: this.editModal });
+    }
+
+    public saveChanges(data): void {
+        const orderForm = {
+            id: data.id,
+            status: data.status,
+        };
+        this.ordersPageService.updateOrder(orderForm)
+            .subscribe((res) => {
+                    this.getOrders();
+                    this.modalWindowService.closeModalWindow();
+                },
+                (err) => {
+                    console.error(err);
+                })
     }
 
     public applyDelete(id): void {

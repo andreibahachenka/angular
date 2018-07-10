@@ -96,7 +96,8 @@
                                                          class="arrow-left"></div>
                                                     <div *ngIf="message?.user_id === 1"
                                                          class="arrow-right"></div>
-                                                    <p>{{ message?.text }}</p>
+                                                    <p *ngIf="message?.admin" style="color: red">{{ message?.text }}</p>
+                                                    <p *ngIf="!message?.admin">{{ message?.text }}</p>
                                                     <div *ngIf="message?.user_id === 1"
                                                          class="chat_time pull-right">{{ message?.created_at }}
                                                     </div>
@@ -120,6 +121,9 @@
                                             <div class="chat_bottom">
 
                                                 <mat-checkbox formControlName="sendToAll" [(ngModel)]="sendToAll">Send to all</mat-checkbox>
+                                                <br>
+                                                <mat-checkbox formControlName="addLink" [(ngModel)]="addLink">Add link: </mat-checkbox>
+                                                <input class="chat-link" matInput placeholder="link" [(ngModel)]="link" formControlName="link"/>
 
                                                 <button [disabled]="messageForm.get('message').invalid || loadingMessages" type="submit"
                                                         href="#" class="send-message-button pull-right btn btn-success">
