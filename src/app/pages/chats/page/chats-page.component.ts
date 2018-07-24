@@ -14,7 +14,7 @@ import {
     Validators
 } from '@angular/forms';
 
-import { NavMenuService, UtilsService, NotificationService } from '../../../services';
+import { NavMenuService, FileUploadService, UtilsService } from '../../../services';
 import { NavItemModel } from './../../../components/nav-menu/models';
 import { ModalWindowService } from '../../../components/modal-window/services/modal-window.service';
 import { ChatsPageService } from './services/chats-page.service';
@@ -85,6 +85,9 @@ export class ChatsPageComponent implements OnInit {
     public chatOffset = 0;
 
     public user_id = null;
+    public photo = null;
+    public isImageUploaded: boolean = false;
+    public image = null;
 
     public uId = null;
 
@@ -99,6 +102,7 @@ export class ChatsPageComponent implements OnInit {
     constructor(fb: FormBuilder,
                 private _chatServices: ChatsPageService,
                 private specialQuizzesPageService: SpecialQuizzesPageService,
+                private fileUploadService: FileUploadService,
                 private modalWindowService: ModalWindowService) {
         this.searchForm = fb.group({
             user: ['', Validators.required],
@@ -108,6 +112,7 @@ export class ChatsPageComponent implements OnInit {
             sendToAll: [false],
             addLink: [false],
             link: [''],
+            photo: [''],
         });
     }
 
@@ -344,7 +349,7 @@ export class ChatsPageComponent implements OnInit {
         let request =  {
                 message: {
                     text: this.messageForm.get('message').value,
-                    image: null,
+                    image: this.image ? this.image : null,
                     link: '',
                     bottom_text: '',
                     brand_id: 0,
@@ -389,6 +394,14 @@ export class ChatsPageComponent implements OnInit {
 
                 message['text'] = message['message'] ? message['message']['text'] : 'Error.';
 
+                if (message['message']['image']) {
+                    message['text'] = `${message['text']} (Image: ${message['message']['image']['url']})`;
+                }
+
+                if (message['message']['link']) {
+                    message['text'] = `${message['text']} (Link: ${message['message']['link']})`;
+                }
+
                 message['admin'] = true;
 
                 this.messageList.push(message);
@@ -409,6 +422,7 @@ export class ChatsPageComponent implements OnInit {
                 });
 
                 this.messageForm.get('message').setValue('');
+                this.removeImage();
 
                 this.loadingMessages = false;
 
@@ -432,6 +446,25 @@ export class ChatsPageComponent implements OnInit {
                 }
             ).subscribe();
         }
+    }
+
+    public handleFileInput(files: FileList): void {
+        let image = files.item(0);
+        this.fileUploadService.uploadFile(image)
+            .subscribe((result: any) => {
+                    this.image = result;
+                    this.isImageUploaded = true;
+                },
+                (err) => {
+                    console.log(err);
+                    this.isImageUploaded = false;
+                })
+    }
+
+    public removeImage() {
+        this.image = null;
+        this.isImageUploaded = false;
+        this.messageForm.get('photo').setValue('');
     }
 
     public openSpecial() {

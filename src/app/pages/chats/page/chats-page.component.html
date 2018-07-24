@@ -124,6 +124,13 @@
                                                 <br>
                                                 <mat-checkbox formControlName="addLink" [(ngModel)]="addLink">Add link: </mat-checkbox>
                                                 <input class="chat-link" matInput placeholder="link" [(ngModel)]="link" formControlName="link"/>
+                                                <br>
+                                                <button mat-raised-button class="upload-btn">
+                                                    {{upload}}
+                                                    <input type="file" #fileInput placeholder="Photo" class="upload-btn__input" formControlName="photo" (change)="handleFileInput($event.target.files)">
+                                                </button>
+                                                <img *ngIf="isImageUploaded" class="upload-text" src="{{image?.url}}" alt="preview-image">
+                                                <button *ngIf="isImageUploaded" (click)="removeImage()" type="button">x</button>
 
                                                 <button [disabled]="messageForm.get('message').invalid || loadingMessages" type="submit"
                                                         href="#" class="send-message-button pull-right btn btn-success">
